@@ -592,7 +592,7 @@ local function YDAMROL_fake_script()
 		if QueuePrompt.BackgroundTransparency == 0 then
 
 			local NearestSpot = nil
-			local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+			local Position = Player.Character.HumanoidRootPart.Position
 
 			for _, i in pairs(workspace:GetChildren()) do
 				if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
@@ -628,9 +628,10 @@ local function YDAMROL_fake_script()
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
 				task.wait()
+				local Root = Player.Character.HumanoidRootPart
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" then
 					if (Position - NearestSpot.Position).Magnitude < 40 then
-						Position = NearestSpot.Position
+						Root.Position = NearestSpot.Position
 					end
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
