@@ -619,6 +619,7 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
 				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1
+				print("Fired")
 				if QueuePrompt.BackgroundTransparency == 0  then
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
