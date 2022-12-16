@@ -620,11 +620,12 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 				end
 			end
 
-			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 1
-			task.wait(0.0001)
-			fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-			print("Pressed")
-			QueuePrompt.BackgroundTransparency == 1
+			repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1
+			if QueuePrompt.BackgroundTransparency == 0  then
+				print("Pressed")
+				fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+				QueuePrompt.BackgroundTransparency = 1
+			end
 		end
 	end)
 end
