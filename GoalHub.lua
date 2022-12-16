@@ -1,3 +1,8 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
 local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 local Frame = Instance.new("Frame")
@@ -466,13 +471,15 @@ TextLabel_8.TextWrapped = true
 
 -- Scripts:
 
-local function MJZDM_fake_script() -- ScreenGui.LocalScript 
+local function WLUQCI_fake_script() -- ScreenGui.LocalScript 
 	local script = Instance.new('LocalScript', ScreenGui)
 
 	local SprintSpeed = 21
 	local Code = ""
+	--//Variables//--
 	local UserInput = game:GetService("UserInputService")
 	local Player = game:GetService("Players").LocalPlayer
+	--//UI//--
 	local Parent_Frame = ImageButton.Main.ScrollingFrame
 	
 	local Customize_Frame = Parent_Frame.Customize.Buttons
@@ -482,9 +489,12 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 	local Awareness = Game_Frame["Ball Awareness"]
 	local Sprint = Game_Frame.Sprint
 	local Queue = Game_Frame["Quick Queue"]
-	local QueuePrompt = Queue.TextButton
-
+	
 	local CodePrompt = Code_Frame.Button
+	local AwarenessPrompt = Awareness.TextButton
+	local SprintPrompt = Sprint.TextButton
+	local QueuePrompt = Queue.TextButton
+	
 	CodePrompt.MouseButton1Click:Connect(function()
 		if CodePrompt.BackgroundTransparency == 0 then
 			CodePrompt.BackgroundTransparency = 1
@@ -505,7 +515,6 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 		end
 	end)
 	
-	local AwarenessPrompt = Awareness.TextButton
 	AwarenessPrompt.MouseButton1Click:Connect(function()
 		if AwarenessPrompt.BackgroundTransparency == 0 then
 			AwarenessPrompt.BackgroundTransparency = 1
@@ -521,7 +530,6 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 		end)
 	end
 	
-	local SprintPrompt = Sprint.TextButton
 	SprintPrompt.MouseButton1Click:Connect(function()
 		if SprintPrompt.BackgroundTransparency == 0 then
 			SprintPrompt.BackgroundTransparency = 1
@@ -571,7 +579,6 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 				CodePrompt.BackgroundTransparency = 1
 				SprintPrompt.BackgroundTransparency = 1
 				AwarenessPrompt.BackgroundTransparency = 1
-				QueuePrompt.BackgroundTransparency = 1
 				ScreenGui:Destroy()
 			end
 		end
@@ -583,7 +590,6 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 		else
 			QueuePrompt.BackgroundTransparency = 0
 		end
-	
 		if QueuePrompt.BackgroundTransparency == 0 then
 			local NearestSpot = nil
 			local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
@@ -618,11 +624,12 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 				end
 			end
 	
-			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 1
+			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 0
 			if NearestSpot.ProximityPrompt.ObjectText == "" and QueuePrompt.BackgroundTransparency == 0 then
 				fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+				QueuePrompt.BackgroundTransparency = 1
 			end
 		end
 	end)
 end
-coroutine.wrap(MJZDM_fake_script)()
+coroutine.wrap(WLUQCI_fake_script)()
