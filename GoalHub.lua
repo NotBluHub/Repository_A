@@ -54,7 +54,7 @@ local TextLabel_8 = Instance.new("TextLabel")
 
 --Properties:
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = game:WaitForChild("CoreGui")
 
 ImageButton.Parent = ScreenGui
 ImageButton.AnchorPoint = Vector2.new(0, 0.5)
