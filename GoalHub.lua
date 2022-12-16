@@ -622,14 +622,16 @@ local function RYHJC_fake_script()
 					end
 				end
 			end
-			print(NearestSpot.Name)
-			if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
-				NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
+			
+			local function ResetText()
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
+					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
+				end
 			end
+			ResetText()
 			while QueuePrompt.BackgroundTransparency == 0 do
 				local Character = Player.Character
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
-	
 					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
 	
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
@@ -637,11 +639,12 @@ local function RYHJC_fake_script()
 				end
 				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
 				if QueuePrompt.BackgroundTransparency == 1 then
-					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
-						NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
-					end
+					ResetText()
 				end
 				repeat task.wait() until not Player.Character.VFX.NoMove.Value or QueuePrompt.BackgroundTransparency == 1
+				if QueuePrompt.BackgroundTransparency == 1 then
+					ResetText()
+				end
 			end
 		end
 	end)
