@@ -1,8 +1,3 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
 local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 local Frame = Instance.new("Frame")
@@ -473,9 +468,7 @@ TextLabel_8.TextWrapped = true
 
 local function WLUQCI_fake_script() -- ScreenGui.LocalScript 
 	local script = Instance.new('LocalScript', ScreenGui)
-	
-	ImageButton.Draggable = true
-	
+
 	local SprintSpeed = 21
 	local Code = ""
 	--//Variables//--
@@ -628,9 +621,13 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 			end
 
 			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 0
-			if NearestSpot.ProximityPrompt.ObjectText == "" and QueuePrompt.BackgroundTransparency == 0 then
-				fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-				QueuePrompt.BackgroundTransparency = 1
+			while QueuePrompt.BackgroundTransparency == 0 do
+				if NearestSpot.ProximityPrompt.ObjectText == "" then
+					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+				else
+					QueuePrompt.BackgroundTransparency = 1
+				end
+				task.wait()
 			end
 		end
 	end)
