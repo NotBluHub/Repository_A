@@ -468,9 +468,8 @@ TextLabel_8.TextWrapped = true
 -- Scripts:
 
 local function YDAMROL_fake_script()
-
 	ImageButton.Draggable = true
-	
+
 	local SprintSpeed = 21
 	local Code = ""
 	--//Variables//--
@@ -478,40 +477,40 @@ local function YDAMROL_fake_script()
 	local Player = game:GetService("Players").LocalPlayer
 	--//UI//--
 	local Parent_Frame = ImageButton.Main.ScrollingFrame
-	
+
 	local Customize_Frame = Parent_Frame.Customize.Buttons
 	local Code_Frame = Customize_Frame.Code
-	
+
 	local Game_Frame = Parent_Frame.Maingame.Buttons
 	local Awareness = Game_Frame["Ball Awareness"]
 	local Sprint = Game_Frame.Sprint
 	local Queue = Game_Frame["Quick Queue"]
-	
+
 	local CodePrompt = Code_Frame.Button
 	local AwarenessPrompt = Awareness.TextButton
 	local SprintPrompt = Sprint.TextButton
 	local QueuePrompt = Queue.TextButton
-	
+
 	CodePrompt.MouseButton1Click:Connect(function()
 		if CodePrompt.BackgroundTransparency == 0 then
 			CodePrompt.BackgroundTransparency = 1
 		else
 			CodePrompt.BackgroundTransparency = 0
 		end
-	
+
 		if game.GameId == 3213718766 and CodePrompt.BackgroundTransparency == 0 then
 			local f = true
 			task.delay(1, function()
 				f = false
 			end)
-	
+
 			while f do
 				task.wait()
 				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Code_Frame.TextFrame.TextBox.Text)
 			end
 		end
 	end)
-	
+
 	AwarenessPrompt.MouseButton1Click:Connect(function()
 		if AwarenessPrompt.BackgroundTransparency == 0 then
 			AwarenessPrompt.BackgroundTransparency = 1
@@ -526,7 +525,7 @@ local function YDAMROL_fake_script()
 			end
 		end)
 	end
-	
+
 	SprintPrompt.MouseButton1Click:Connect(function()
 		if SprintPrompt.BackgroundTransparency == 0 then
 			SprintPrompt.BackgroundTransparency = 1
@@ -581,7 +580,7 @@ local function YDAMROL_fake_script()
 			end
 		end
 	end)
-	
+
 	QueuePrompt.MouseButton1Click:Connect(function()
 		if QueuePrompt.BackgroundTransparency == 0 then
 
@@ -630,9 +629,7 @@ local function YDAMROL_fake_script()
 			while QueuePrompt.BackgroundTransparency == 0 do
 				local Character = Player.Character
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
-					
-					--Character:MoveTo(NearestSpot.Position)
-					
+
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
