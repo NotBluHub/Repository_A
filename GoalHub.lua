@@ -635,12 +635,13 @@ local function YDAMROL_fake_script()
 					end
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-				elseif QueuePrompt.BackgroundTransparency == 1 then
+				end
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or (Position - NearestSpot.Position).Magnitude < 40 or QueuePrompt.BackgroundTransparency == 1
+				if QueuePrompt.BackgroundTransparency == 1 then
 					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
 						NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 					end
 				end
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or (Position - NearestSpot.Position).Magnitude < 40 or QueuePrompt.BackgroundTransparency == 1
 			end
 		end
 	end)
