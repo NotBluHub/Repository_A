@@ -623,13 +623,16 @@ local function YDAMROL_fake_script()
 					end
 				end
 			end
+			print(NearestSpot.Name)
 			if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
 				NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
 				local Character = Player.Character
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
-					Character:MoveTo(NearestSpot.Position)
+					
+					--Character:MoveTo(NearestSpot.Position)
+					
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
@@ -645,3 +648,5 @@ local function YDAMROL_fake_script()
 	end)
 end
 coroutine.wrap(YDAMROL_fake_script)()
+
+---
