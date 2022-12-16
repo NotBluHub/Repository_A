@@ -648,5 +648,3 @@ local function YDAMROL_fake_script()
 	end)
 end
 coroutine.wrap(YDAMROL_fake_script)()
-
----
