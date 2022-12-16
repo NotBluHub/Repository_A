@@ -482,7 +482,8 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 	local Awareness = Game_Frame["Ball Awareness"]
 	local Sprint = Game_Frame.Sprint
 	local Queue = Game_Frame["Quick Queue"]
-	
+	local QueuePrompt = Queue.TextButton
+
 	local CodePrompt = Code_Frame.Button
 	CodePrompt.MouseButton1Click:Connect(function()
 		if CodePrompt.BackgroundTransparency == 0 then
@@ -570,12 +571,12 @@ local function MJZDM_fake_script() -- ScreenGui.LocalScript
 				CodePrompt.BackgroundTransparency = 1
 				SprintPrompt.BackgroundTransparency = 1
 				AwarenessPrompt.BackgroundTransparency = 1
+				QueuePrompt.BackgroundTransparency = 1
 				ScreenGui:Destroy()
 			end
 		end
 	end)
 	
-	local QueuePrompt = Queue.Button
 	QueuePrompt.MouseButton1Click:Connect(function()
 		if QueuePrompt.BackgroundTransparency == 0 then
 			QueuePrompt.BackgroundTransparency = 1
