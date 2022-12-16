@@ -622,7 +622,7 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 
 			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 0
 			while QueuePrompt.BackgroundTransparency == 0 do
-				if NearestSpot.ProximityPrompt.ObjectText == "" then
+				if NearestSpot.ProximityPrompt.ObjectText ~= "Only".. Player.Name .."Can press to Leave."  then
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				else
 					QueuePrompt.BackgroundTransparency = 1
