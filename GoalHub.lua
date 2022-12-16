@@ -473,7 +473,9 @@ TextLabel_8.TextWrapped = true
 
 local function WLUQCI_fake_script() -- ScreenGui.LocalScript 
 	local script = Instance.new('LocalScript', ScreenGui)
-
+	
+	ImageButton.Draggable = true
+	
 	local SprintSpeed = 21
 	local Code = ""
 	--//Variables//--
