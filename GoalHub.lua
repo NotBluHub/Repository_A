@@ -481,40 +481,40 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 	local Player = game:GetService("Players").LocalPlayer
 	--//UI//--
 	local Parent_Frame = ImageButton.Main.ScrollingFrame
-	
+
 	local Customize_Frame = Parent_Frame.Customize.Buttons
 	local Code_Frame = Customize_Frame.Code
-	
+
 	local Game_Frame = Parent_Frame.Maingame.Buttons
 	local Awareness = Game_Frame["Ball Awareness"]
 	local Sprint = Game_Frame.Sprint
 	local Queue = Game_Frame["Quick Queue"]
-	
+
 	local CodePrompt = Code_Frame.Button
 	local AwarenessPrompt = Awareness.TextButton
 	local SprintPrompt = Sprint.TextButton
 	local QueuePrompt = Queue.TextButton
-	
+
 	CodePrompt.MouseButton1Click:Connect(function()
 		if CodePrompt.BackgroundTransparency == 0 then
 			CodePrompt.BackgroundTransparency = 1
 		else
 			CodePrompt.BackgroundTransparency = 0
 		end
-	
+
 		if game.GameId == 3213718766 and CodePrompt.BackgroundTransparency == 0 then
 			local f = true
 			task.delay(1, function()
 				f = false
 			end)
-	
+
 			while f do
 				task.wait()
 				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Code_Frame.TextFrame.TextBox.Text)
 			end
 		end
 	end)
-	
+
 	AwarenessPrompt.MouseButton1Click:Connect(function()
 		if AwarenessPrompt.BackgroundTransparency == 0 then
 			AwarenessPrompt.BackgroundTransparency = 1
@@ -529,7 +529,7 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 			end
 		end)
 	end
-	
+
 	SprintPrompt.MouseButton1Click:Connect(function()
 		if SprintPrompt.BackgroundTransparency == 0 then
 			SprintPrompt.BackgroundTransparency = 1
@@ -579,11 +579,12 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 				CodePrompt.BackgroundTransparency = 1
 				SprintPrompt.BackgroundTransparency = 1
 				AwarenessPrompt.BackgroundTransparency = 1
+				QueuePrompt.BackgroundTransparency = 1
 				ScreenGui:Destroy()
 			end
 		end
 	end)
-	
+
 	QueuePrompt.MouseButton1Click:Connect(function()
 		if QueuePrompt.BackgroundTransparency == 0 then
 			QueuePrompt.BackgroundTransparency = 1
@@ -593,12 +594,12 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 		if QueuePrompt.BackgroundTransparency == 0 then
 			local NearestSpot = nil
 			local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-	
+
 			for _, i in pairs(workspace:GetChildren()) do
 				if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
 					local BSpots = i.Campo.BlueSpots
 					local RSPots = i.Campo.RedSpots
-	
+
 					for _, v in pairs(RSPots:GetChildren()) do
 						if v:FindFirstChildOfClass("ProximityPrompt") then
 							if NearestSpot ~= nil then
@@ -623,7 +624,7 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 					end
 				end
 			end
-	
+
 			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 0
 			if NearestSpot.ProximityPrompt.ObjectText == "" and QueuePrompt.BackgroundTransparency == 0 then
 				fireproximityprompt(NearestSpot.ProximityPrompt, 1)
