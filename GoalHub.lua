@@ -1,8 +1,3 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
 local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 local Frame = Instance.new("Frame")
@@ -49,16 +44,22 @@ local TextLabel_6 = Instance.new("TextLabel")
 local TextButton_2 = Instance.new("TextButton")
 local ImageLabel_9 = Instance.new("ImageLabel")
 local ImageLabel_10 = Instance.new("ImageLabel")
+local QuickQueue = Instance.new("Frame")
+local Frame_9 = Instance.new("Frame")
 local TextLabel_7 = Instance.new("TextLabel")
+local TextButton_3 = Instance.new("TextButton")
+local ImageLabel_11 = Instance.new("ImageLabel")
+local ImageLabel_12 = Instance.new("ImageLabel")
+local TextLabel_8 = Instance.new("TextLabel")
 
 --Properties:
 
-ScreenGui.Parent = game:WaitForChild("CoreGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 ImageButton.Parent = ScreenGui
 ImageButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.Position = UDim2.new(0, 533, 0, 136)
+ImageButton.Position = UDim2.new(0, 223, 0, 94)
 ImageButton.Size = UDim2.new(0, 494, 0, 600)
 ImageButton.AutoButtonColor = false
 ImageButton.Image = "rbxassetid://5553946656"
@@ -401,27 +402,77 @@ ImageLabel_10.ImageColor3 = Color3.fromRGB(60, 60, 60)
 ImageLabel_10.ScaleType = Enum.ScaleType.Slice
 ImageLabel_10.SliceCenter = Rect.new(2, 2, 62, 62)
 
-TextLabel_7.Parent = ImageButton
+QuickQueue.Name = "Quick Queue"
+QuickQueue.Parent = Buttons_2
+QuickQueue.BackgroundTransparency = 1.000
+QuickQueue.LayoutOrder = 5
+QuickQueue.Size = UDim2.new(1, 0, 0, 20)
+
+Frame_9.Parent = QuickQueue
+Frame_9.BackgroundTransparency = 1.000
+Frame_9.Size = UDim2.new(1, 0, 0, 20)
+
+TextLabel_7.Parent = Frame_9
 TextLabel_7.BackgroundTransparency = 1.000
-TextLabel_7.ClipsDescendants = true
-TextLabel_7.Position = UDim2.new(0, 0, 0, 22)
-TextLabel_7.Size = UDim2.new(0, 77, 0, 30)
+TextLabel_7.Position = UDim2.new(0, 24, 0, 0)
+TextLabel_7.Size = UDim2.new(1, 0, 1, 0)
 TextLabel_7.Font = Enum.Font.Code
-TextLabel_7.Text = "Features"
-TextLabel_7.TextColor3 = Color3.fromRGB(18, 127, 253)
+TextLabel_7.Text = "Quick Queue"
+TextLabel_7.TextColor3 = Color3.fromRGB(160, 160, 160)
 TextLabel_7.TextSize = 15.000
-TextLabel_7.TextWrapped = true
+TextLabel_7.TextXAlignment = Enum.TextXAlignment.Left
 
-local function CJPCRQ_fake_script()
+TextButton_3.Parent = QuickQueue
+TextButton_3.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+TextButton_3.BackgroundTransparency = 1.000
+TextButton_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_3.Position = UDim2.new(0, 6, 0, 4)
+TextButton_3.Size = UDim2.new(0, 12, 0, 12)
+TextButton_3.ZIndex = 2
+TextButton_3.Font = Enum.Font.SourceSans
+TextButton_3.Text = ""
+TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_3.TextSize = 14.000
 
-	ImageButton.Draggable = true
-	--//Player Inputs//--
+ImageLabel_11.Parent = TextButton_3
+ImageLabel_11.BackgroundTransparency = 1.000
+ImageLabel_11.Position = UDim2.new(0, 1, 0, 1)
+ImageLabel_11.Size = UDim2.new(1, -2, 1, -2)
+ImageLabel_11.ZIndex = 0
+ImageLabel_11.Image = "rbxassetid://2592362371"
+ImageLabel_11.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel_11.ScaleType = Enum.ScaleType.Slice
+ImageLabel_11.SliceCenter = Rect.new(2, 2, 62, 62)
+
+ImageLabel_12.Parent = TextButton_3
+ImageLabel_12.BackgroundTransparency = 1.000
+ImageLabel_12.Size = UDim2.new(1, 0, 1, 0)
+ImageLabel_12.ZIndex = 3
+ImageLabel_12.Image = "rbxassetid://2592362371"
+ImageLabel_12.ImageColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel_12.ScaleType = Enum.ScaleType.Slice
+ImageLabel_12.SliceCenter = Rect.new(2, 2, 62, 62)
+
+TextLabel_8.Parent = ImageButton
+TextLabel_8.BackgroundTransparency = 1.000
+TextLabel_8.ClipsDescendants = true
+TextLabel_8.Position = UDim2.new(0, 0, 0, 22)
+TextLabel_8.Size = UDim2.new(0, 77, 0, 30)
+TextLabel_8.Font = Enum.Font.Code
+TextLabel_8.Text = "Features"
+TextLabel_8.TextColor3 = Color3.fromRGB(18, 127, 253)
+TextLabel_8.TextSize = 15.000
+TextLabel_8.TextWrapped = true
+
+-- Scripts:
+
+local function MJZDM_fake_script() -- ScreenGui.LocalScript 
+	local script = Instance.new('LocalScript', ScreenGui)
+
 	local SprintSpeed = 21
 	local Code = ""
-	--//Variables//--
 	local UserInput = game:GetService("UserInputService")
 	local Player = game:GetService("Players").LocalPlayer
-	--//UI//--
 	local Parent_Frame = ImageButton.Main.ScrollingFrame
 	
 	local Customize_Frame = Parent_Frame.Customize.Buttons
@@ -430,6 +481,7 @@ local function CJPCRQ_fake_script()
 	local Game_Frame = Parent_Frame.Maingame.Buttons
 	local Awareness = Game_Frame["Ball Awareness"]
 	local Sprint = Game_Frame.Sprint
+	local Queue = Game_Frame["Quick Queue"]
 	
 	local CodePrompt = Code_Frame.Button
 	CodePrompt.MouseButton1Click:Connect(function()
@@ -438,7 +490,7 @@ local function CJPCRQ_fake_script()
 		else
 			CodePrompt.BackgroundTransparency = 0
 		end
-		
+	
 		if game.GameId == 3213718766 and CodePrompt.BackgroundTransparency == 0 then
 			local f = true
 			task.delay(1, function()
@@ -522,5 +574,54 @@ local function CJPCRQ_fake_script()
 			end
 		end
 	end)
+	
+	local QueuePrompt = Queue.Button
+	QueuePrompt.MouseButton1Click:Connect(function()
+		if QueuePrompt.BackgroundTransparency == 0 then
+			QueuePrompt.BackgroundTransparency = 1
+		else
+			QueuePrompt.BackgroundTransparency = 0
+		end
+	
+		if QueuePrompt.BackgroundTransparency == 0 then
+			local NearestSpot = nil
+			local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+	
+			for _, i in pairs(workspace:GetChildren()) do
+				if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
+					local BSpots = i.Campo.BlueSpots
+					local RSPots = i.Campo.RedSpots
+	
+					for _, v in pairs(RSPots:GetChildren()) do
+						if v:FindFirstChildOfClass("ProximityPrompt") then
+							if NearestSpot ~= nil then
+								if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
+									NearestSpot = v
+								end
+							else
+								NearestSpot = v
+							end
+						end
+					end
+					for _, v in pairs(BSpots:GetChildren()) do
+						if v:FindFirstChildOfClass("ProximityPrompt") then
+							if NearestSpot ~= nil then
+								if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
+									NearestSpot = v
+								end
+							else
+								NearestSpot = v
+							end
+						end
+					end
+				end
+			end
+	
+			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 1
+			if NearestSpot.ProximityPrompt.ObjectText == "" and QueuePrompt.BackgroundTransparency == 0 then
+				fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+			end
+		end
+	end)
 end
-coroutine.wrap(CJPCRQ_fake_script)()
+coroutine.wrap(MJZDM_fake_script)()
