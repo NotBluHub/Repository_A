@@ -620,7 +620,7 @@ local function WLUQCI_fake_script() -- ScreenGui.LocalScript
 				end
 			end
 
-			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 0
+			repeat task.wait() until NearestSpot.ProximityPrompt.ObjectText == "" or QueuePrompt.BackgroundTransparency == 1
 			task.wait(0.0001)
 			fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 		end
