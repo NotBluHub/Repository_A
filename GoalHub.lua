@@ -584,19 +584,21 @@ local function YDAMROL_fake_script()
 	
 	QueuePrompt.MouseButton1Click:Connect(function()
 		if QueuePrompt.BackgroundTransparency == 0 then
+
 			QueuePrompt.BackgroundTransparency = 1
 		else
 			QueuePrompt.BackgroundTransparency = 0
 		end
 		if QueuePrompt.BackgroundTransparency == 0 then
+
 			local NearestSpot = nil
 			local Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-	
+
 			for _, i in pairs(workspace:GetChildren()) do
 				if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
 					local BSpots = i.Campo.BlueSpots
 					local RSPots = i.Campo.RedSpots
-	
+
 					for _, v in pairs(RSPots:GetChildren()) do
 						if v:FindFirstChildOfClass("ProximityPrompt") then
 							if NearestSpot ~= nil then
@@ -625,18 +627,16 @@ local function YDAMROL_fake_script()
 				NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
-				local Root = Player.Character.HumanoidRootPart.Position
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1 or
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1
 				if QueuePrompt.BackgroundTransparency == 0  then
+					if (Position - NearestSpot.Position).Magnitude > 5 then
+						Position = NearestSpot.Position
+					end
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-					task.wait(0.1)
-					print((Position - NearestSpot.Position).Magnitude)
-				elseif (Position - NearestSpot.Position).Magnitude > 10 then
-					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" and  then
-						NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
-					end
 				end
+				task.wait(0.1)
+				print((Position - NearestSpot.Position).Magnitude)
 			end
 		end
 	end)
