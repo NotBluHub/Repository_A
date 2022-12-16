@@ -627,21 +627,21 @@ local function YDAMROL_fake_script()
 				NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
-				task.wait()
-				local Root = Player.Character.HumanoidRootPart
-				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" then
-					if (Position - NearestSpot.Position).Magnitude < 40 then
-						Root.Position = NearestSpot.Position
-					end
+				local Character = Player.Character
+				--Player.Character.VFX.IsPlaying.Value
+				--Player.Character.VFX.NoMove.Value
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
+					Character.HumanoidRootPart.Position = NearestSpot.Position
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or (Position - NearestSpot.Position).Magnitude < 40 or QueuePrompt.BackgroundTransparency == 1
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
 				if QueuePrompt.BackgroundTransparency == 1 then
 					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
 						NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 					end
 				end
+				repeat task.wait() until not Player.Character.VFX.NoMove.Value or QueuePrompt.BackgroundTransparency == 1
 			end
 		end
 	end)
