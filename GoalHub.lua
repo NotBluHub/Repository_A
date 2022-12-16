@@ -625,12 +625,13 @@ local function YDAMROL_fake_script()
 				NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1
+				local Root = Player.Character.HumanoidRootPart.Position
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1 or 
 				print("Fired")
 				if QueuePrompt.BackgroundTransparency == 0  then
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-				else
+				elseif (Position - NearestSpot.Position).Magnitude > 10 then
 					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
 						NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "300"
 					end
