@@ -628,10 +628,8 @@ local function YDAMROL_fake_script()
 			end
 			while QueuePrompt.BackgroundTransparency == 0 do
 				local Character = Player.Character
-				--Player.Character.VFX.IsPlaying.Value
-				--Player.Character.VFX.NoMove.Value
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
-					Character.HumanoidRootPart.Position = NearestSpot.Position
+					Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
