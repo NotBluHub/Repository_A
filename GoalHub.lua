@@ -38,7 +38,7 @@ local TextButton_2 = Instance.new("TextButton")
 local ImageLabel_10 = Instance.new("ImageLabel")
 local ImageLabel_11 = Instance.new("ImageLabel")
 local Frame_6 = Instance.new("Frame")
-local Maingame = Instance.new("Frame")
+local Secure = Instance.new("Frame")
 local Frame_7 = Instance.new("Frame")
 local TextLabel_6 = Instance.new("TextLabel")
 local Buttons_2 = Instance.new("ScrollingFrame")
@@ -53,31 +53,56 @@ local ImageLabel_13 = Instance.new("ImageLabel")
 local Sprint = Instance.new("Frame")
 local Frame_9 = Instance.new("Frame")
 local TextLabel_8 = Instance.new("TextLabel")
+local TextLabel_9 = Instance.new("TextLabel")
 local TextButton_4 = Instance.new("TextButton")
 local ImageLabel_14 = Instance.new("ImageLabel")
 local ImageLabel_15 = Instance.new("ImageLabel")
 local QuickQueue = Instance.new("Frame")
 local Frame_10 = Instance.new("Frame")
-local TextLabel_9 = Instance.new("TextLabel")
+local TextLabel_10 = Instance.new("TextLabel")
 local TextButton_5 = Instance.new("TextButton")
 local ImageLabel_16 = Instance.new("ImageLabel")
 local ImageLabel_17 = Instance.new("ImageLabel")
-local Column2 = Instance.new("ScrollingFrame")
-local UIListLayout_4 = Instance.new("UIListLayout")
-local UIPadding_4 = Instance.new("UIPadding")
-local Hub = Instance.new("Frame")
+local AutoDribble = Instance.new("Frame")
 local Frame_11 = Instance.new("Frame")
-local Buttons_3 = Instance.new("ScrollingFrame")
-local UIListLayout_5 = Instance.new("UIListLayout")
-local UIPadding_5 = Instance.new("UIPadding")
-local Shutdown = Instance.new("Frame")
-local Frame_12 = Instance.new("Frame")
-local TextLabel_10 = Instance.new("TextLabel")
+local TextLabel_11 = Instance.new("TextLabel")
 local TextButton_6 = Instance.new("TextButton")
 local ImageLabel_18 = Instance.new("ImageLabel")
 local ImageLabel_19 = Instance.new("ImageLabel")
-local TextLabel_11 = Instance.new("TextLabel")
+local Risky = Instance.new("Frame")
+local Frame_12 = Instance.new("Frame")
 local TextLabel_12 = Instance.new("TextLabel")
+local Buttons_3 = Instance.new("ScrollingFrame")
+local UIListLayout_4 = Instance.new("UIListLayout")
+local UIPadding_4 = Instance.new("UIPadding")
+local AutoQueue = Instance.new("Frame")
+local Frame_13 = Instance.new("Frame")
+local TextLabel_13 = Instance.new("TextLabel")
+local TextButton_7 = Instance.new("TextButton")
+local ImageLabel_20 = Instance.new("ImageLabel")
+local ImageLabel_21 = Instance.new("ImageLabel")
+local JumpCD = Instance.new("Frame")
+local Frame_14 = Instance.new("Frame")
+local TextLabel_14 = Instance.new("TextLabel")
+local TextButton_8 = Instance.new("TextButton")
+local ImageLabel_22 = Instance.new("ImageLabel")
+local ImageLabel_23 = Instance.new("ImageLabel")
+local Column2 = Instance.new("ScrollingFrame")
+local UIListLayout_5 = Instance.new("UIListLayout")
+local UIPadding_5 = Instance.new("UIPadding")
+local Hub = Instance.new("Frame")
+local Frame_15 = Instance.new("Frame")
+local Buttons_4 = Instance.new("ScrollingFrame")
+local UIListLayout_6 = Instance.new("UIListLayout")
+local UIPadding_6 = Instance.new("UIPadding")
+local Shutdown = Instance.new("Frame")
+local Frame_16 = Instance.new("Frame")
+local TextLabel_15 = Instance.new("TextLabel")
+local TextButton_9 = Instance.new("TextButton")
+local ImageLabel_24 = Instance.new("ImageLabel")
+local ImageLabel_25 = Instance.new("ImageLabel")
+local TextLabel_16 = Instance.new("TextLabel")
+local TextLabel_17 = Instance.new("TextLabel")
 
 --Properties:
 
@@ -395,19 +420,19 @@ Frame_6.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
 Frame_6.BorderSizePixel = 0
 Frame_6.Size = UDim2.new(1, 0, 0, 1)
 
-Maingame.Name = "Maingame"
-Maingame.Parent = Column1
-Maingame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Maingame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Maingame.Position = UDim2.new(0, 0, 0.0282258056, 0)
-Maingame.Size = UDim2.new(1, 0, 0, 80)
+Secure.Name = "Secure"
+Secure.Parent = Column1
+Secure.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Secure.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Secure.Position = UDim2.new(0, 0, 0.57789588, 0)
+Secure.Size = UDim2.new(1, 0, 0.0927419364, 80)
 
-Frame_7.Parent = Maingame
+Frame_7.Parent = Secure
 Frame_7.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
 Frame_7.BorderSizePixel = 0
 Frame_7.Size = UDim2.new(1, 0, 0, 1)
 
-TextLabel_6.Parent = Maingame
+TextLabel_6.Parent = Secure
 TextLabel_6.AnchorPoint = Vector2.new(0, 0.5)
 TextLabel_6.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 TextLabel_6.BorderSizePixel = 0
@@ -419,7 +444,7 @@ TextLabel_6.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel_6.TextSize = 15.000
 
 Buttons_2.Name = "Buttons"
-Buttons_2.Parent = Maingame
+Buttons_2.Parent = Secure
 Buttons_2.BackgroundTransparency = 1.000
 Buttons_2.BorderSizePixel = 0
 Buttons_2.Position = UDim2.new(0, 6, 0, 2)
@@ -503,10 +528,19 @@ TextLabel_8.BackgroundTransparency = 1.000
 TextLabel_8.Position = UDim2.new(0, 24, 0, 0)
 TextLabel_8.Size = UDim2.new(1, 0, 1, 0)
 TextLabel_8.Font = Enum.Font.Code
-TextLabel_8.Text = "Toggle Sprint - M2"
+TextLabel_8.Text = "Toggle Sprint"
 TextLabel_8.TextColor3 = Color3.fromRGB(160, 160, 160)
 TextLabel_8.TextSize = 15.000
 TextLabel_8.TextXAlignment = Enum.TextXAlignment.Left
+
+TextLabel_9.Parent = Frame_9
+TextLabel_9.BackgroundTransparency = 1.000
+TextLabel_9.Position = UDim2.new(0, 125, 0, 0)
+TextLabel_9.Size = UDim2.new(0.665198267, 0, 1, 0)
+TextLabel_9.Font = Enum.Font.Code
+TextLabel_9.Text = " - M2 TOGGLE"
+TextLabel_9.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextLabel_9.TextXAlignment = Enum.TextXAlignment.Left
 
 TextButton_4.Parent = Sprint
 TextButton_4.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
@@ -549,15 +583,15 @@ Frame_10.Parent = QuickQueue
 Frame_10.BackgroundTransparency = 1.000
 Frame_10.Size = UDim2.new(1, 0, 0, 20)
 
-TextLabel_9.Parent = Frame_10
-TextLabel_9.BackgroundTransparency = 1.000
-TextLabel_9.Position = UDim2.new(0, 24, 0, 0)
-TextLabel_9.Size = UDim2.new(1, 0, 1, 0)
-TextLabel_9.Font = Enum.Font.Code
-TextLabel_9.Text = "Quick Queue"
-TextLabel_9.TextColor3 = Color3.fromRGB(160, 160, 160)
-TextLabel_9.TextSize = 15.000
-TextLabel_9.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel_10.Parent = Frame_10
+TextLabel_10.BackgroundTransparency = 1.000
+TextLabel_10.Position = UDim2.new(0, 24, 0, 0)
+TextLabel_10.Size = UDim2.new(1, 0, 1, 0)
+TextLabel_10.Font = Enum.Font.Code
+TextLabel_10.Text = "Quick Queue"
+TextLabel_10.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextLabel_10.TextSize = 15.000
+TextLabel_10.TextXAlignment = Enum.TextXAlignment.Left
 
 TextButton_5.Parent = QuickQueue
 TextButton_5.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
@@ -590,6 +624,201 @@ ImageLabel_17.ImageColor3 = Color3.fromRGB(60, 60, 60)
 ImageLabel_17.ScaleType = Enum.ScaleType.Slice
 ImageLabel_17.SliceCenter = Rect.new(2, 2, 62, 62)
 
+AutoDribble.Name = "Auto Dribble"
+AutoDribble.Parent = Buttons_2
+AutoDribble.BackgroundTransparency = 1.000
+AutoDribble.LayoutOrder = 5
+AutoDribble.Size = UDim2.new(1, 0, 0, 20)
+
+Frame_11.Parent = AutoDribble
+Frame_11.BackgroundTransparency = 1.000
+Frame_11.Size = UDim2.new(1, 0, 0, 20)
+
+TextLabel_11.Parent = Frame_11
+TextLabel_11.BackgroundTransparency = 1.000
+TextLabel_11.Position = UDim2.new(0, 24, 0, 0)
+TextLabel_11.Size = UDim2.new(1, 0, 1, 0)
+TextLabel_11.Font = Enum.Font.Code
+TextLabel_11.Text = "Auto Dribble"
+TextLabel_11.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextLabel_11.TextSize = 15.000
+TextLabel_11.TextXAlignment = Enum.TextXAlignment.Left
+
+TextButton_6.Parent = AutoDribble
+TextButton_6.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+TextButton_6.BackgroundTransparency = 1.000
+TextButton_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_6.Position = UDim2.new(0, 6, 0, 4)
+TextButton_6.Size = UDim2.new(0, 12, 0, 12)
+TextButton_6.ZIndex = 2
+TextButton_6.Font = Enum.Font.SourceSans
+TextButton_6.Text = ""
+TextButton_6.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_6.TextSize = 14.000
+
+ImageLabel_18.Parent = TextButton_6
+ImageLabel_18.BackgroundTransparency = 1.000
+ImageLabel_18.Position = UDim2.new(0, 1, 0, 1)
+ImageLabel_18.Size = UDim2.new(1, -2, 1, -2)
+ImageLabel_18.ZIndex = 2
+ImageLabel_18.Image = "rbxassetid://2592362371"
+ImageLabel_18.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel_18.ScaleType = Enum.ScaleType.Slice
+ImageLabel_18.SliceCenter = Rect.new(2, 2, 62, 62)
+
+ImageLabel_19.Parent = TextButton_6
+ImageLabel_19.BackgroundTransparency = 1.000
+ImageLabel_19.Size = UDim2.new(1, 0, 1, 0)
+ImageLabel_19.ZIndex = 3
+ImageLabel_19.Image = "rbxassetid://2592362371"
+ImageLabel_19.ImageColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel_19.ScaleType = Enum.ScaleType.Slice
+ImageLabel_19.SliceCenter = Rect.new(2, 2, 62, 62)
+
+Risky.Name = "Risky"
+Risky.Parent = Column1
+Risky.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Risky.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Risky.Position = UDim2.new(0, 0, 0.57789588, 0)
+Risky.Size = UDim2.new(1, 0, 0.0927419364, 80)
+
+Frame_12.Parent = Risky
+Frame_12.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+Frame_12.BorderSizePixel = 0
+Frame_12.Size = UDim2.new(1, 0, 0, 1)
+
+TextLabel_12.Parent = Risky
+TextLabel_12.AnchorPoint = Vector2.new(0, 0.5)
+TextLabel_12.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextLabel_12.BorderSizePixel = 0
+TextLabel_12.Position = UDim2.new(0, 8, 0, 0)
+TextLabel_12.Size = UDim2.new(0, 36, 0, 2)
+TextLabel_12.Font = Enum.Font.Code
+TextLabel_12.Text = "Risky"
+TextLabel_12.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_12.TextSize = 15.000
+
+Buttons_3.Name = "Buttons"
+Buttons_3.Parent = Risky
+Buttons_3.BackgroundTransparency = 1.000
+Buttons_3.BorderSizePixel = 0
+Buttons_3.Position = UDim2.new(0, 6, 0, 2)
+Buttons_3.Size = UDim2.new(0, 233, 1, -4)
+Buttons_3.ZIndex = 2
+Buttons_3.CanvasSize = UDim2.new(0, 0, 0, 0)
+Buttons_3.ScrollBarThickness = 4
+Buttons_3.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+
+UIListLayout_4.Parent = Buttons_3
+UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_4.Padding = UDim.new(0, 2)
+
+UIPadding_4.Parent = Buttons_3
+UIPadding_4.PaddingTop = UDim.new(0, 12)
+
+AutoQueue.Name = "Auto Queue"
+AutoQueue.Parent = Buttons_3
+AutoQueue.BackgroundTransparency = 1.000
+AutoQueue.LayoutOrder = 5
+AutoQueue.Size = UDim2.new(1, 0, 0, 20)
+
+Frame_13.Parent = AutoQueue
+Frame_13.BackgroundTransparency = 1.000
+Frame_13.Size = UDim2.new(1, 0, 0, 20)
+
+TextLabel_13.Parent = Frame_13
+TextLabel_13.BackgroundTransparency = 1.000
+TextLabel_13.Position = UDim2.new(0, 24, 0, 0)
+TextLabel_13.Size = UDim2.new(1, 0, 1, 0)
+TextLabel_13.Font = Enum.Font.Code
+TextLabel_13.Text = "Auto Queue"
+TextLabel_13.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextLabel_13.TextSize = 15.000
+TextLabel_13.TextXAlignment = Enum.TextXAlignment.Left
+
+TextButton_7.Parent = AutoQueue
+TextButton_7.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+TextButton_7.BackgroundTransparency = 1.000
+TextButton_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_7.Position = UDim2.new(0, 6, 0, 4)
+TextButton_7.Size = UDim2.new(0, 12, 0, 12)
+TextButton_7.ZIndex = 2
+TextButton_7.Font = Enum.Font.SourceSans
+TextButton_7.Text = ""
+TextButton_7.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_7.TextSize = 14.000
+
+ImageLabel_20.Parent = TextButton_7
+ImageLabel_20.BackgroundTransparency = 1.000
+ImageLabel_20.Position = UDim2.new(0, 1, 0, 1)
+ImageLabel_20.Size = UDim2.new(1, -2, 1, -2)
+ImageLabel_20.ZIndex = 2
+ImageLabel_20.Image = "rbxassetid://2592362371"
+ImageLabel_20.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel_20.ScaleType = Enum.ScaleType.Slice
+ImageLabel_20.SliceCenter = Rect.new(2, 2, 62, 62)
+
+ImageLabel_21.Parent = TextButton_7
+ImageLabel_21.BackgroundTransparency = 1.000
+ImageLabel_21.Size = UDim2.new(1, 0, 1, 0)
+ImageLabel_21.ZIndex = 3
+ImageLabel_21.Image = "rbxassetid://2592362371"
+ImageLabel_21.ImageColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel_21.ScaleType = Enum.ScaleType.Slice
+ImageLabel_21.SliceCenter = Rect.new(2, 2, 62, 62)
+
+JumpCD.Name = "JumpCD"
+JumpCD.Parent = Buttons_3
+JumpCD.BackgroundTransparency = 1.000
+JumpCD.LayoutOrder = 5
+JumpCD.Size = UDim2.new(1, 0, 0, 20)
+
+Frame_14.Parent = JumpCD
+Frame_14.BackgroundTransparency = 1.000
+Frame_14.Size = UDim2.new(1, 0, 0, 20)
+
+TextLabel_14.Parent = Frame_14
+TextLabel_14.BackgroundTransparency = 1.000
+TextLabel_14.Position = UDim2.new(0, 24, 0, 0)
+TextLabel_14.Size = UDim2.new(1, 0, 1, 0)
+TextLabel_14.Font = Enum.Font.Code
+TextLabel_14.Text = "Remove Jump CD"
+TextLabel_14.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextLabel_14.TextSize = 15.000
+TextLabel_14.TextXAlignment = Enum.TextXAlignment.Left
+
+TextButton_8.Parent = JumpCD
+TextButton_8.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+TextButton_8.BackgroundTransparency = 1.000
+TextButton_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_8.Position = UDim2.new(0, 6, 0, 4)
+TextButton_8.Size = UDim2.new(0, 12, 0, 12)
+TextButton_8.ZIndex = 2
+TextButton_8.Font = Enum.Font.SourceSans
+TextButton_8.Text = ""
+TextButton_8.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_8.TextSize = 14.000
+
+ImageLabel_22.Parent = TextButton_8
+ImageLabel_22.BackgroundTransparency = 1.000
+ImageLabel_22.Position = UDim2.new(0, 1, 0, 1)
+ImageLabel_22.Size = UDim2.new(1, -2, 1, -2)
+ImageLabel_22.ZIndex = 2
+ImageLabel_22.Image = "rbxassetid://2592362371"
+ImageLabel_22.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel_22.ScaleType = Enum.ScaleType.Slice
+ImageLabel_22.SliceCenter = Rect.new(2, 2, 62, 62)
+
+ImageLabel_23.Parent = TextButton_8
+ImageLabel_23.BackgroundTransparency = 1.000
+ImageLabel_23.Size = UDim2.new(1, 0, 1, 0)
+ImageLabel_23.ZIndex = 3
+ImageLabel_23.Image = "rbxassetid://2592362371"
+ImageLabel_23.ImageColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel_23.ScaleType = Enum.ScaleType.Slice
+ImageLabel_23.SliceCenter = Rect.new(2, 2, 62, 62)
+
 Column2.Name = "Column2"
 Column2.Parent = Main
 Column2.BackgroundTransparency = 1.000
@@ -601,15 +830,15 @@ Column2.CanvasSize = UDim2.new(0, 0, 0, 0)
 Column2.ScrollBarThickness = 4
 Column2.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
-UIListLayout_4.Parent = Column2
-UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout_4.Padding = UDim.new(0, 12)
+UIListLayout_5.Parent = Column2
+UIListLayout_5.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_5.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_5.Padding = UDim.new(0, 12)
 
-UIPadding_4.Parent = Column2
-UIPadding_4.PaddingLeft = UDim.new(0, 2)
-UIPadding_4.PaddingRight = UDim.new(0, 2)
-UIPadding_4.PaddingTop = UDim.new(0, 8)
+UIPadding_5.Parent = Column2
+UIPadding_5.PaddingLeft = UDim.new(0, 2)
+UIPadding_5.PaddingRight = UDim.new(0, 2)
+UIPadding_5.PaddingTop = UDim.new(0, 8)
 
 Hub.Name = "Hub"
 Hub.Parent = Column2
@@ -617,112 +846,112 @@ Hub.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Hub.Size = UDim2.new(1, 0, 0, 80)
 
-Frame_11.Parent = Hub
-Frame_11.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
-Frame_11.BorderSizePixel = 0
-Frame_11.Size = UDim2.new(1, 0, 0, 1)
-Frame_11.ZIndex = 2
+Frame_15.Parent = Hub
+Frame_15.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+Frame_15.BorderSizePixel = 0
+Frame_15.Size = UDim2.new(1, 0, 0, 1)
+Frame_15.ZIndex = 2
 
-Buttons_3.Name = "Buttons"
-Buttons_3.Parent = Hub
-Buttons_3.BackgroundTransparency = 1.000
-Buttons_3.BorderSizePixel = 0
-Buttons_3.Position = UDim2.new(0, 6, 0, 2)
-Buttons_3.Size = UDim2.new(0, 233, 1, -4)
-Buttons_3.ZIndex = 2
-Buttons_3.CanvasSize = UDim2.new(0, 0, 0, 0)
-Buttons_3.ScrollBarThickness = 4
-Buttons_3.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+Buttons_4.Name = "Buttons"
+Buttons_4.Parent = Hub
+Buttons_4.BackgroundTransparency = 1.000
+Buttons_4.BorderSizePixel = 0
+Buttons_4.Position = UDim2.new(0, 6, 0, 2)
+Buttons_4.Size = UDim2.new(0, 233, 1, -4)
+Buttons_4.ZIndex = 2
+Buttons_4.CanvasSize = UDim2.new(0, 0, 0, 0)
+Buttons_4.ScrollBarThickness = 4
+Buttons_4.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
-UIListLayout_5.Parent = Buttons_3
-UIListLayout_5.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout_5.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout_5.Padding = UDim.new(0, 2)
+UIListLayout_6.Parent = Buttons_4
+UIListLayout_6.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_6.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_6.Padding = UDim.new(0, 2)
 
-UIPadding_5.Parent = Buttons_3
-UIPadding_5.PaddingTop = UDim.new(0, 12)
+UIPadding_6.Parent = Buttons_4
+UIPadding_6.PaddingTop = UDim.new(0, 12)
 
 Shutdown.Name = "Shutdown"
-Shutdown.Parent = Buttons_3
+Shutdown.Parent = Buttons_4
 Shutdown.BackgroundTransparency = 1.000
 Shutdown.LayoutOrder = 4
 Shutdown.Size = UDim2.new(1, 0, 0, 20)
 
-Frame_12.Parent = Shutdown
-Frame_12.BackgroundTransparency = 1.000
-Frame_12.Size = UDim2.new(1, 0, 0, 20)
+Frame_16.Parent = Shutdown
+Frame_16.BackgroundTransparency = 1.000
+Frame_16.Size = UDim2.new(1, 0, 0, 20)
 
-TextLabel_10.Parent = Frame_12
-TextLabel_10.BackgroundTransparency = 1.000
-TextLabel_10.Position = UDim2.new(0, 31, 0, -1)
-TextLabel_10.Size = UDim2.new(0.672489107, 0, 1, 0)
-TextLabel_10.Font = Enum.Font.Code
-TextLabel_10.Text = "Unload Hub"
-TextLabel_10.TextColor3 = Color3.fromRGB(160, 160, 160)
-TextLabel_10.TextSize = 15.000
+TextLabel_15.Parent = Frame_16
+TextLabel_15.BackgroundTransparency = 1.000
+TextLabel_15.Position = UDim2.new(0, 31, 0, -1)
+TextLabel_15.Size = UDim2.new(0.672489107, 0, 1, 0)
+TextLabel_15.Font = Enum.Font.Code
+TextLabel_15.Text = "Unload Hub"
+TextLabel_15.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextLabel_15.TextSize = 15.000
 
-TextButton_6.Parent = Shutdown
-TextButton_6.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
-TextButton_6.BackgroundTransparency = 1.000
-TextButton_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton_6.Position = UDim2.new(0, 31, 0, 22)
-TextButton_6.Size = UDim2.new(0, 155, 0, 32)
-TextButton_6.ZIndex = 3
-TextButton_6.Font = Enum.Font.Code
-TextButton_6.Text = "Unload :("
-TextButton_6.TextColor3 = Color3.fromRGB(160, 160, 160)
-TextButton_6.TextSize = 14.000
+TextButton_9.Parent = Shutdown
+TextButton_9.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+TextButton_9.BackgroundTransparency = 1.000
+TextButton_9.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_9.Position = UDim2.new(0, 31, 0, 22)
+TextButton_9.Size = UDim2.new(0, 155, 0, 32)
+TextButton_9.ZIndex = 3
+TextButton_9.Font = Enum.Font.Code
+TextButton_9.Text = "Unload :("
+TextButton_9.TextColor3 = Color3.fromRGB(160, 160, 160)
+TextButton_9.TextSize = 14.000
 
-ImageLabel_18.Parent = TextButton_6
-ImageLabel_18.BackgroundTransparency = 1.000
-ImageLabel_18.Size = UDim2.new(1, 0, 1, 0)
-ImageLabel_18.Image = "rbxassetid://2592362371"
-ImageLabel_18.ImageColor3 = Color3.fromRGB(60, 60, 60)
-ImageLabel_18.ScaleType = Enum.ScaleType.Slice
-ImageLabel_18.SliceCenter = Rect.new(2, 2, 62, 62)
+ImageLabel_24.Parent = TextButton_9
+ImageLabel_24.BackgroundTransparency = 1.000
+ImageLabel_24.Size = UDim2.new(1, 0, 1, 0)
+ImageLabel_24.Image = "rbxassetid://2592362371"
+ImageLabel_24.ImageColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel_24.ScaleType = Enum.ScaleType.Slice
+ImageLabel_24.SliceCenter = Rect.new(2, 2, 62, 62)
 
-ImageLabel_19.Parent = TextButton_6
-ImageLabel_19.BackgroundTransparency = 1.000
-ImageLabel_19.Position = UDim2.new(0, 1, 0, 1)
-ImageLabel_19.Size = UDim2.new(1, -2, 1, -2)
-ImageLabel_19.ZIndex = 2
-ImageLabel_19.Image = "rbxassetid://2592362371"
-ImageLabel_19.ImageColor3 = Color3.fromRGB(0, 0, 0)
-ImageLabel_19.ScaleType = Enum.ScaleType.Slice
-ImageLabel_19.SliceCenter = Rect.new(2, 2, 62, 62)
+ImageLabel_25.Parent = TextButton_9
+ImageLabel_25.BackgroundTransparency = 1.000
+ImageLabel_25.Position = UDim2.new(0, 1, 0, 1)
+ImageLabel_25.Size = UDim2.new(1, -2, 1, -2)
+ImageLabel_25.ZIndex = 2
+ImageLabel_25.Image = "rbxassetid://2592362371"
+ImageLabel_25.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel_25.ScaleType = Enum.ScaleType.Slice
+ImageLabel_25.SliceCenter = Rect.new(2, 2, 62, 62)
 
-TextLabel_11.Parent = Hub
-TextLabel_11.AnchorPoint = Vector2.new(0, 0.5)
-TextLabel_11.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-TextLabel_11.BorderSizePixel = 0
-TextLabel_11.Position = UDim2.new(0, 9, 0, 0)
-TextLabel_11.Size = UDim2.new(0, 31, 0, 2)
-TextLabel_11.ZIndex = 4
-TextLabel_11.Font = Enum.Font.Code
-TextLabel_11.Text = "Hub"
-TextLabel_11.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_11.TextSize = 15.000
+TextLabel_16.Parent = Hub
+TextLabel_16.AnchorPoint = Vector2.new(0, 0.5)
+TextLabel_16.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextLabel_16.BorderSizePixel = 0
+TextLabel_16.Position = UDim2.new(0, 9, 0, 0)
+TextLabel_16.Size = UDim2.new(0, 31, 0, 2)
+TextLabel_16.ZIndex = 4
+TextLabel_16.Font = Enum.Font.Code
+TextLabel_16.Text = "Hub"
+TextLabel_16.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_16.TextSize = 15.000
 
-TextLabel_12.Parent = ImageButton
-TextLabel_12.BackgroundTransparency = 1.000
-TextLabel_12.ClipsDescendants = true
-TextLabel_12.Position = UDim2.new(0, 0, 0, 22)
-TextLabel_12.Size = UDim2.new(0, 77, 0, 30)
-TextLabel_12.Font = Enum.Font.Code
-TextLabel_12.Text = "Features"
-TextLabel_12.TextColor3 = Color3.fromRGB(18, 127, 253)
-TextLabel_12.TextSize = 15.000
-TextLabel_12.TextWrapped = true
+TextLabel_17.Parent = ImageButton
+TextLabel_17.BackgroundTransparency = 1.000
+TextLabel_17.ClipsDescendants = true
+TextLabel_17.Position = UDim2.new(0, 0, 0, 22)
+TextLabel_17.Size = UDim2.new(0, 77, 0, 30)
+TextLabel_17.Font = Enum.Font.Code
+TextLabel_17.Text = "Features"
+TextLabel_17.TextColor3 = Color3.fromRGB(18, 127, 253)
+TextLabel_17.TextSize = 15.000
+TextLabel_17.TextWrapped = true
 
 -- Scripts:
 
-local function KKGVPIO_fake_script() -- ImageButton.Script 
+local function DDVCWTN_fake_script() -- ImageButton.Script 
 	local script = Instance.new('Script', ImageButton)
 
 
 end
-coroutine.wrap(KKGVPIO_fake_script)()
-local function XPFY_fake_script() -- ScreenGui.LocalScript 
+coroutine.wrap(DDVCWTN_fake_script)()
+local function RGQK_fake_script()
 	ImageButton.Draggable = true
 
 	local SprintSpeed = 21
@@ -735,92 +964,95 @@ local function XPFY_fake_script() -- ScreenGui.LocalScript
 	local Column_2 = ImageButton.Main.Column2
 
 	local Customize_Frame = Column_1.Customize.Buttons
-	local Code_Frame = Customize_Frame.Code
-	local AutoSpin_Frame = Customize_Frame.AutoSpin
-
 	local Hub_Frame = Column_2.Hub.Buttons
+	local Secure_Frame = Column_1.Secure.Buttons
+	local Risky_Frame = Column_1.Risky.Buttons
+
 	local Shutdown = Hub_Frame.Shutdown
-
-	local Game_Frame = Column_1.Maingame.Buttons
-	local Awareness = Game_Frame["Ball Awareness"]
-	local Sprint = Game_Frame.Sprint
-	local Queue = Game_Frame["Quick Queue"]
-
 	local Ps = {
-		CodePrompt = Code_Frame.TextButton,
-		AutoSpinPrompt = AutoSpin_Frame.TextButton,
-		AwarenessPrompt = Awareness.TextButton,
-		SprintPrompt = Sprint.TextButton,
-		QueuePrompt = Queue.TextButton
+		CodeSpamButton = Customize_Frame.Code.TextButton,
+		AutoSpinButton = Customize_Frame.AutoSpin.TextButton,
+		AwarenessButton = Secure_Frame["Ball Awareness"].TextButton,
+		SprintButton = Secure_Frame.Sprint.TextButton,
+		QueueButton = Secure_Frame["Quick Queue"].TextButton,
+		JumpCDButton = Risky_Frame.JumpCD.TextButton,
+		AutoQueueButton = Risky_Frame["Auto Queue"].TextButton
 	}
 
-	Ps.CodePrompt.MouseButton1Click:Connect(function()
-		if Ps.CodePrompt.BackgroundTransparency == 0 then
-			Ps.CodePrompt.BackgroundTransparency = 1
+
+	if not Player.PlayerGui:FindFirstChild("Intro") then
+		Customize_Frame.Parent.Visible = false
+	else
+		Secure_Frame.Parent.Visible = false
+		Risky_Frame.Parent.Visible = false
+	end
+	Ps.CodeSpamButton.MouseButton1Click:Connect(function()
+		if Ps.CodeSpamButton.BackgroundTransparency == 0 then
+			Ps.CodeSpamButton.BackgroundTransparency = 1
 		else
-			Ps.CodePrompt.BackgroundTransparency = 0
+			Ps.CodeSpamButton.BackgroundTransparency = 0
 		end
-		if Ps.CodePrompt.BackgroundTransparency == 0 then
-			while Ps.CodePrompt.BackgroundTransparency == 0 do
+		if Ps.CodeSpamButton.BackgroundTransparency == 0 then
+			while Ps.CodeSpamButton.BackgroundTransparency == 0 do
 				task.wait()
-				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Code_Frame.TextFrame.TextBox.Text)
+				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
 			end
 		end
 	end)
 
 
-	Ps.AutoSpinPrompt.MouseButton1Click:Connect(function()
-		if Ps.AutoSpinPrompt.BackgroundTransparency == 0 then
-			Ps.AutoSpinPrompt.BackgroundTransparency = 1
+	Ps.AutoSpinButton.MouseButton1Click:Connect(function()
+		if Ps.AutoSpinButton.BackgroundTransparency == 0 then
+			Ps.AutoSpinButton.BackgroundTransparency = 1
 		else
-			Ps.AutoSpinPrompt.BackgroundTransparency = 0
+			Ps.AutoSpinButton.BackgroundTransparency = 0
 		end
 
-		if Ps.AutoSpinPrompt.BackgroundTransparency == 0 then
-			local Str = AutoSpin_Frame.Frame.TextFrame.TextBox.Text
+		if Ps.AutoSpinButton.BackgroundTransparency == 0 then
+			local Str = Ps.AutoSpinButton.Parent.Frame.TextFrame.TextBox.Text
 			local Badges = string.split(string.lower(Str:gsub(" ","")), ",")
 
 			local Badge = game:GetService("Players").LocalPlayer.PlayerGui.Intro.Customize.CustomizationFrame.RerollFrame.Badge1.Badge1Value
 			mousemoveabs(520, 585)
 			task.wait()
-			while Ps.AutoSpinPrompt.BackgroundTransparency == 0 do
-				repeat task.wait() until Badge.Parent.Reroll.ImageColor3 == Color3.fromRGB(255, 255, 255) or Ps.AutoSpinPrompt.BackgroundTransparency == 1
+			while Ps.AutoSpinButton.BackgroundTransparency == 0 do
+				repeat task.wait() until Badge.Parent.Reroll.ImageColor3 == Color3.fromRGB(255, 255, 255) or Ps.AutoSpinButton.BackgroundTransparency == 1
 				local Found = false
 				if table.find(Badges, string.lower(Badge.Text)) then
 					task.wait(4)
 					if table.find(Badges, string.lower(Badge.Text)) then
-						Ps.AutoSpinPrompt.BackgroundTransparency = 1
+						Ps.AutoSpinButton.BackgroundTransparency = 1
 						Found = true
 						print("GOT THE BADGE")
 					end
 				end
-				if Ps.AutoSpinPrompt.BackgroundTransparency == 0 and not Found then
+				if Ps.AutoSpinButton.BackgroundTransparency == 0 and not Found then
 					mouse1click()
 				end
 			end
 		end
 	end)
 
-	Ps.AwarenessPrompt.MouseButton1Click:Connect(function()
-		if Ps.AwarenessPrompt.BackgroundTransparency == 0 then
-			Ps.AwarenessPrompt.BackgroundTransparency = 1
+	Ps.AwarenessButton.MouseButton1Click:Connect(function()
+		if Ps.AwarenessButton.BackgroundTransparency == 0 then
+			Ps.AwarenessButton.BackgroundTransparency = 1
 		else
-			Ps.AwarenessPrompt.BackgroundTransparency = 0
+			Ps.AwarenessButton.BackgroundTransparency = 0
 		end
 	end)
 	if workspace:FindFirstChild("Ignore") then
 		workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
-			if Ps.AwarenessPrompt.BackgroundTransparency == 0 then
+			if Ps.AwarenessButton.BackgroundTransparency == 0 then
 				p8.Transparency = 0.6
 			end
 		end)
 	end
 
-	Ps.SprintPrompt.MouseButton1Click:Connect(function()
-		if Ps.SprintPrompt.BackgroundTransparency == 0 then
-			Ps.SprintPrompt.BackgroundTransparency = 1
+	Ps.SprintButton.MouseButton1Click:Connect(function()
+		if Ps.SprintButton.BackgroundTransparency == 0 then
+			Ps.SprintButton.BackgroundTransparency = 1
 		else
-			Ps.SprintPrompt.BackgroundTransparency = 0
+			Ps.SprintButton.BackgroundTransparency = 0
 		end
 	end)
 	local Toggle = false
@@ -830,7 +1062,7 @@ local function XPFY_fake_script() -- ScreenGui.LocalScript
 		local Humanoid = Player.Character:WaitForChild("Humanoid")
 		local locked = UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter
 		if not isTyping then
-			if Sprint.TextButton.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and locked then
+			if Ps.SprintButton.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and locked then
 				if Toggle then
 					Toggle = false
 					i:Destroy()
@@ -844,7 +1076,7 @@ local function XPFY_fake_script() -- ScreenGui.LocalScript
 					task.wait()
 					Humanoid.WalkSpeed = SprintSpeed
 					while Toggle do
-						repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or not locked or Sprint.TextButton.BackgroundTransparency ~= 0
+						repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or not locked or Ps.SprintButton.BackgroundTransparency ~= 0
 						if Toggle then
 							Toggle = false
 							i:Destroy()
@@ -863,63 +1095,121 @@ local function XPFY_fake_script() -- ScreenGui.LocalScript
 				end
 			end
 		end
-		if Key.KeyCode == Enum.KeyCode.F8 then
-			for _, i in pairs(Ps) do
-				i.BackgroundTransparency = 1
-				task.wait()
-			end
-			ScreenGui:Destroy()
-		end
 	end)
 	Shutdown.TextButton.MouseButton1Click:Connect(function()
 		for _, i in pairs(Ps) do
 			i.BackgroundTransparency = 1
 			task.wait()
 		end
+		if not Player.Character:FindFirstChild("SemPuloTemp") then
+			local SemPuloTemp = Instance.new("StringValue", Player.Character)
+			SemPuloTemp.Name = "SemPuloTemp"
+		end
 		ScreenGui:Destroy()
 	end)
 
-	Ps.QueuePrompt.MouseButton1Click:Connect(function()
-		if Ps.QueuePrompt.BackgroundTransparency == 0 then
+	local function FindSpot()
+		local NearestSpot = nil
+		local Position = Player.Character.HumanoidRootPart.Position
 
-			Ps.QueuePrompt.BackgroundTransparency = 1
-		else
-			Ps.QueuePrompt.BackgroundTransparency = 0
-		end
-		if Ps.QueuePrompt.BackgroundTransparency == 0 then
+		for _, i in pairs(workspace:GetChildren()) do
+			if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
+				local BSpots = i.Campo.BlueSpots
+				local RSPots = i.Campo.RedSpots
 
-			local NearestSpot = nil
-			local Position = Player.Character.HumanoidRootPart.Position
-
-			for _, i in pairs(workspace:GetChildren()) do
-				if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
-					local BSpots = i.Campo.BlueSpots
-					local RSPots = i.Campo.RedSpots
-
-					for _, v in pairs(RSPots:GetChildren()) do
-						if v:FindFirstChildOfClass("ProximityPrompt") then
-							if NearestSpot ~= nil then
-								if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
-									NearestSpot = v
-								end
-							else
+				for _, v in pairs(RSPots:GetChildren()) do
+					if v:FindFirstChildOfClass("ProximityPrompt") then
+						if NearestSpot ~= nil then
+							if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
 								NearestSpot = v
 							end
+						else
+							NearestSpot = v
 						end
 					end
-					for _, v in pairs(BSpots:GetChildren()) do
-						if v:FindFirstChildOfClass("ProximityPrompt") then
-							if NearestSpot ~= nil then
-								if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
-									NearestSpot = v
-								end
-							else
+				end
+				for _, v in pairs(BSpots:GetChildren()) do
+					if v:FindFirstChildOfClass("ProximityPrompt") then
+						if NearestSpot ~= nil then
+							if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
 								NearestSpot = v
 							end
+						else
+							NearestSpot = v
 						end
 					end
 				end
 			end
+		end
+		return NearestSpot
+	end
+	Ps.QueueButton.MouseButton1Click:Connect(function()
+		if Ps.QueueButton.BackgroundTransparency == 0 then
+
+			Ps.QueueButton.BackgroundTransparency = 1
+		else
+			Ps.QueueButton.BackgroundTransparency = 0
+		end
+		if Ps.QueueButton.BackgroundTransparency == 0 then
+
+			local NearestSpot = FindSpot()
+
+			while Ps.QueueButton.BackgroundTransparency == 0 do
+				local Character = Player.Character
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
+					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+					Ps.QueueButton.BackgroundTransparency = 1
+				end
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.QueueButton.BackgroundTransparency == 1
+			end
+		end
+	end)
+
+	Ps.JumpCDButton.MouseButton1Click:Connect(function()
+		if Ps.JumpCDButton.BackgroundTransparency == 0 then
+			Ps.JumpCDButton.BackgroundTransparency = 1
+		else
+			Ps.JumpCDButton.BackgroundTransparency = 0
+		end
+		if Ps.JumpCDButton.BackgroundTransparency == 0 then
+			local Character = Player.Character
+			if Character:FindFirstChild("SemPulo") then
+				Character.SemPulo:Destroy()
+			end
+			if Character:FindFirstChild("SemPuloTemp") then
+				Character.SemPuloTemp:Destroy()
+			end
+		else
+			local SemPuloTemp = Instance.new("StringValue", Player.Character)
+			SemPuloTemp.Name = "SemPuloTemp"
+		end
+	end)
+	Player.CharacterAppearanceLoaded:Connect(function(Character)
+		local Humanoid = Character:WaitForChild("Humanoid")
+		if Character:FindFirstChild("SemPulo") then
+			Character.SemPulo:Destroy()
+		end
+		if Ps.JumpCDButton.BackgroundTransparency == 1 and not Character:FindFirstChild("SemPuloTemp") then
+			local SemPuloTemp = Instance.new("StringValue", Player.Character)
+			SemPuloTemp.Name = "SemPuloTemp"
+		end
+		Humanoid.Changed:connect(function()
+			if Ps.JumpCDButton.BackgroundTransparency == 1 and Character:FindFirstChild("SemPuloTemp") then
+				Humanoid.Jump = false
+			end
+		end)
+	end)
+
+	Ps.AutoQueueButton.MouseButton1Click:Connect(function()
+		if Ps.AutoQueueButton.BackgroundTransparency == 0 then
+
+			Ps.AutoQueueButton.BackgroundTransparency = 1
+		else
+			Ps.AutoQueueButton.BackgroundTransparency = 0
+		end
+		if Ps.AutoQueueButton.BackgroundTransparency == 0 then
+
+			local NearestSpot = FindSpot()
 
 			local function ResetText()
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
@@ -927,24 +1217,25 @@ local function XPFY_fake_script() -- ScreenGui.LocalScript
 				end
 			end
 			ResetText()
-			while Ps.QueuePrompt.BackgroundTransparency == 0 do
+			while Ps.AutoQueueButton.BackgroundTransparency == 0 do
 				local Character = Player.Character
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
+					print("Fired")
 					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
 
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.QueuePrompt.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
-				if Ps.QueuePrompt.BackgroundTransparency == 1 then
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.AutoQueueButton.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
+				if Ps.AutoQueueButton.BackgroundTransparency == 1 then
 					ResetText()
 				end
-				repeat task.wait() until not Player.Character.VFX.NoMove.Value or Ps.QueuePrompt.BackgroundTransparency == 1
-				if Ps.QueuePrompt.BackgroundTransparency == 1 then
+				repeat task.wait() until not Player.Character.VFX.NoMove.Value or Ps.AutoQueueButton.BackgroundTransparency == 1
+				if Ps.AutoQueueButton.BackgroundTransparency == 1 then
 					ResetText()
 				end
 			end
 		end
 	end)
 end
-coroutine.wrap(XPFY_fake_script)()
+coroutine.wrap(RGQK_fake_script)()
