@@ -719,7 +719,7 @@ TextLabel_12.TextWrapped = true
 local function KKGVPIO_fake_script() -- ImageButton.Script 
 	local script = Instance.new('Script', ImageButton)
 
-	
+
 end
 coroutine.wrap(KKGVPIO_fake_script)()
 local function XPFY_fake_script() -- ScreenGui.LocalScript 
@@ -935,11 +935,11 @@ local function XPFY_fake_script() -- ScreenGui.LocalScript
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or QueuePrompt.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.QueuePrompt.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
 				if Ps.QueuePrompt.BackgroundTransparency == 1 then
 					ResetText()
 				end
-				repeat task.wait() until not Player.Character.VFX.NoMove.Value or QueuePrompt.BackgroundTransparency == 1
+				repeat task.wait() until not Player.Character.VFX.NoMove.Value or Ps.QueuePrompt.BackgroundTransparency == 1
 				if Ps.QueuePrompt.BackgroundTransparency == 1 then
 					ResetText()
 				end
