@@ -944,13 +944,6 @@ TextLabel_17.TextSize = 15.000
 TextLabel_17.TextWrapped = true
 
 -- Scripts:
-
-local function DDVCWTN_fake_script() -- ImageButton.Script 
-	local script = Instance.new('Script', ImageButton)
-
-
-end
-coroutine.wrap(DDVCWTN_fake_script)()
 local function RGQK_fake_script()
 	ImageButton.Draggable = true
 
@@ -1158,7 +1151,7 @@ local function RGQK_fake_script()
 
 			while Ps.QueueButton.BackgroundTransparency == 0 do
 				local Character = Player.Character
-				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Player.Character.VFX.IsPlaying.Value and not Player.Player.Character.VFX.NoMove.Value then
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 					Ps.QueueButton.BackgroundTransparency = 1
 				end
@@ -1166,7 +1159,15 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
-
+	
+	local function FindTackleFootAnimation(Op)
+		for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
+			local str = string.split(Track.Animation.AnimationId,"//")
+			if str[2] == "9015340307" then
+				return true
+			end
+		end
+	end
 	Ps.AutoDribble.MouseButton1Click:Connect(function()
 		if Ps.AutoDribble.BackgroundTransparency == 0 then
 
@@ -1177,28 +1178,19 @@ local function RGQK_fake_script()
 		if Ps.AutoDribble.BackgroundTransparency == 0 then
 			local PlayerTackles = {}
 			while Ps.AutoDribble.BackgroundTransparency == 0 do
-				task.wait(0.0001)
-				local Character = Player.Character
-				if Character:FindFirstChild("Bola") then
-					local Ball = Character.Bola
+				task.wait()
+				if Player.Character:FindFirstChild("Bola") then
+					local Ball = Player.Character.Bola
 					for _, i in pairs(game:GetService("Players"):GetChildren()) do
 						if i ~= Player then
 							local Op = i.Character
-							if (Op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 20 and Op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
-								local TackleFound = false
-								for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
-									local str = string.split(Track.Animation.AnimationId,"//")
-									if str[2] == "9015340307" then
-										TackleFound = true
-									end
-								end
-								local Ifs = not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Character
-								if Op.Humanoid:FindFirstChild("Tackled") and Ifs or TackleFound and Ifs then
+							local Magnitude = (i.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
+							if Magnitude < 20 and i.Character.Humanoid.Teammate.Value ~= Player.Character.Humanoid.Teammate.Value then
+								if i.Character.Humanoid:FindFirstChild("Tackled") and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Player.Character or FindTackleFootAnimation(i.Character) and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Player.Character and Magnitude < 10 then
 									keypress(0x56)
 									keyrelease(0x56)
 									keypress(0x20)
 									keyrelease(0x20)
-
 									table.insert(PlayerTackles, i.Name)
 									local Find = table.find(PlayerTackles, i.Name)
 									task.delay(3, function()
@@ -1206,20 +1198,19 @@ local function RGQK_fake_script()
 											table.remove(PlayerTackles, Find)
 										end
 									end)
-									print(Op.Name ..", Tackled You!")
-
+									print(i.Character.Name ..", Tackled You!")
 									if Ball:FindFirstChild("AutoDribbled1") then 
 										local AutoDribbled2 = Instance.new("Sound", Ball)
 										AutoDribbled2.Name = "AutoDribbled2"
 										coroutine.resume(coroutine.create(function()
-											repeat task.wait() until Ball.Parent ~= Character or Ps.AutoDribble.BackgroundTransparency == 1
+											repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
 											if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
 										end))
 									else
 										local AutoDribbled1 = Instance.new("Sound", Ball)
 										AutoDribbled1.Name = "AutoDribbled1"
 										coroutine.resume(coroutine.create(function()
-											repeat task.wait() until Ball.Parent ~= Character or Ps.AutoDribble.BackgroundTransparency == 1
+											repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
 											if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
 										end))
 									end
@@ -1241,20 +1232,20 @@ local function RGQK_fake_script()
 		if Ps.JumpCDButton.BackgroundTransparency == 0 then
 			local Character = Player.Character
 			if Character:FindFirstChild("SemPulo") then
-				Character.SemPulo:Destroy()
+				Player.Character.SemPulo:Destroy()
 			end
 			if Character:FindFirstChild("SemPuloTemp") then
-				Character.SemPuloTemp:Destroy()
+				Player.Character.SemPuloTemp:Destroy()
 			end
 		else
 			local SemPuloTemp = Instance.new("StringValue", Player.Character)
 			SemPuloTemp.Name = "SemPuloTemp"
 		end
 	end)
-	Player.CharacterAppearanceLoaded:Connect(function(Character)
+	Player.Character.AppearanceLoaded:Connect(function(Character)
 		local Humanoid = Character:WaitForChild("Humanoid")
 		if Character:FindFirstChild("SemPulo") then
-			Character.SemPulo:Destroy()
+			Player.Character.SemPulo:Destroy()
 		end
 		if Ps.JumpCDButton.BackgroundTransparency == 1 and not Character:FindFirstChild("SemPuloTemp") then
 			local SemPuloTemp = Instance.new("StringValue", Player.Character)
@@ -1286,17 +1277,17 @@ local function RGQK_fake_script()
 			ResetText()
 			while Ps.AutoQueueButton.BackgroundTransparency == 0 do
 				local Character = Player.Character
-				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
-					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Player.Character.VFX.IsPlaying.Value and not Player.Player.Character.VFX.NoMove.Value then
+					game:GetService("Players").LocalPlayer.Player.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
 
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.AutoQueueButton.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.AutoQueueButton.BackgroundTransparency == 1 or not Player.Player.Character.VFX.IsPlaying.Value
 				if Ps.AutoQueueButton.BackgroundTransparency == 1 then
 					ResetText()
 				end
-				repeat task.wait() until not Player.Character.VFX.NoMove.Value or Ps.AutoQueueButton.BackgroundTransparency == 1
+				repeat task.wait() until not Player.Player.Character.VFX.NoMove.Value or Ps.AutoQueueButton.BackgroundTransparency == 1
 				if Ps.AutoQueueButton.BackgroundTransparency == 1 then
 					ResetText()
 				end
@@ -1304,4 +1295,4 @@ local function RGQK_fake_script()
 		end
 	end)
 end
-coroutine.wrap(RGQK_fake_script)()
+coroutine.wrap(RGQK_fake_script)() 
