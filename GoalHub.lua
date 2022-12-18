@@ -1025,6 +1025,7 @@ local function RGQK_fake_script()
 					if table.find(Badges, string.lower(Badge.Text)) then
 						Ps.AutoSpinButton.BackgroundTransparency = 1
 						Found = true
+						print("GOT THE BADGE")
 					end
 				end
 				if Ps.AutoSpinButton.BackgroundTransparency == 0 and not Found then
@@ -1184,6 +1185,7 @@ local function RGQK_fake_script()
 						if i ~= Player then
 							local Op = i.Character
 							if (Op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 20 and Op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
+								print(Op.Name)
 								if Op.Humanoid:FindFirstChild("Tackled") and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Character then
 									keypress(0x56)
 									keyrelease(0x56)
@@ -1197,6 +1199,7 @@ local function RGQK_fake_script()
 											table.remove(PlayerTackles, Find)
 										end
 									end)
+									print(Op.Name ..", Tackled You!")
 									
 									if Ball:FindFirstChild("AutoDribbled1") then 
 										local AutoDribbled2 = Instance.new("Sound", Ball)
