@@ -1025,7 +1025,6 @@ local function RGQK_fake_script()
 					if table.find(Badges, string.lower(Badge.Text)) then
 						Ps.AutoSpinButton.BackgroundTransparency = 1
 						Found = true
-						print("GOT THE BADGE")
 					end
 				end
 				if Ps.AutoSpinButton.BackgroundTransparency == 0 and not Found then
@@ -1198,23 +1197,22 @@ local function RGQK_fake_script()
 											table.remove(PlayerTackles, Find)
 										end
 									end)
-									print(Op.Name ..", Tackled You!")
 									
 									if Ball:FindFirstChild("AutoDribbled1") then 
 										local AutoDribbled2 = Instance.new("Sound", Ball)
 										AutoDribbled2.Name = "AutoDribbled2"
-										print("AutoDribble 2")
+										coroutine.resume(coroutine.create(function()
+											repeat task.wait() until Ball.Parent ~= Character or Ps.AutoDribble.BackgroundTransparency == 1
+											if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
+										end))
 									else
 										local AutoDribbled1 = Instance.new("Sound", Ball)
 										AutoDribbled1.Name = "AutoDribbled1"
-										print("AutoDribble 1")
+										coroutine.resume(coroutine.create(function()
+											repeat task.wait() until Ball.Parent ~= Character or Ps.AutoDribble.BackgroundTransparency == 1
+											if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
+										end))
 									end
-									coroutine.resume(coroutine.create(function()
-										repeat task.wait() until Ball.Parent ~= Character or Ps.AutoDribble.BackgroundTransparency == 1
-										if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
-										if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
-										print("Tags Destroyed")
-									end))
 								end
 							end
 						end
