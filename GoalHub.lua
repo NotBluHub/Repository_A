@@ -138,7 +138,7 @@ TextLabel.BackgroundTransparency = 1.000
 TextLabel.Position = UDim2.new(0, 6, 0, -1)
 TextLabel.Size = UDim2.new(0, 0, 0, 20)
 TextLabel.Font = Enum.Font.Code
-TextLabel.Text = "Blu x Booh Hub | V 1.0"
+TextLabel.Text = "Blu x Booh Hub | V 1.5"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextSize = 18.000
 TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -958,6 +958,7 @@ local function RGQK_fake_script()
 	local Code = ""
 	--//Variables//--
 	local UserInput = game:GetService("UserInputService")
+	local Debris = game:GetService("Debris")
 	local Player = game:GetService("Players").LocalPlayer
 	--//UI//--
 	local Column_1 = ImageButton.Main.Column1
@@ -975,6 +976,7 @@ local function RGQK_fake_script()
 		AwarenessButton = Secure_Frame["Ball Awareness"].TextButton,
 		SprintButton = Secure_Frame.Sprint.TextButton,
 		QueueButton = Secure_Frame["Quick Queue"].TextButton,
+		AutoDribble = Secure_Frame["Auto Dribble"].TextButton,
 		JumpCDButton = Risky_Frame.JumpCD.TextButton,
 		AutoQueueButton = Risky_Frame["Auto Queue"].TextButton
 	}
@@ -1165,6 +1167,63 @@ local function RGQK_fake_script()
 		end
 	end)
 
+	Ps.AutoDribble.MouseButton1Click:Connect(function()
+		if Ps.AutoDribble.BackgroundTransparency == 0 then
+
+			Ps.AutoDribble.BackgroundTransparency = 1
+		else
+			Ps.AutoDribble.BackgroundTransparency = 0
+		end
+		if Ps.AutoDribble.BackgroundTransparency == 0 then
+			local PlayerTackles = {}
+			while Ps.AutoDribble.BackgroundTransparency == 0 do
+				task.wait(0.0001)
+				local Character = Player.Character
+				if Character:FindFirstChild("Bola") then
+					local Ball = Character.Bola
+					for _, i in pairs(game:GetService("Players"):GetChildren()) do
+						if i ~= Player then
+							local Op = i.Character
+							if (Op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 20 then
+								if Op.Humanoid:FindFirstChild("Tackled") and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Character then
+									keypress(0x56)
+									keyrelease(0x56)
+									keypress(0x20)
+									keyrelease(0x20)
+									
+									table.insert(PlayerTackles, i.Name)
+									local Find = table.find(PlayerTackles, i.Name)
+									task.delay(3, function()
+										if Find then
+											table.remove(PlayerTackles, Find)
+										end
+									end)
+									print(Op.Name ..", Tackled You!")
+									
+									if Ball:FindFirstChild("AutoDribbled1") then 
+										local AutoDribbled2 = Instance.new("Sound", Ball)
+										AutoDribbled2.Name = "AutoDribbled2"
+										print("AutoDribble 2")
+									else
+										local AutoDribbled1 = Instance.new("Sound", Ball)
+										AutoDribbled1.Name = "AutoDribbled1"
+										print("AutoDribble 1")
+									end
+									coroutine.resume(coroutine.create(function()
+										repeat task.wait() until Ball.Parent ~= Character or Ps.AutoDribble.BackgroundTransparency == 1
+										if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
+										if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
+										print("Tags Destroyed")
+									end))
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end)
+
 	Ps.JumpCDButton.MouseButton1Click:Connect(function()
 		if Ps.JumpCDButton.BackgroundTransparency == 0 then
 			Ps.JumpCDButton.BackgroundTransparency = 1
@@ -1220,7 +1279,6 @@ local function RGQK_fake_script()
 			while Ps.AutoQueueButton.BackgroundTransparency == 0 do
 				local Character = Player.Character
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
-					print("Fired")
 					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
 
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
