@@ -1185,13 +1185,20 @@ local function RGQK_fake_script()
 						if i ~= Player then
 							local Op = i.Character
 							if (Op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 20 and Op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
-								print(Op.Name)
-								if Op.Humanoid:FindFirstChild("Tackled") and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Character then
+								local TackleFound = false
+								for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
+									local str = string.split(Track.Animation.AnimationId,"//")
+									if str[2] == "9015340307" then
+										TackleFound = true
+									end
+								end
+								local Ifs = not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Character
+								if Op.Humanoid:FindFirstChild("Tackled") and Ifs or TackleFound and Ifs then
 									keypress(0x56)
 									keyrelease(0x56)
 									keypress(0x20)
 									keyrelease(0x20)
-									
+
 									table.insert(PlayerTackles, i.Name)
 									local Find = table.find(PlayerTackles, i.Name)
 									task.delay(3, function()
@@ -1200,7 +1207,7 @@ local function RGQK_fake_script()
 										end
 									end)
 									print(Op.Name ..", Tackled You!")
-									
+
 									if Ball:FindFirstChild("AutoDribbled1") then 
 										local AutoDribbled2 = Instance.new("Sound", Ball)
 										AutoDribbled2.Name = "AutoDribbled2"
