@@ -1184,7 +1184,7 @@ local function RGQK_fake_script()
 					for _, i in pairs(game:GetService("Players"):GetChildren()) do
 						if i ~= Player then
 							local Op = i.Character
-							if (Op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 20 then
+							if (Op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 20 and Op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
 								if Op.Humanoid:FindFirstChild("Tackled") and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Character then
 									keypress(0x56)
 									keyrelease(0x56)
