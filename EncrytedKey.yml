@@ -1,0 +1,7 @@
+jobs:
+  retrieve-secret:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Retrieve secret
+      id: secret
+      run: echo "${{ secrets.GOLDENGOOSE }}"
