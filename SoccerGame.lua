@@ -948,10 +948,8 @@ local function RGQK_fake_script()
 	ImageButton.Draggable = true
 
 	local SprintSpeed = 21
-	local Code = ""
 	--//Variables//--
 	local UserInput = game:GetService("UserInputService")
-	local Debris = game:GetService("Debris")
 	local Player = game:GetService("Players").LocalPlayer
 	--//UI//--
 	local Column_1 = ImageButton.Main.Column1
@@ -1013,12 +1011,12 @@ local function RGQK_fake_script()
 			while Ps.AutoSpinButton.BackgroundTransparency == 0 do
 				repeat task.wait() until Badge.Parent.Reroll.ImageColor3 == Color3.fromRGB(255, 255, 255) or Ps.AutoSpinButton.BackgroundTransparency == 1
 				local Found = false
-				if table.find(Badges, string.lower(Badge.Text)) then
+				if string.match(string.lower(Badge.Text), Badges) then
 					task.wait(4)
-					if table.find(Badges, string.lower(Badge.Text)) then
-						Ps.AutoSpinButton.BackgroundTransparency = 1
+					if string.match(string.lower(Badge.Text), Badges) then
 						Found = true
 						print("GOT THE BADGE")
+						Ps.AutoSpinButton.BackgroundTransparency = 1
 					end
 				end
 				if Ps.AutoSpinButton.BackgroundTransparency == 0 and not Found then
@@ -1027,6 +1025,7 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
+
 
 	Ps.AwarenessButton.MouseButton1Click:Connect(function()
 		if Ps.AwarenessButton.BackgroundTransparency == 0 then
@@ -1055,9 +1054,8 @@ local function RGQK_fake_script()
 	local i = nil
 	UserInput.InputBegan:Connect(function(Key, isTyping)
 		local Humanoid = Player.Character:WaitForChild("Humanoid")
-		local locked = UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter
 		if not isTyping then
-			if Ps.SprintButton.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and locked then
+			if Ps.SprintButton.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
 				if Toggle then
 					Toggle = false
 					i:Destroy()
@@ -1071,7 +1069,7 @@ local function RGQK_fake_script()
 					task.wait()
 					Humanoid.WalkSpeed = SprintSpeed
 					while Toggle do
-						repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or not locked or Ps.SprintButton.BackgroundTransparency ~= 0
+						repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Ps.SprintButton.BackgroundTransparency ~= 0
 						if Toggle then
 							Toggle = false
 							i:Destroy()
@@ -1103,40 +1101,36 @@ local function RGQK_fake_script()
 		ScreenGui:Destroy()
 	end)
 
-	local function FindSpot()
-		local NearestSpot = nil
-		local Position = Player.Character.HumanoidRootPart.Position
+	local Actual_Spots = {}
+	for _, i in pairs(workspace:GetDescendants()) do
+		if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" and i:FindFirstChildOfClass("ProximityPrompt") then
+			table.insert(Actual_Spots, i)
+		end
+	end
+	local function FindSpot(Character)
+		local filter_table = {}
 
-		for _, i in pairs(workspace:GetChildren()) do
-			if i:IsA("Model") and i.Name == "CampoAuto" and i.Campo:FindFirstChild("BlueSpots") and i.Campo:FindFirstChild("RedSpots") then
-				local BSpots = i.Campo.BlueSpots
-				local RSPots = i.Campo.RedSpots
-
-				for _, v in pairs(RSPots:GetChildren()) do
-					if v:FindFirstChildOfClass("ProximityPrompt") then
-						if NearestSpot ~= nil then
-							if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
-								NearestSpot = v
-							end
-						else
-							NearestSpot = v
-						end
-					end
-				end
-				for _, v in pairs(BSpots:GetChildren()) do
-					if v:FindFirstChildOfClass("ProximityPrompt") then
-						if NearestSpot ~= nil then
-							if (Position - v.Position).Magnitude < (Position - NearestSpot.Position).Magnitude then
-								NearestSpot = v
-							end
-						else
-							NearestSpot = v
-						end
-					end
+		for _, i in pairs(workspace:GetDescendants()) do
+			if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" then
+				if i:IsA('Part') and i:FindFirstChildOfClass("ProximityPrompt") then
+					print(i.Name)
+					table.insert(filter_table, i)
 				end
 			end
 		end
-		return NearestSpot
+
+		local startPoint = Character.HumanoidRootPart.Position
+		local closestPart = nil
+		local minDistance = math.huge
+		for _, part in pairs(filter_table) do
+			local distance = (part.Position - startPoint).Magnitude  -- Calculate the distance between the part and the start point
+			if distance < minDistance then  -- If the distance is smaller than the minimum distance
+				minDistance = distance  -- Update the minimum distance
+				closestPart = part  -- Update the closest part
+			end
+		end
+
+		return closestPart
 	end
 	Ps.QueueButton.MouseButton1Click:Connect(function()
 		if Ps.QueueButton.BackgroundTransparency == 0 then
@@ -1147,11 +1141,11 @@ local function RGQK_fake_script()
 		end
 		if Ps.QueueButton.BackgroundTransparency == 0 then
 
-			local NearestSpot = FindSpot()
+			local NearestSpot = FindSpot(Player.Character)
 
 			while Ps.QueueButton.BackgroundTransparency == 0 do
 				local Character = Player.Character
-				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Player.Character.VFX.IsPlaying.Value and not Player.Player.Character.VFX.NoMove.Value then
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and Ps.QueueButton.BackgroundTransparency ~= 1 then
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 					Ps.QueueButton.BackgroundTransparency = 1
 				end
@@ -1159,15 +1153,13 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
-	
-	local function FindTackleFootAnimation(Op)
-		for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
-			local str = string.split(Track.Animation.AnimationId,"//")
-			if str[2] == "9015340307" then
-				return true
-			end
-		end
-	end
+	--                _          _____       _ _     _     _      
+	--     /\        | |        |  __ \     (_) |   | |   | |     
+	--    /  \  _   _| |_ ___   | |  | |_ __ _| |__ | |__ | | ___ 
+	--   / /\ \| | | | __/ _ \  | |  | | '__| | '_ \| '_ \| |/ _ \
+	--  / ____ \ |_| | || (_) | | |__| | |  | | |_) | |_) | |  __/
+	-- /_/    \_\__,_|\__\___/  |_____/|_|  |_|_.__/|_.__/|_|\___|
+
 	Ps.AutoDribble.MouseButton1Click:Connect(function()
 		if Ps.AutoDribble.BackgroundTransparency == 0 then
 
@@ -1186,33 +1178,35 @@ local function RGQK_fake_script()
 							local Op = i.Character
 							local Magnitude = (i.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
 							if Magnitude < 20 and i.Character.Humanoid.Teammate.Value ~= Player.Character.Humanoid.Teammate.Value then
-								if i.Character.Humanoid:FindFirstChild("Tackled") and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Player.Character or FindTackleFootAnimation(i.Character) and not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Player.Character and Magnitude < 10 then
-									keypress(0x56)
-									keyrelease(0x56)
-									keypress(0x20)
-									keyrelease(0x20)
-									table.insert(PlayerTackles, i.Name)
-									local Find = table.find(PlayerTackles, i.Name)
-									task.delay(3, function()
-										if Find then
-											table.remove(PlayerTackles, Find)
+								if not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Player.Character then
+									if i.Character.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(i.Character) and Magnitude < 10 then
+										keypress(0x56)
+										keyrelease(0x56)
+										keypress(0x20)
+										keyrelease(0x20)
+										table.insert(PlayerTackles, i.Name)
+										local Find = table.find(PlayerTackles, i.Name)
+										task.delay(3, function()
+											if Find then
+												table.remove(PlayerTackles, Find)
+											end
+										end)
+										print(i.Character.Name ..", Tackled You!")
+										if Ball:FindFirstChild("AutoDribbled1") then 
+											local AutoDribbled2 = Instance.new("Sound", Ball)
+											AutoDribbled2.Name = "AutoDribbled2"
+											coroutine.resume(coroutine.create(function()
+												repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
+												if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
+											end))
+										else
+											local AutoDribbled1 = Instance.new("Sound", Ball)
+											AutoDribbled1.Name = "AutoDribbled1"
+											coroutine.resume(coroutine.create(function()
+												repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
+												if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
+											end))
 										end
-									end)
-									print(i.Character.Name ..", Tackled You!")
-									if Ball:FindFirstChild("AutoDribbled1") then 
-										local AutoDribbled2 = Instance.new("Sound", Ball)
-										AutoDribbled2.Name = "AutoDribbled2"
-										coroutine.resume(coroutine.create(function()
-											repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
-											if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
-										end))
-									else
-										local AutoDribbled1 = Instance.new("Sound", Ball)
-										AutoDribbled1.Name = "AutoDribbled1"
-										coroutine.resume(coroutine.create(function()
-											repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
-											if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
-										end))
 									end
 								end
 							end
@@ -1222,41 +1216,12 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
-
-	Ps.JumpCDButton.MouseButton1Click:Connect(function()
-		if Ps.JumpCDButton.BackgroundTransparency == 0 then
-			Ps.JumpCDButton.BackgroundTransparency = 1
-		else
-			Ps.JumpCDButton.BackgroundTransparency = 0
-		end
-		if Ps.JumpCDButton.BackgroundTransparency == 0 then
-			local Character = Player.Character
-			if Character:FindFirstChild("SemPulo") then
-				Player.Character.SemPulo:Destroy()
-			end
-			if Character:FindFirstChild("SemPuloTemp") then
-				Player.Character.SemPuloTemp:Destroy()
-			end
-		else
-			local SemPuloTemp = Instance.new("StringValue", Player.Character)
-			SemPuloTemp.Name = "SemPuloTemp"
-		end
-	end)
-	Player.Character.AppearanceLoaded:Connect(function(Character)
-		local Humanoid = Character:WaitForChild("Humanoid")
-		if Character:FindFirstChild("SemPulo") then
-			Player.Character.SemPulo:Destroy()
-		end
-		if Ps.JumpCDButton.BackgroundTransparency == 1 and not Character:FindFirstChild("SemPuloTemp") then
-			local SemPuloTemp = Instance.new("StringValue", Player.Character)
-			SemPuloTemp.Name = "SemPuloTemp"
-		end
-		Humanoid.Changed:connect(function()
-			if Ps.JumpCDButton.BackgroundTransparency == 1 and Character:FindFirstChild("SemPuloTemp") then
-				Humanoid.Jump = false
-			end
-		end)
-	end)
+	--                _           ____                        
+	--     /\        | |         / __ \                       
+	--    /  \  _   _| |_ ___   | |  | |_   _  ___ _   _  ___ 
+	--   / /\ \| | | | __/ _ \  | |  | | | | |/ _ \ | | |/ _ \
+	--  / ____ \ |_| | || (_) | | |__| | |_| |  __/ |_| |  __/
+	-- /_/    \_\__,_|\__\___/   \___\_\\__,_|\___|\__,_|\___|
 
 	Ps.AutoQueueButton.MouseButton1Click:Connect(function()
 		if Ps.AutoQueueButton.BackgroundTransparency == 0 then
@@ -1267,7 +1232,7 @@ local function RGQK_fake_script()
 		end
 		if Ps.AutoQueueButton.BackgroundTransparency == 0 then
 
-			local NearestSpot = FindSpot()
+			local NearestSpot = FindSpot(Player.Character)
 
 			local function ResetText()
 				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "Ready!" then
@@ -1277,22 +1242,24 @@ local function RGQK_fake_script()
 			ResetText()
 			while Ps.AutoQueueButton.BackgroundTransparency == 0 do
 				local Character = Player.Character
-				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Player.Character.VFX.IsPlaying.Value and not Player.Player.Character.VFX.NoMove.Value then
-					game:GetService("Players").LocalPlayer.Player.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
+				if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value then
+					print("Fired")
+					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = NearestSpot.CFrame
 
 					NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text = "Ready!"
 					fireproximityprompt(NearestSpot.ProximityPrompt, 1)
 				end
-				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.AutoQueueButton.BackgroundTransparency == 1 or not Player.Player.Character.VFX.IsPlaying.Value
+				repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Ps.AutoQueueButton.BackgroundTransparency == 1 or not Player.Character.VFX.IsPlaying.Value
 				if Ps.AutoQueueButton.BackgroundTransparency == 1 then
 					ResetText()
 				end
-				repeat task.wait() until not Player.Player.Character.VFX.NoMove.Value or Ps.AutoQueueButton.BackgroundTransparency == 1
+				repeat task.wait() until not Player.Character.VFX.NoMove.Value or Ps.AutoQueueButton.BackgroundTransparency == 1
 				if Ps.AutoQueueButton.BackgroundTransparency == 1 then
 					ResetText()
 				end
 			end
 		end
 	end)
+
 end
 coroutine.wrap(RGQK_fake_script)() 
