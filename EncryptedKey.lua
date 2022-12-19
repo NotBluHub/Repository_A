@@ -1,1 +1,1 @@
-print(${{secrets.KEY}})
+return ${{secrets.KEY}}
