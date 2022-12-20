@@ -950,6 +950,8 @@ local function RGQK_fake_script()
 	local SprintSpeed = 21
 	--//Variables//--
 	local UserInput = game:GetService("UserInputService")
+	local runService = game:GetService("RunService")
+	local Debris = game:GetService("Debris")
 	local Player = game:GetService("Players").LocalPlayer
 	--//UI//--
 	local Column_1 = ImageButton.Main.Column1
@@ -971,8 +973,15 @@ local function RGQK_fake_script()
 		JumpCDButton = Risky_Frame.JumpCD.TextButton,
 		AutoQueueButton = Risky_Frame["Auto Queue"].TextButton
 	}
-
-
+--   _____          _         _____                       
+--  / ____|        | |       / ____|                      
+-- | |     ___   __| | ___  | (___  _ __   __ _ _ __ ___  
+-- | |    / _ \ / _` |/ _ \  \___ \| '_ \ / _` | '_ ` _ \ 
+-- | |___| (_) | (_| |  __/  ____) | |_) | (_| | | | | | |
+--  \_____\___/ \__,_|\___| |_____/| .__/ \__,_|_| |_| |_|
+--                                 | |                    
+--                                 |_|                    
+	
 	if not Player.PlayerGui:FindFirstChild("Intro") then
 		Customize_Frame.Parent.Visible = false
 	else
@@ -992,8 +1001,15 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
-
-
+--                _           _____       _       
+--     /\        | |         / ____|     (_)      
+--    /  \  _   _| |_ ___   | (___  _ __  _ _ __  
+--   / /\ \| | | | __/ _ \   \___ \| '_ \| | '_ \ 
+--  / ____ \ |_| | || (_) |  ____) | |_) | | | | |
+-- /_/    \_\__,_|\__\___/  |_____/| .__/|_|_| |_|
+--                                 | |            
+--                                 |_|            
+	
 	Ps.AutoSpinButton.MouseButton1Click:Connect(function()
 		if Ps.AutoSpinButton.BackgroundTransparency == 0 then
 			Ps.AutoSpinButton.BackgroundTransparency = 1
@@ -1025,8 +1041,13 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
-
-
+--  ____        _ _                                                     
+-- |  _ \      | | |     /\                                             
+-- | |_) | __ _| | |    /  \__      ____ _ _ __ ___ _ __   ___  ___ ___ 
+-- |  _ < / _` | | |   / /\ \ \ /\ / / _` | '__/ _ \ '_ \ / _ \/ __/ __|
+-- | |_) | (_| | | |  / ____ \ V  V / (_| | | |  __/ | | |  __/\__ \__ \
+-- |____/ \__,_|_|_| /_/    \_\_/\_/ \__,_|_|  \___|_| |_|\___||___/___/
+                                                                      
 	Ps.AwarenessButton.MouseButton1Click:Connect(function()
 		if Ps.AwarenessButton.BackgroundTransparency == 0 then
 			Ps.AwarenessButton.BackgroundTransparency = 1
@@ -1041,7 +1062,14 @@ local function RGQK_fake_script()
 			end
 		end)
 	end
-
+--   _____            _       _     _______                _      
+--  / ____|          (_)     | |   |__   __|              | |     
+-- | (___  _ __  _ __ _ _ __ | |_     | | ___   __ _  __ _| | ___ 
+--  \___ \| '_ \| '__| | '_ \| __|    | |/ _ \ / _` |/ _` | |/ _ \
+--  ____) | |_) | |  | | | | | |_     | | (_) | (_| | (_| | |  __/
+-- |_____/| .__/|_|  |_|_| |_|\__|    |_|\___/ \__, |\__, |_|\___|
+--        | |                                   __/ | __/ |       
+--        |_|                                  |___/ |___/        
 	Ps.SprintButton.MouseButton1Click:Connect(function()
 		if Ps.SprintButton.BackgroundTransparency == 0 then
 			Ps.SprintButton.BackgroundTransparency = 1
@@ -1089,6 +1117,14 @@ local function RGQK_fake_script()
 			end
 		end
 	end)
+--   _____ _           _      _                     
+--  / ____| |         | |    | |                    
+-- | (___ | |__  _   _| |_ __| | _____      ___ __  
+--  \___ \| '_ \| | | | __/ _` |/ _ \ \ /\ / / '_ \ 
+--  ____) | | | | |_| | || (_| | (_) \ V  V /| | | |
+-- |_____/|_| |_|\__,_|\__\__,_|\___/ \_/\_/ |_| |_|
+                                                  
+                                                  
 	Shutdown.TextButton.MouseButton1Click:Connect(function()
 		for _, i in pairs(Ps) do
 			i.BackgroundTransparency = 1
@@ -1100,6 +1136,13 @@ local function RGQK_fake_script()
 		end
 		ScreenGui:Destroy()
 	end)
+--   ____        _      _       ____                        
+--  / __ \      (_)    | |     / __ \                       
+-- | |  | |_   _ _  ___| | __ | |  | |_   _  ___ _   _  ___ 
+-- | |  | | | | | |/ __| |/ / | |  | | | | |/ _ \ | | |/ _ \
+-- | |__| | |_| | | (__|   <  | |__| | |_| |  __/ |_| |  __/
+--  \___\_\\__,_|_|\___|_|\_\  \___\_\\__,_|\___|\__,_|\___|
+                                                          
 
 	local Actual_Spots = {}
 	for _, i in pairs(workspace:GetDescendants()) do
@@ -1123,10 +1166,10 @@ local function RGQK_fake_script()
 		local closestPart = nil
 		local minDistance = math.huge
 		for _, part in pairs(filter_table) do
-			local distance = (part.Position - startPoint).Magnitude  -- Calculate the distance between the part and the start point
-			if distance < minDistance then  -- If the distance is smaller than the minimum distance
-				minDistance = distance  -- Update the minimum distance
-				closestPart = part  -- Update the closest part
+			local distance = (part.Position - startPoint).Magnitude
+			if distance < minDistance then
+				minDistance = distance
+				closestPart = part
 			end
 		end
 
@@ -1160,6 +1203,51 @@ local function RGQK_fake_script()
 	--  / ____ \ |_| | || (_) | | |__| | |  | | |_) | |_) | |  __/
 	-- /_/    \_\__,_|\__\___/  |_____/|_|  |_|_.__/|_.__/|_|\___|
 
+	local playerEnteredRadius = {}
+	local playersInRadius = {}
+
+	local function onPlayerEnterRadius(otherPlayer)
+		if not table.find(playersInRadius, otherPlayer) then
+			table.insert(playersInRadius, otherPlayer)
+		end
+	end
+	local function onPlayerLeaveRadius(otherPlayer)
+		if table.find(playersInRadius, otherPlayer) then
+			table.remove(playersInRadius, otherPlayer)
+		end
+	end
+	local function checkRadius()
+		if Player.Character:FindFirstChild("Bola") then
+			local playersInRadius = {}
+			for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
+				if otherPlayer ~= Player then
+					local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
+					if distance <= 20 then
+						playersInRadius[otherPlayer] = true
+						if not playerEnteredRadius[otherPlayer] then
+							playerEnteredRadius[otherPlayer] = true
+							onPlayerEnterRadius(otherPlayer)
+						end
+					else
+						if playerEnteredRadius[otherPlayer] then
+							playerEnteredRadius[otherPlayer] = false
+							onPlayerLeaveRadius(otherPlayer)
+						end
+					end
+				end
+			end
+		else
+			playerEnteredRadius = {}
+			playersInRadius = {}
+		end
+	end
+	local function FindTackleFootAnimation(Op)
+		for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
+			if Track.Animation.AnimationId == "rbxassetid://9015340307" then
+				return true
+			end
+		end
+	end
 	Ps.AutoDribble.MouseButton1Click:Connect(function()
 		if Ps.AutoDribble.BackgroundTransparency == 0 then
 
@@ -1168,52 +1256,58 @@ local function RGQK_fake_script()
 			Ps.AutoDribble.BackgroundTransparency = 0
 		end
 		if Ps.AutoDribble.BackgroundTransparency == 0 then
-			local PlayerTackles = {}
+			local HeartBeat = runService.Heartbeat:Connect(checkRadius)
+			
 			while Ps.AutoDribble.BackgroundTransparency == 0 do
 				task.wait()
 				if Player.Character:FindFirstChild("Bola") then
 					local Ball = Player.Character.Bola
-					for _, i in pairs(game:GetService("Players"):GetChildren()) do
-						if i ~= Player then
-							local Op = i.Character
-							local Magnitude = (i.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
-							if Magnitude < 20 and i.Character.Humanoid.Teammate.Value ~= Player.Character.Humanoid.Teammate.Value then
-								if not Ball:FindFirstChild("AutoDribbled2") and not table.find(PlayerTackles, i.Name) and Ball.Parent == Player.Character then
-									if i.Character.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(i.Character) and Magnitude < 10 then
-										keypress(0x56)
-										keyrelease(0x56)
-										keypress(0x20)
-										keyrelease(0x20)
-										table.insert(PlayerTackles, i.Name)
-										local Find = table.find(PlayerTackles, i.Name)
-										task.delay(3, function()
-											if Find then
-												table.remove(PlayerTackles, Find)
-											end
-										end)
-										print(i.Character.Name ..", Tackled You!")
-										if Ball:FindFirstChild("AutoDribbled1") then 
-											local AutoDribbled2 = Instance.new("Sound", Ball)
-											AutoDribbled2.Name = "AutoDribbled2"
-											coroutine.resume(coroutine.create(function()
-												repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
-												if Ball:FindFirstChild("AutoDribbled2") then Ball.AutoDribbled2:Destroy() end
-											end))
-										else
-											local AutoDribbled1 = Instance.new("Sound", Ball)
-											AutoDribbled1.Name = "AutoDribbled1"
-											coroutine.resume(coroutine.create(function()
-												repeat task.wait() until Ball.Parent ~= Player.Character or Ps.AutoDribble.BackgroundTransparency == 1
-												if Ball:FindFirstChild("AutoDribbled1") then Ball.AutoDribbled1:Destroy() end
-											end))
-										end
+					for _, Op in ipairs(playersInRadius) do
+						local inTacklesTable = false
+						local op = Op.Character
+						if not Ball:FindFirstChild(op.Name) and op.Humanoid.Teammate.Value ~= Player.Character.Humanoid.Teammate.Value and not Ball:FindFirstChild("AutoDribbled2") then
+							if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op) and (op.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude < 15 then
+								keypress(0x56)
+								keyrelease(0x56)
+								keypress(0x20)
+								keyrelease(0x20)
+								print(op.Name .. " Tried to tackle")
+								
+								local FoundRecent = false
+								for _, i in ipairs(Ball:GetChildren()) do
+									if i:IsA("NumberValue") and game:GetService("Players"):FindFirstChild(i.Name) and tick() - i.Value <= 0.5 then
+										FoundRecent = true
 									end
+								end
+								if not FoundRecent then
+									local Tag = Instance.new("NumberValue", Ball)
+									Tag.Name = op.Name
+									Tag.Value = tick()
+									Debris:AddItem(Tag, 2.5)
+
+									local sound = Ball:FindFirstChild("AutoDribbled1") or Ball:FindFirstChild("AutoDribbled2")
+									if sound then
+										sound.Name = "AutoDribbled2"
+									else
+										sound = Instance.new("Sound", Ball)
+										sound.Name = "AutoDribbled1"
+									end
+									print("2")
+									coroutine.resume(coroutine.create(function()
+										repeat wait() until Ball.Parent ~= Player.Character
+										if Ball:FindFirstChild(sound.Name) then
+											sound:Destroy()
+											print("3")
+										end
+									end))
 								end
 							end
 						end
 					end
 				end
 			end
+			print("Loop End")
+			HeartBeat:Disconnect()
 		end
 	end)
 	--                _           ____                        
