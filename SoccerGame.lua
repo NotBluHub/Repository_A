@@ -1222,7 +1222,7 @@ local function RGQK_fake_script()
 			for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
 				if otherPlayer ~= Player then
 					local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
-					if distance <= 20 then
+					if distance <= 15 then
 						playersInRadius[otherPlayer] = true
 						if not playerEnteredRadius[otherPlayer] then
 							playerEnteredRadius[otherPlayer] = true
@@ -1266,7 +1266,7 @@ local function RGQK_fake_script()
 						local inTacklesTable = false
 						local op = Op.Character
 						if not Ball:FindFirstChild(op.Name) and op.Humanoid.Teammate.Value ~= Player.Character.Humanoid.Teammate.Value and not Ball:FindFirstChild("AutoDribbled2") then
-							if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op) and (op.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude < 15 then
+							if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op) and (op.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude < 5 then
 								keypress(0x56)
 								keyrelease(0x56)
 								keypress(0x20)
