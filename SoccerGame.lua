@@ -1306,7 +1306,10 @@ local function FLHCQ_fake_script()
 			Cylinder.Name = "Radius"
 			Cylinder.Shape = Enum.PartType.Cylinder
 			Cylinder.Size = Vector3.new(0.1, 10, 10)
-			Cylinder.Transparency = 0.8
+			Cylinder.Anchored = false
+			Cylinder.CanCollide = false
+			Cylinder.Massless = true
+			Cylinder.Transparency = 0.7
 			Weld.Name = "Radius"
 			Weld.Part0 = Weld.Parent
 			Weld.Part1 = Cylinder
@@ -1333,6 +1336,8 @@ local function FLHCQ_fake_script()
 						local op = Op.Character
 						if not Ball:FindFirstChild(op.Name) and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and Character.Backpack.DribbleCounter.Value >= 1 then
 							if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op) and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 10 then
+								keypress(0x46)
+								keyrelease(0x46)
 								keypress(0x56)
 								keyrelease(0x56)
 								keypress(0x20)
