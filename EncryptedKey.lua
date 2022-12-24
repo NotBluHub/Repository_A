@@ -26,5 +26,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(inputObject, isT
                 end
             end
         end
+        print(Toggle)
     end
 end)
