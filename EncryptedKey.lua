@@ -5,6 +5,7 @@ local SprintSpeed = 21
 local Humanoid = game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid")
 game:GetService("UserInputService").InputBegan:Connect(function(inputObject, isTyping)
     if not isTyping and if inputObject.KeyCode == Enum.KeyCode.E then
+        print("1")
         if Toggle then
             Toggle = false
             i:Destroy()
