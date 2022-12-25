@@ -29,4 +29,3 @@ local Keys = {
 	['Vacant25'] = 'JWR2IDJN2'
 }
 print("Hey")
-return Keys
