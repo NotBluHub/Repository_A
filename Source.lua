@@ -211,7 +211,7 @@ CreateTab = function(Parent, Name ,Size)
 	local Buttons = Instance.new("ScrollingFrame")
 	local UIListLayout = Instance.new("UIListLayout")
 	local UIPadding = Instance.new("UIPadding")
-
+	
 	Frame.Name = Name
 	Frame.Parent = Parent
 	Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -252,7 +252,7 @@ CreateTab = function(Parent, Name ,Size)
 
 	UIPadding.Parent = Buttons
 	UIPadding.PaddingTop = UDim.new(0, 12)
-
+	
 	return Frame
 end
 ToggleButton = function(Parent, Name)
@@ -310,7 +310,7 @@ ToggleButton = function(Parent, Name)
 	Text.TextColor3 = Color3.fromRGB(160, 160, 160)
 	Text.TextSize = 15.000
 	Text.TextXAlignment = Enum.TextXAlignment.Left
-
+	
 	return Frame
 end
 BigButton = function(Parent, Name)
@@ -355,7 +355,7 @@ BigButton = function(Parent, Name)
 	ImageLabel_2.ImageColor3 = Color3.fromRGB(60, 60, 60)
 	ImageLabel_2.ScaleType = Enum.ScaleType.Slice
 	ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
-
+	
 	return Frame
 end
 Keybind = function(Parent, Name)
@@ -364,7 +364,7 @@ Keybind = function(Parent, Name)
 	local TextButton = Instance.new("TextButton")
 	local ImageLabel = Instance.new("ImageLabel")
 	local ImageLabel_2 = Instance.new("ImageLabel")
-
+	
 	Frame.Name = Name
 	Frame.Parent = Parent.Buttons
 	Frame.BackgroundTransparency = 1.000
@@ -413,7 +413,7 @@ Keybind = function(Parent, Name)
 	ImageLabel_2.ImageColor3 = Color3.fromRGB(60, 60, 60)
 	ImageLabel_2.ScaleType = Enum.ScaleType.Slice
 	ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
-
+	
 	return Frame
 end
 
@@ -519,7 +519,7 @@ ToggleTextBox = function(Parent, Name, PlaceHolder)
 	TextLabel.TextColor3 = Color3.fromRGB(160, 160, 160)
 	TextLabel.TextSize = 15.000
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-
+	
 	return Frame
 end
 
@@ -576,7 +576,7 @@ UserInput.InputBegan:Connect(function(Key, isTyping)
 				ImageButton.Visible = true
 			end
 		end
-
+		
 	end
 end)
 Unload.Button.MouseButton1Click:Connect(function()
@@ -589,12 +589,12 @@ Unload.Button.MouseButton1Click:Connect(function()
 end)
 
 if game.GameId == 3213718766 then -- Goal!
-
+	
 	if game.PlaceId == 8397893574 then
 		local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
-
+		
 		local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
-
+		
 		Code_Spammer.Button.MouseButton1Click:Connect(function()
 			if Code_Spammer.Button.BackgroundTransparency == 0 then
 				Code_Spammer.Button.BackgroundTransparency = 1
@@ -622,20 +622,20 @@ if game.GameId == 3213718766 then -- Goal!
 				g:Disconnect()
 			end
 		end)
-
+		
 	elseif game.PlaceId == 9822821238 then
 		local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
 		local Ball_Awareness = ToggleButton(Game_Tab, "Ball Awareness")
 		local Quick_Queue = ToggleButton(Game_Tab, "Quick Queue")
 		local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
-
+		
 		local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
-
+		
 		local Auto_Dribble = ToggleButton(AutoDribble_Tab, "Auto Dribble")
 		local Jump_Input = ToggleButton(AutoDribble_Tab, "Jump Input")
 		local Show_Step_Radius = ToggleButton(AutoDribble_Tab, "Show Step Radius")
-
+		
 		---------------------------------------------------------------------------
 		Ball_Awareness.Button.MouseButton1Click:Connect(function()
 			if Ball_Awareness.Button.BackgroundTransparency == 0 then
