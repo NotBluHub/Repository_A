@@ -320,7 +320,7 @@ BigButton = function(Parent, Name)
 	local ImageLabel_2 = Instance.new("ImageLabel")
 
 	Frame.Name = Name
-	Frame.Parent = Parent
+	Frame.Parent = Parent.Buttons
 	Frame.BackgroundTransparency = 1.000
 	Frame.LayoutOrder = 4
 	Frame.Size = UDim2.new(1, 0, 0, 20)
@@ -366,7 +366,7 @@ Keybind = function(Parent, Name)
 	local ImageLabel_2 = Instance.new("ImageLabel")
 	
 	Frame.Name = Name
-	Frame.Parent = Parent
+	Frame.Parent = Parent.Buttons
 	Frame.BackgroundTransparency = 1.000
 	Frame.Size = UDim2.new(1, 0, 0, 42)
 
@@ -417,6 +417,112 @@ Keybind = function(Parent, Name)
 	return Frame
 end
 
+ToggleTextBox = function(Parent, Name, PlaceHolder)
+	local Frame = Instance.new("Frame")
+	local TextButton = Instance.new("TextButton")
+	local ImageLabel = Instance.new("ImageLabel")
+	local ImageLabel_2 = Instance.new("ImageLabel")
+	local TextFrame = Instance.new("Frame")
+	local ImageLabel_3 = Instance.new("ImageLabel")
+	local ImageLabel_4 = Instance.new("ImageLabel")
+	local ImageLabel_5 = Instance.new("ImageLabel")
+	local TextBox = Instance.new("TextBox")
+	local TextLabel = Instance.new("TextLabel")
+
+	Frame.Name = Name
+	Frame.Parent = Parent.Buttons
+	Frame.BackgroundTransparency = 1.000
+	Frame.Size = UDim2.new(0.982301295, 0, 0.127808765, 42)
+
+	TextButton.Parent = Frame
+	TextButton.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+	TextButton.BackgroundTransparency = 1.000
+	TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton.Position = UDim2.new(0, 6, 0, 4)
+	TextButton.Size = UDim2.new(0, 12, 0, 12)
+	TextButton.ZIndex = 2
+	TextButton.Font = Enum.Font.SourceSans
+	TextButton.Text = ""
+	TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton.TextSize = 14.000
+
+	ImageLabel.Parent = TextButton
+	ImageLabel.BackgroundTransparency = 1.000
+	ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+	ImageLabel.ZIndex = 3
+	ImageLabel.Image = "rbxassetid://2592362371"
+	ImageLabel.ImageColor3 = Color3.fromRGB(60, 60, 60)
+	ImageLabel.ScaleType = Enum.ScaleType.Slice
+	ImageLabel.SliceCenter = Rect.new(2, 2, 62, 62)
+
+	ImageLabel_2.Parent = TextButton
+	ImageLabel_2.BackgroundTransparency = 1.000
+	ImageLabel_2.Position = UDim2.new(0, 1, 0, 1)
+	ImageLabel_2.Size = UDim2.new(1, -2, 1, -2)
+	ImageLabel_2.ZIndex = 2
+	ImageLabel_2.Image = "rbxassetid://2592362371"
+	ImageLabel_2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	ImageLabel_2.ScaleType = Enum.ScaleType.Slice
+	ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
+
+	TextFrame.Name = "TextFrame"
+	TextFrame.Parent = Frame
+	TextFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TextFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextFrame.Position = UDim2.new(0, 6, 0, 22)
+	TextFrame.Size = UDim2.new(1.00000012, -12, 0.270365298, 16)
+
+	ImageLabel_3.Parent = TextFrame
+	ImageLabel_3.BackgroundTransparency = 1.000
+	ImageLabel_3.Position = UDim2.new(0, 1, 0, 1)
+	ImageLabel_3.Size = UDim2.new(1, -2, 1, -2)
+	ImageLabel_3.Image = "rbxassetid://2592362371"
+	ImageLabel_3.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	ImageLabel_3.ScaleType = Enum.ScaleType.Slice
+	ImageLabel_3.SliceCenter = Rect.new(2, 2, 62, 62)
+
+	ImageLabel_4.Parent = TextFrame
+	ImageLabel_4.BackgroundTransparency = 1.000
+	ImageLabel_4.Size = UDim2.new(1, 0, 1, 0)
+	ImageLabel_4.Image = "rbxassetid://2592362371"
+	ImageLabel_4.ImageColor3 = Color3.fromRGB(60, 60, 60)
+	ImageLabel_4.ScaleType = Enum.ScaleType.Slice
+	ImageLabel_4.SliceCenter = Rect.new(2, 2, 62, 62)
+
+	ImageLabel_5.Parent = TextFrame
+	ImageLabel_5.BackgroundTransparency = 1.000
+	ImageLabel_5.Size = UDim2.new(1, 0, 1, 0)
+	ImageLabel_5.ZIndex = 2
+	ImageLabel_5.Image = "rbxassetid://2454009026"
+	ImageLabel_5.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	ImageLabel_5.ImageTransparency = 0.800
+
+	TextBox.Parent = TextFrame
+	TextBox.AnchorPoint = Vector2.new(0.5, 0.5)
+	TextBox.BackgroundTransparency = 1.000
+	TextBox.Position = UDim2.new(0.5, 0, 0.5, 0)
+	TextBox.Size = UDim2.new(1, 0, 1, 0)
+	TextBox.ZIndex = 2
+	TextBox.Font = Enum.Font.Code
+	TextBox.PlaceholderText = PlaceHolder
+	TextBox.Text = ""
+	TextBox.TextColor3 = Color3.fromRGB(210, 210, 210)
+	TextBox.TextSize = 14.000
+	TextBox.TextWrapped = true
+
+	TextLabel.Parent = Frame
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.Position = UDim2.new(0, 26, 0, 0)
+	TextLabel.Size = UDim2.new(1.00000012, 0, 0.331039131, 0)
+	TextLabel.Font = Enum.Font.Code
+	TextLabel.Text = "Code Spammer"
+	TextLabel.TextColor3 = Color3.fromRGB(160, 160, 160)
+	TextLabel.TextSize = 15.000
+	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+	
+	return Frame
+end
+
 local UserInput = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
 local Debris = game:GetService("Debris")
@@ -424,6 +530,9 @@ local Player = game:GetService("Players").LocalPlayer
 
 local ToggleGui_Keybind = "RightShift"
 local SprintSpeed = 21
+local StepTackleRadius = 12
+local SlideTackleRadius = 15
+
 local Script_Disabled = false
 
 function TogglePages(Page)
@@ -441,7 +550,9 @@ Settings_2.MouseButton1Click:Connect(function() TogglePages(Settings_2.Name) end
 
 local Hub_Tab = CreateTab(Column2_Settings, "Hub", {UDim2.new(1, 0, 0, 80), UDim2.new(0, 31, 0, 2)})
 local Unload = BigButton(Hub_Tab, "Unload")
-local Gui_Keybind = Keybind(Column1_Settings, "Toggle Gui")
+
+local Keybinds_Tab = CreateTab(Column1_Settings, "Keybinds", {UDim2.new(1, 0, 0, 100), UDim2.new(0, 68, 0, 2)})
+local Gui_Keybind = Keybind(Keybinds_Tab, "Toggle Gui")
 Gui_Keybind.Button.Text = ToggleGui_Keybind
 
 Gui_Keybind.Button.MouseButton1Click:Connect(function()
@@ -480,7 +591,37 @@ end)
 if game.GameId == 3213718766 then -- Goal!
 	
 	if game.PlaceId == 8397893574 then
-		local Game_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
+		local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
+		
+		local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
+		
+		Code_Spammer.Button.MouseButton1Click:Connect(function()
+			if Code_Spammer.Button.BackgroundTransparency == 0 then
+				Code_Spammer.Button.BackgroundTransparency = 1
+			else
+				Code_Spammer.Button.BackgroundTransparency = 0
+			end
+			if Code_Spammer.Button.BackgroundTransparency == 0 then
+				local a, b, c, d, e, f, g
+				local Event = Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
+				local Text = Code_Spammer.TextFrame.TextBox.Text
+				a = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				b = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				c = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				d = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				e = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				f = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				g = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+				wait(5)
+				a:Disconnect()
+				b:Disconnect()
+				c:Disconnect()
+				d:Disconnect()
+				e:Disconnect()
+				f:Disconnect()
+				g:Disconnect()
+			end
+		end)
 		
 	elseif game.PlaceId == 9822821238 then
 		local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
@@ -619,7 +760,7 @@ if game.GameId == 3213718766 then -- Goal!
 				for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
 					if otherPlayer ~= Player then
 						local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
-						if distance <= 15 then
+						if distance <= SlideTackleRadius then
 							playersInRadius[otherPlayer] = true
 							if not playerEnteredRadius[otherPlayer] then
 								print("Enter")
@@ -663,7 +804,7 @@ if game.GameId == 3213718766 then -- Goal!
 						for _, Op in ipairs(playersInRadius) do
 							local op = Op.Character
 							if not Ball:FindFirstChild(op.Name) and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
-								if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < 12 then
+								if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
 									if Character.Backpack.DribbleCounter.Value >= 1 then
 										keypress(0x46)
 										keyrelease(0x46)
@@ -708,7 +849,7 @@ if game.GameId == 3213718766 then -- Goal!
 				local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
 				Cylinder.Name = "Radius"
 				Cylinder.Shape = Enum.PartType.Cylinder
-				Cylinder.Size = Vector3.new(0.1, 10, 10)
+				Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
 				Cylinder.Anchored = false
 				Cylinder.CanCollide = false
 				Cylinder.Massless = true
@@ -717,6 +858,15 @@ if game.GameId == 3213718766 then -- Goal!
 				Weld.Part0 = Weld.Parent
 				Weld.Part1 = Cylinder
 				Weld.C0 = CFrame.new(0, -3, 0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08, 0, 0, 0, 1)
+				while Show_Step_Radius.Button.BackgroundTransparency == 0 do
+					local Character = Player.Character
+					Cylinder.Parent = Character
+					Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
+					Weld.Parent = Character.HumanoidRootPart
+					Weld.Part0 = Weld.Parent
+
+					Player.CharacterAppearanceLoaded:Wait()
+				end
 			else
 				if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
 				if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
