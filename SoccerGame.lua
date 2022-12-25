@@ -1026,13 +1026,16 @@ local function FLHCQ_fake_script()
 	--  \_____\___/ \__,_|\___| |_____/| .__/ \__,_|_| |_| |_|
 	--                                 | |                    
 	--                                 |_|                    
-
+	local function Spam(Code)
+		Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Code)
+	end
 	if not Player.PlayerGui:FindFirstChild("Intro") then
 		Customize_Frame.Parent.Visible = false
 	else
 		Secure_Frame.Parent.Visible = false
 		Risky_Frame.Parent.Visible = false
 	end
+	local a, b, c, d
 	Ps.CodeSpamButton.MouseButton1Click:Connect(function()
 		if Ps.CodeSpamButton.BackgroundTransparency == 0 then
 			Ps.CodeSpamButton.BackgroundTransparency = 1
@@ -1040,10 +1043,24 @@ local function FLHCQ_fake_script()
 			Ps.CodeSpamButton.BackgroundTransparency = 0
 		end
 		if Ps.CodeSpamButton.BackgroundTransparency == 0 then
-			while Ps.CodeSpamButton.BackgroundTransparency == 0 do
-				task.wait()
-				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
-			end
+			a = runService.RenderStepped:Connect(function()
+				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+			end)
+			b = runService.RenderStepped:Connect(function()
+				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+			end)
+			c = runService.RenderStepped:Connect(function()
+				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+			end)
+			d = runService.RenderStepped:Connect(function()
+				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+			end)
+		end
+		if a then
+			a:Disconnect()
+			b:Disconnect()
+			c:Disconnect()
+			d:Disconnect()
 		end
 	end)
 	--                _           _____       _       
@@ -1072,7 +1089,7 @@ local function FLHCQ_fake_script()
 			while Ps.AutoSpinButton.BackgroundTransparency == 0 do
 				repeat task.wait() until Badge.Parent.Reroll.ImageColor3 == Color3.fromRGB(255, 255, 255) or Ps.AutoSpinButton.BackgroundTransparency == 1
 				local Found = false
-				
+
 				for _, i in pairs(Badges) do
 					if i == Badge.Text then
 						Found = true
@@ -1080,7 +1097,7 @@ local function FLHCQ_fake_script()
 						Ps.AutoSpinButton.BackgroundTransparency = 1
 					end
 				end
-				
+
 				if Ps.AutoSpinButton.BackgroundTransparency == 0 and not Found then
 					mouse1click()
 				end
@@ -1342,7 +1359,7 @@ local function FLHCQ_fake_script()
 								keyrelease(0x56)
 								keypress(0x20)
 								keyrelease(0x20)
-								
+
 								local Tag = Instance.new("NumberValue", Ball)
 								Tag.Name = op.Name
 								Debris:AddItem(Tag, 1.5)
