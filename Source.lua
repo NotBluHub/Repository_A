@@ -624,11 +624,6 @@ if game.GameId == 3213718766 then -- Goal!
 		end)
 		
 	elseif game.PlaceId == 9822821238 then
-		local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-
-		local Ball_Awareness = ToggleButton(Game_Tab, "Ball Awareness")
-		local Quick_Queue = ToggleButton(Game_Tab, "Quick Queue")
-		local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
 		
 		local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
 		
