@@ -630,7 +630,7 @@ if game.GameId == 3213718766 then -- Goal!
 		local Quick_Queue = ToggleButton(Game_Tab, "Quick Queue")
 		local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
 		
-		local AutoDribble_Tab = CreateTab(Column1_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
+		local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
 		
 		local Auto_Dribble = ToggleButton(AutoDribble_Tab, "Auto Dribble")
 		local Jump_Input = ToggleButton(AutoDribble_Tab, "Jump Input")
