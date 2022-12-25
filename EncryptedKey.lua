@@ -1,7 +1,7 @@
 local Keys = {
 	['Blu'] = 'ZGTD3QO54',
 	['David'] = 'M6ISKQPT5',
-	['Booh'] = 	'AOVP8X5XU',
+	['Booh'] = 'AOVP8X5XU',
 	['Vacant01'] = '718M33ND8',
 	['Vacant02'] = 'TB3C8ELPD',
 	['Vacant03'] = 'GSNCAEJNI',
