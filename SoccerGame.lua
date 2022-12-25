@@ -1026,16 +1026,12 @@ local function FLHCQ_fake_script()
 	--  \_____\___/ \__,_|\___| |_____/| .__/ \__,_|_| |_| |_|
 	--                                 | |                    
 	--                                 |_|                    
-	local function Spam(Code)
-		Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Code)
-	end
 	if not Player.PlayerGui:FindFirstChild("Intro") then
 		Customize_Frame.Parent.Visible = false
 	else
 		Secure_Frame.Parent.Visible = false
 		Risky_Frame.Parent.Visible = false
 	end
-	local a, b, c, d
 	Ps.CodeSpamButton.MouseButton1Click:Connect(function()
 		if Ps.CodeSpamButton.BackgroundTransparency == 0 then
 			Ps.CodeSpamButton.BackgroundTransparency = 1
@@ -1043,20 +1039,20 @@ local function FLHCQ_fake_script()
 			Ps.CodeSpamButton.BackgroundTransparency = 0
 		end
 		if Ps.CodeSpamButton.BackgroundTransparency == 0 then
+			local a, b, c, d
 			a = runService.RenderStepped:Connect(function()
-				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
 			end)
 			b = runService.RenderStepped:Connect(function()
-				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
 			end)
 			c = runService.RenderStepped:Connect(function()
-				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
 			end)
 			d = runService.RenderStepped:Connect(function()
-				Spam(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
+				Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent:FireServer(Ps.CodeSpamButton.Parent.TextFrame.TextBox.Text)
 			end)
-		end
-		if a then
+			wait(5)
 			a:Disconnect()
 			b:Disconnect()
 			c:Disconnect()
