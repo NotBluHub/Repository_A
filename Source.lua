@@ -693,11 +693,12 @@ if table.find(UserIds, Player.UserId) then
 			end)
 
 		elseif game.PlaceId == 9822821238 then
-			local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
+			local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
 			local Quick_Queue = ToggleButton(Game_Tab, "Quick Queue")
 			local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
 			local No_Sit = ToggleButton(Game_Tab, "No Sit")
+			local Unlock_Camera = ToggleButton(Game_Tab, "Unlock Camera Zoom")
 			
 			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 			
@@ -816,6 +817,16 @@ if table.find(UserIds, Player.UserId) then
 						Player.Character.Humanoid.Sit = false
 						Player.Character.VFX.NoMove.Value = false
 					end
+				end
+			end)
+			---------------------------------------------------------------------------
+			Unlock_Camera.Button.MouseButton1Click:Connect(function()
+				if Unlock_Camera.Button.BackgroundTransparency == 0 then
+					Unlock_Camera.Button.BackgroundTransparency = 1
+					Player.CameraMaxZoomDistance = 23
+				else
+					Unlock_Camera.Button.BackgroundTransparency = 0
+					Player.CameraMaxZoomDistance = 100
 				end
 			end)
 			---------------------------------------------------------------------------
