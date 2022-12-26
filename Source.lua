@@ -1,7 +1,7 @@
 local UserIds = {
-	105115151,					--Blu
-	132541900, 2730836956,		--David
-	149522897,	--Booh
+	105115151,		--Blu
+	132541900, 2730836956,	--David
+	149522897,		--Booh
 }
 
 if table.find(UserIds, game:GetService("Players").LocalPlayer.UserId) then
