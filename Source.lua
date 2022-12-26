@@ -22,7 +22,7 @@ local msg = {
 
 local response = syn.request(
 	{
-		Url = "https://discord.com/api/webhooks/1056687097056071730/MWuIM2rfzIefxn2d7r6j15w_Y-fI0u-NvX79Y08lbiEJsjtr7ux602Rk9cqIMa5YF8Ts",
+		Url = "https://discord.com/api/webhooks/1056799634992934922/O-VAE5GOv4Bdx5QN6t3vCqrHRlv3rPjqXO0_aQch03dAlA4V0VU-WhWFsrU7OMxKxdNs",
 		Method = "POST",
 		Headers = {
 			["Content-Type"] = "application/json"
