@@ -38,6 +38,7 @@ if table.find(UserIds, Player.UserId) then
 	local ScreenGui = Instance.new("ScreenGui")
 	local ImageButton = Instance.new("ImageButton")
 	local Pages = Instance.new("Folder")
+	local Frame_ = Instance.new("Frame")
 	local Game_ = Instance.new("Frame")
 	local Column1_Game_ = Instance.new("ScrollingFrame")
 	local UIListLayout = Instance.new("UIListLayout")
@@ -77,6 +78,12 @@ if table.find(UserIds, Player.UserId) then
 
 	Pages.Name = "Pages"
 	Pages.Parent = ImageButton
+
+	Frame_.Parent = Pages
+	Frame_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Frame_.BackgroundTransparency = 1.000
+	Frame_.Position = UDim2.new(0, 0, 0, 52)
+	Frame_.Size = UDim2.new(0, 494, 0, 268)
 
 	Game_.Name = "Game"
 	Game_.Parent = Pages
@@ -307,7 +314,7 @@ if table.find(UserIds, Player.UserId) then
 
 		Button.Name = "Button"
 		Button.Parent = Frame
-		Button.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+		Button.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
 		Button.BackgroundTransparency = 1.000
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.Position = UDim2.new(0, 6, 0, 4)
@@ -364,7 +371,7 @@ if table.find(UserIds, Player.UserId) then
 
 		Button.Parent = Frame
 		Button.Name = "Button"
-		Button.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+		Button.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
 		Button.BackgroundTransparency = 1.000
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.Position = UDim2.new(0, 31, 0, 22)
@@ -419,7 +426,7 @@ if table.find(UserIds, Player.UserId) then
 
 		TextButton.Parent = Frame
 		TextButton.Name = "Button"
-		TextButton.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+		TextButton.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
 		TextButton.BackgroundTransparency = 1.000
 		TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		TextButton.Position = UDim2.new(0.427312791, 0, 0, 0)
@@ -472,7 +479,7 @@ if table.find(UserIds, Player.UserId) then
 		Frame.Size = UDim2.new(0.982301295, 0, 0.127808765, 42)
 
 		TextButton.Parent = Frame
-		TextButton.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+		TextButton.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
 		TextButton.BackgroundTransparency = 1.000
 		TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		TextButton.Position = UDim2.new(0, 6, 0, 4)
@@ -568,6 +575,26 @@ if table.find(UserIds, Player.UserId) then
 
 	local Script_Disabled = false
 
+	local Image = nil
+
+	coroutine.resume(coroutine.create(function()
+		local data = readfile("image.png")
+		if data then	
+			Image = Drawing.new("Image")
+			Image.Size = Frame_.AbsoluteSize
+			Image.Transparency = 0.4
+			Image.Data = data
+			Image.Visible = true
+			Image.Position = Frame_.AbsolutePosition + Vector2.new(0, 35)
+
+			while not Script_Disabled do
+				wait()
+				Image.Position = Frame_.AbsolutePosition + Vector2.new(0, 35)
+			end
+			Image:Remove()
+		end
+	end))
+
 	function TogglePages(Page)
 		for _, i in pairs(Pages:GetChildren()) do
 			if i.Name ~= Page then
@@ -597,7 +624,6 @@ if table.find(UserIds, Player.UserId) then
 		if not Script_Disabled then
 			if ToggleGui_Keybind == "" then
 				local Str = string.split(tostring(Key.KeyCode), ".")
-				print(Str[3])
 				if Str[3] ~= "Unknown" then
 					ToggleGui_Keybind = Str[3]
 					Gui_Keybind.Button.Text = ToggleGui_Keybind
@@ -605,8 +631,14 @@ if table.find(UserIds, Player.UserId) then
 			elseif Key.KeyCode == Enum.KeyCode[ToggleGui_Keybind] and not isTyping then
 				if ImageButton.Visible == true then
 					ImageButton.Visible = false
+					if Image then
+						Image.Transparency = 0
+					end
 				else
 					ImageButton.Visible = true
+					if Image then
+						Image.Transparency = 0.4
+					end
 				end
 			end
 
@@ -701,7 +733,6 @@ if table.find(UserIds, Player.UserId) then
 				for _, i in pairs(workspace:GetDescendants()) do
 					if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" then
 						if i:IsA('Part') and i:FindFirstChildOfClass("ProximityPrompt") then
-							print(i.Name)
 							table.insert(filter_table, i)
 						end
 					end
@@ -755,7 +786,6 @@ if table.find(UserIds, Player.UserId) then
 			UserInput.InputBegan:Connect(function(Key, isTyping)
 				local Humanoid = Player.Character:WaitForChild("Humanoid")
 				if not isTyping and not Script_Disabled and Toggle_Sprint.Button.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
-					print("1")
 					if Toggle then
 						Toggle = false
 						i:Destroy()
@@ -769,7 +799,7 @@ if table.find(UserIds, Player.UserId) then
 						task.wait()
 						Humanoid.WalkSpeed = SprintSpeed
 						while Toggle and not Script_Disabled do
-							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled
+							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or not Toggle
 							if Toggle then
 								Toggle = false
 								i:Destroy()
@@ -788,7 +818,7 @@ if table.find(UserIds, Player.UserId) then
 				else
 					No_Sit.Button.BackgroundTransparency = 0
 				end
-				
+
 				while No_Sit.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait(0.00001)
 					if not Script_Disabled then
@@ -816,13 +846,11 @@ if table.find(UserIds, Player.UserId) then
 							if distance <= SlideTackleRadius then
 								playersInRadius[otherPlayer] = true
 								if not playerEnteredRadius[otherPlayer] then
-									print("Enter")
 									playerEnteredRadius[otherPlayer] = true
 									onPlayerEnterRadius(otherPlayer)
 								end
 							else
 								if playerEnteredRadius[otherPlayer] then
-									print("Leave")
 									playerEnteredRadius[otherPlayer] = false
 									onPlayerLeaveRadius(otherPlayer)
 								end
