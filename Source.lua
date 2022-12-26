@@ -28,10 +28,10 @@ ScreenGui.Parent = game:WaitForChild("CoreGui")
 
 ImageButton.Parent = ScreenGui
 ImageButton.Draggable = true
-ImageButton.AnchorPoint = Vector2.new(0, 0.5)
+ImageButton.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.Position = UDim2.new(0.126378104, 5, 0.368270308, 0)
+ImageButton.Position = UDim2.new(0.5, 5, 0.25, 0)
 ImageButton.Size = UDim2.new(0, 494, 0, 320)
 ImageButton.AutoButtonColor = false
 ImageButton.ImageColor3 = Color3.fromRGB(0, 0, 0)
