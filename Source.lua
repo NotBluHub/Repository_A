@@ -1,7 +1,8 @@
 local UserIds = {
-	105115151,				--Blu
+	105115151,		--Blu
 	132541900, 2730836956,	--David
-	149522897,				--Booh
+	149522897,		--Booh
+	1425652856,		-- Kaz
 }
 
 local Player = game:GetService("Players").LocalPlayer
