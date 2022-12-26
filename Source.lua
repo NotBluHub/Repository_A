@@ -826,7 +826,7 @@ if table.find(UserIds, Player.UserId) then
 					Acrobatic.Button.BackgroundTransparency = 0
 				end
 				
-				while Acrobatic.Button.BackgroundTransparency == 0 do
+				while Acrobatic.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait()
 					Player.ArcheType3.Value = "Acrobatic"
 				end
@@ -853,9 +853,9 @@ if table.find(UserIds, Player.UserId) then
 					FormlessShooter.Button.BackgroundTransparency = 0
 				end
 
-				while FormlessShooter.Button.BackgroundTransparency == 0 do
+				while FormlessShooter.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait()
-					Player.ArcheType3.Value = "FormlessShooter"
+					Player.ArcheType2.Value = "FormlessShooter"
 				end
 			end)
 			---------------------------------------------------------------------------
