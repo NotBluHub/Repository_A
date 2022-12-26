@@ -4,7 +4,7 @@ local UserIds = {
 	149522897,		--Booh
 	1425652856,		-- Kaz
 }
-local WebUrl = "https://discord.com/api/webhooks/1056802768557441114/EFRU4id73UzetMdOJfv9MLbVXlmQgms6Hh36OAScFJabsgi_qqjxG-_4Yyclrv7bgOKx"
+local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -928,4 +928,3 @@ if table.find(UserIds, Player.UserId) then
 		end
 	end
 end
-	
