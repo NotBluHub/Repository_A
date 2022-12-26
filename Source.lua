@@ -693,34 +693,24 @@ if table.find(UserIds, Player.UserId) then
 			end)
 
 		elseif game.PlaceId == 9822821238 then
-			local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 110), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
+			local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
-			local Ball_Awareness = ToggleButton(Game_Tab, "Ball Awareness")
 			local Quick_Queue = ToggleButton(Game_Tab, "Quick Queue")
 			local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
 			local No_Sit = ToggleButton(Game_Tab, "No Sit")
-
+			
+			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
+			
+			local Acrobatic = ToggleButton(Badge_Tab, "Acrobatic")
+			local Ball_Awareness = ToggleButton(Badge_Tab, "Ball Awareness")
+			local FormlessShooter = ToggleButton(Badge_Tab, "Formless Shooter")
+			
 			local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
 			local Auto_Dribble = ToggleButton(AutoDribble_Tab, "Auto Dribble")
 			local Jump_Input = ToggleButton(AutoDribble_Tab, "Jump Input")
 			local Show_Step_Radius = ToggleButton(AutoDribble_Tab, "Show Step Radius")
 
-			---------------------------------------------------------------------------
-			Ball_Awareness.Button.MouseButton1Click:Connect(function()
-				if Ball_Awareness.Button.BackgroundTransparency == 0 then
-					Ball_Awareness.Button.BackgroundTransparency = 1
-				else
-					Ball_Awareness.Button.BackgroundTransparency = 0
-				end
-			end)
-			if workspace:FindFirstChild("Ignore") then
-				workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
-					if Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
-						p8.Transparency = 0.6
-					end
-				end)
-			end
 			---------------------------------------------------------------------------
 			local Actual_Spots = {}
 			for _, i in pairs(workspace:GetDescendants()) do
@@ -804,7 +794,7 @@ if table.find(UserIds, Player.UserId) then
 							if Toggle then
 								Toggle = false
 								i:Destroy()
-								if Humanoid.WalkSpeed == SprintSpeed then
+								if Humanoid.WalkSpeed ~= 16 then
 									Humanoid.WalkSpeed = 16
 								end
 							end
@@ -826,6 +816,46 @@ if table.find(UserIds, Player.UserId) then
 						Player.Character.Humanoid.Sit = false
 						Player.Character.VFX.NoMove.Value = false
 					end
+				end
+			end)
+			---------------------------------------------------------------------------
+			Acrobatic.Button.MouseButton1Click:Connect(function()
+				if Acrobatic.Button.BackgroundTransparency == 0 then
+					Acrobatic.Button.BackgroundTransparency = 1
+				else
+					Acrobatic.Button.BackgroundTransparency = 0
+				end
+				
+				while Acrobatic.Button.BackgroundTransparency == 0 do
+					wait()
+					Player.ArcheType3.Value = "Acrobatic"
+				end
+			end)
+			---------------------------------------------------------------------------
+			Ball_Awareness.Button.MouseButton1Click:Connect(function()
+				if Ball_Awareness.Button.BackgroundTransparency == 0 then
+					Ball_Awareness.Button.BackgroundTransparency = 1
+				else
+					Ball_Awareness.Button.BackgroundTransparency = 0
+				end
+			end)
+			if workspace:FindFirstChild("Ignore") then
+				workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
+					if Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
+						p8.Transparency = 0.6
+					end
+				end)
+			end---------------------------------------------------------------------------
+			FormlessShooter.Button.MouseButton1Click:Connect(function()
+				if FormlessShooter.Button.BackgroundTransparency == 0 then
+					FormlessShooter.Button.BackgroundTransparency = 1
+				else
+					FormlessShooter.Button.BackgroundTransparency = 0
+				end
+
+				while FormlessShooter.Button.BackgroundTransparency == 0 do
+					wait()
+					Player.ArcheType3.Value = "FormlessShooter"
 				end
 			end)
 			---------------------------------------------------------------------------
