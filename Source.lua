@@ -527,11 +527,33 @@ local UserInput = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
 local Debris = game:GetService("Debris")
 local Player = game:GetService("Players").LocalPlayer
+local msg = {
+	["embeds"] = {{
+		["title"] = "**".. Player.Name .."**",
+		["color"] = 13708129,
+		["description"] = Player.Name .." Has Loaded Blu Hub",
+		["thumbnail"] = {
+			["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
+		},
+		["footer"] = {
+			["text"] = "Player ID: ".. Player.UserId,
+		},
+	}}
+}
+
+local response = syn.request(
+	{
+		Url = "https://discord.com/api/webhooks/1056687097056071730/MWuIM2rfzIefxn2d7r6j15w_Y-fI0u-NvX79Y08lbiEJsjtr7ux602Rk9cqIMa5YF8Ts",
+		Method = "POST",
+		Headers = {
+			["Content-Type"] = "application/json"
+		},
+		Body = game:GetService("HttpService"):JSONEncode(msg)
+	}
+)
+
 
 local ToggleGui_Keybind = "RightShift"
-local SprintSpeed = 21
-local StepTackleRadius = 12
-local SlideTackleRadius = 15
 
 local Script_Disabled = false
 
@@ -589,6 +611,9 @@ Unload.Button.MouseButton1Click:Connect(function()
 end)
 
 if game.GameId == 3213718766 then -- Goal!
+	local SprintSpeed = 21
+	local StepTackleRadius = 12
+	local SlideTackleRadius = 15
 
 	if game.PlaceId == 8397893574 then
 		local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
