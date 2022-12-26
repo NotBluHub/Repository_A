@@ -1,10 +1,36 @@
 local UserIds = {
-	105115151,		--Blu
+	105115151,				--Blu
 	132541900, 2730836956,	--David
-	149522897,		--Booh
+	149522897,				--Booh
 }
 
-if table.find(UserIds, game:GetService("Players").LocalPlayer.UserId) then
+local Player = game:GetService("Players").LocalPlayer
+local msg = {
+	["embeds"] = {{
+		["title"] = "**".. Player.Name .."**",
+		["color"] = 13708129,
+		["description"] = Player.Name .." Has Loaded Blu Hub",
+		["thumbnail"] = {
+			["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
+		},
+		["footer"] = {
+			["text"] = "Player ID: ".. Player.UserId,
+		},
+	}}
+}
+
+local response = syn.request(
+	{
+		Url = "https://discord.com/api/webhooks/1056687097056071730/MWuIM2rfzIefxn2d7r6j15w_Y-fI0u-NvX79Y08lbiEJsjtr7ux602Rk9cqIMa5YF8Ts",
+		Method = "POST",
+		Headers = {
+			["Content-Type"] = "application/json"
+		},
+		Body = game:GetService("HttpService"):JSONEncode(msg)
+	}
+)
+
+if table.find(UserIds, Player.UserId) then
 	local ScreenGui = Instance.new("ScreenGui")
 	local ImageButton = Instance.new("ImageButton")
 	local Pages = Instance.new("Folder")
@@ -533,32 +559,6 @@ if table.find(UserIds, game:GetService("Players").LocalPlayer.UserId) then
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
-	local Player = game:GetService("Players").LocalPlayer
-	local msg = {
-		["embeds"] = {{
-			["title"] = "**".. Player.Name .."**",
-			["color"] = 13708129,
-			["description"] = Player.Name .." Has Loaded Blu Hub",
-			["thumbnail"] = {
-				["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
-			},
-			["footer"] = {
-				["text"] = "Player ID: ".. Player.UserId,
-			},
-		}}
-	}
-
-	local response = syn.request(
-		{
-			Url = "https://discord.com/api/webhooks/1056687097056071730/MWuIM2rfzIefxn2d7r6j15w_Y-fI0u-NvX79Y08lbiEJsjtr7ux602Rk9cqIMa5YF8Ts",
-			Method = "POST",
-			Headers = {
-				["Content-Type"] = "application/json"
-			},
-			Body = game:GetService("HttpService"):JSONEncode(msg)
-		}
-	)
-
 
 	local ToggleGui_Keybind = "RightShift"
 
