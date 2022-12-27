@@ -836,16 +836,17 @@ if table.find(UserIds, Player.UserId) then
 				end
 			end)
 			---------------------------------------------------------------------------
+			local function ChangeBadge(Arch, Text)
+				Player[Arch].Value = Text
+			end
+			local R = nil
 			Center.Button.MouseButton1Click:Connect(function()
 				if Center.Button.BackgroundTransparency == 0 then
 					Center.Button.BackgroundTransparency = 1
+					R:Disconnect()
 				else
 					Center.Button.BackgroundTransparency = 0
-				end
-
-				while Center.Button.BackgroundTransparency == 0 and not Script_Disabled do
-					wait()
-					Player.ArcheType3.Value = "Center"
+					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
 				end
 			end)
 			---------------------------------------------------------------------------
@@ -874,16 +875,14 @@ if table.find(UserIds, Player.UserId) then
 				end
 			end)
 			---------------------------------------------------------------------------
+			local R = nil
 			FormlessShooter.Button.MouseButton1Click:Connect(function()
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
 					FormlessShooter.Button.BackgroundTransparency = 1
+					R:Disconnect()
 				else
 					FormlessShooter.Button.BackgroundTransparency = 0
-				end
-
-				while FormlessShooter.Button.BackgroundTransparency == 0 and not Script_Disabled do
-					wait()
-					Player.ArcheType2.Value = "FormlessShooter"
+					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "FormlessShooter") end)
 				end
 			end)
 			---------------------------------------------------------------------------
@@ -936,7 +935,7 @@ if table.find(UserIds, Player.UserId) then
 				end
 				if Auto_Dribble.Button.BackgroundTransparency == 0 then
 					local RenderStepped = runService.RenderStepped:Connect(checkRadius)
-					
+
 					local Dribble_Loop 
 					Dribble_Loop = runService.RenderStepped:Connect(function()
 						local Character = Player.Character
@@ -953,7 +952,7 @@ if table.find(UserIds, Player.UserId) then
 											keyrelease(0x56)
 											keypress(0x20)
 											keyrelease(0x20)
-											
+
 											local CD = 1.5
 											if op.Humanoid:FindFirstChild("Tackled") then
 												CD = 3
