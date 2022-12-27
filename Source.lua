@@ -900,7 +900,7 @@ if table.find(UserIds, Player.UserId) then
 				if Player.Character:FindFirstChild("Bola") then
 					local playersInRadius = {}
 					for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
-						if otherPlayer ~= Player then
+						if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
 							local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
 							if distance <= SlideTackleRadius then
 								playersInRadius[otherPlayer] = true
