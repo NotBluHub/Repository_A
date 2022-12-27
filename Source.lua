@@ -1,10 +1,9 @@
-if _G.Key then
-	print(_G.Key)
-end
 local UserIds = {
 	105115151, 2444381495,	--Blu
 	132541900, 2730836956,	--David
 	149522897,		--Booh
+	1425652856,		--Kaz
+	1768352413,		--Will
 }
 local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
 
@@ -793,7 +792,7 @@ if table.find(UserIds, Player.UserId) then
 						task.wait()
 						Humanoid.WalkSpeed = SprintSpeed
 						while Toggle do
-							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or M1
+							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or M1 or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not CarryBallActive
 							if Toggle then
 								Toggle = false
 								M1 = false
@@ -803,10 +802,6 @@ if table.find(UserIds, Player.UserId) then
 								end
 							end
 						end
-					end
-				elseif Key.UserInputType == Enum.UserInputType.MouseButton1 then
-					if not CarryBall and Toggle and not Script_Disabled then
-						M1 = true
 					end
 				end
 			end)
@@ -958,7 +953,7 @@ if table.find(UserIds, Player.UserId) then
 								local op = Op.Character
 								if not Ball:FindFirstChild(op.Name) and not Character:FindFirstChild("`") and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
 									if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-										if Character.Backpack.DribbleCounter.Value >= 1 then
+										if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
 											keypress(0x46)
 											keyrelease(0x46)
 											keypress(0x56)
