@@ -663,6 +663,8 @@ if table.find(UserIds, Player.UserId) then
 		local StepTackleRadius = 12
 		local SlideTackleRadius = 15
 
+		local CarryBallActive = false
+
 		if game.PlaceId == 8397893574 then
 			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
 
@@ -678,7 +680,7 @@ if table.find(UserIds, Player.UserId) then
 					local Event = Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
 					local Text = Code_Spammer.TextFrame.TextBox.Text
 					local Runners = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
-					
+
 					for _, letter in pairs(Runners) do
 						letter = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
 					end
@@ -688,7 +690,7 @@ if table.find(UserIds, Player.UserId) then
 					for _, letter in pairs(Runners) do
 						letter:Disconnect()
 					end
-					
+
 					Code_Spammer.Button.BackgroundTransparency = 1
 				end
 			end)
@@ -700,13 +702,14 @@ if table.find(UserIds, Player.UserId) then
 			local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
 			local No_Sit = ToggleButton(Game_Tab, "No Sit")
 			local Unlock_Camera = ToggleButton(Game_Tab, "Unlock Camera Zoom")
-			
-			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-			
+
+			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
+
 			local Acrobatic = ToggleButton(Badge_Tab, "Acrobatic")
 			local Ball_Awareness = ToggleButton(Badge_Tab, "Ball Awareness")
+			local CarryBall = ToggleButton(Badge_Tab, "Carry Ball")
 			local FormlessShooter = ToggleButton(Badge_Tab, "Formless Shooter")
-			
+
 			local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
 			local Auto_Dribble = ToggleButton(AutoDribble_Tab, "Auto Dribble")
@@ -774,17 +777,14 @@ if table.find(UserIds, Player.UserId) then
 				end
 			end)
 			local Toggle = false
-			local d = true
+			local M1 = false
 			local i = nil
 			UserInput.InputBegan:Connect(function(Key, isTyping)
 				local Humanoid = Player.Character:WaitForChild("Humanoid")
 				if not isTyping and not Script_Disabled and Toggle_Sprint.Button.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
 					if Toggle then
-						Toggle = false
-						i:Destroy()
-						task.wait()
 						Humanoid.WalkSpeed = 16
-					else
+					elseif not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or CarryBallActive then
 						Toggle = true
 						i = Instance.new("StringValue")
 						i.Name = "ShiftLock"
@@ -792,15 +792,20 @@ if table.find(UserIds, Player.UserId) then
 						task.wait()
 						Humanoid.WalkSpeed = SprintSpeed
 						while Toggle and not Script_Disabled do
-							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or not Toggle
+							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or M1
 							if Toggle then
 								Toggle = false
+								M1 = false
 								i:Destroy()
-								if Humanoid.WalkSpeed ~= 16 then
+								if Humanoid.WalkSpeed == SprintSpeed then
 									Humanoid.WalkSpeed = 16
 								end
 							end
 						end
+					end
+				elseif Key.UserInputType == Enum.UserInputType.MouseButton1 then
+					if not CarryBall and Toggle and not Script_Disabled then
+						M1 = true
 					end
 				end
 			end)
@@ -837,7 +842,7 @@ if table.find(UserIds, Player.UserId) then
 				else
 					Acrobatic.Button.BackgroundTransparency = 0
 				end
-				
+
 				while Acrobatic.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait()
 					Player.ArcheType3.Value = "Acrobatic"
@@ -858,6 +863,16 @@ if table.find(UserIds, Player.UserId) then
 					end
 				end)
 			end
+			---------------------------------------------------------------------------
+			CarryBall.Button.MouseButton1Click:Connect(function()
+				if CarryBall.Button.BackgroundTransparency == 0 then
+					CarryBall.Button.BackgroundTransparency = 1
+					CarryBallActive = false
+				else
+					CarryBall.Button.BackgroundTransparency = 0
+					CarryBallActive = true
+				end
+			end)
 			---------------------------------------------------------------------------
 			FormlessShooter.Button.MouseButton1Click:Connect(function()
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
