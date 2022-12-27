@@ -1,3 +1,6 @@
+if _G.Key then
+	print(_G.Key)
+end
 local UserIds = {
 	105115151, 2444381495,	--Blu
 	132541900, 2730836956,	--David
