@@ -1,1 +1,1 @@
-print(Image)
+print(_G.Image)
