@@ -944,10 +944,8 @@ if table.find(UserIds, Player.UserId) then
 							local Ball = Player.Character.Bola
 							for _, Op in ipairs(playersInRadius) do
 								local op = Op.Character
-								if not Ball:FindFirstChild(op.Name) and not Character:FindFirstChild("IsDribbling") and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
-									print("a")
+								if not Ball:FindFirstChild(op.Name) and not Character:FindFirstChild("`") and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
 									if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-										print("b")
 										if Character.Backpack.DribbleCounter.Value >= 1 then
 											keypress(0x46)
 											keyrelease(0x46)
