@@ -953,8 +953,9 @@ if table.find(UserIds, Player.UserId) then
 											keypress(0x20)
 											keyrelease(0x20)
 
-											local Tag = Instance.new("NumberValue", Ball)
+											local Tag = Instance.new("NumberValue")
 											Tag.Name = op.Name
+											Tag.Parent = Ball
 											Debris:AddItem(Tag, 1.5)
 										elseif Jump_Input.Button.BackgroundTransparency == 0 and op.Humanoid:FindFirstChild("Tackled") then
 											keypress(0x20)
