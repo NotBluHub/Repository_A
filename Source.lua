@@ -661,7 +661,7 @@ if table.find(UserIds, Player.UserId) then
 	if game.GameId == 3213718766 then -- Goal!
 		local SprintSpeed = 21
 		local StepTackleRadius = 12
-		local SlideTackleRadius = 15
+		local SlideTackleRadius = 20
 
 		local CarryBallActive = false
 
@@ -936,15 +936,18 @@ if table.find(UserIds, Player.UserId) then
 				end
 				if Auto_Dribble.Button.BackgroundTransparency == 0 then
 					local RenderStepped = runService.RenderStepped:Connect(checkRadius)
-					while Auto_Dribble.Button.BackgroundTransparency == 0 and not Script_Disabled do
-						task.wait()
+					
+					local Dribble_Loop 
+					Dribble_Loop = runService.RenderStepped:Connect(function()
 						local Character = Player.Character
 						if Character:FindFirstChild("Bola") then
 							local Ball = Player.Character.Bola
 							for _, Op in ipairs(playersInRadius) do
 								local op = Op.Character
-								if not Ball:FindFirstChild(op.Name) and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
+								if not Ball:FindFirstChild(op.Name) and not Character:FindFirstChild("IsDribbling") and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
+									print("a")
 									if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
+										print("b")
 										if Character.Backpack.DribbleCounter.Value >= 1 then
 											keypress(0x46)
 											keyrelease(0x46)
@@ -952,11 +955,15 @@ if table.find(UserIds, Player.UserId) then
 											keyrelease(0x56)
 											keypress(0x20)
 											keyrelease(0x20)
-
+											
+											local CD = 1.5
+											if op.Humanoid:FindFirstChild("Tackled") then
+												CD = 3
+											end
 											local Tag = Instance.new("NumberValue")
 											Tag.Name = op.Name
 											Tag.Parent = Ball
-											Debris:AddItem(Tag, 1.5)
+											Debris:AddItem(Tag, CD)
 										elseif Jump_Input.Button.BackgroundTransparency == 0 and op.Humanoid:FindFirstChild("Tackled") then
 											keypress(0x20)
 											keyrelease(0x20)
@@ -965,8 +972,11 @@ if table.find(UserIds, Player.UserId) then
 								end
 							end
 						end
-					end
-					RenderStepped:Disconnect()
+						if Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
+							Dribble_Loop:Disconnect()
+							RenderStepped:Disconnect()
+						end
+					end)
 				end
 			end)
 			---------------------------------------------------------------------------
