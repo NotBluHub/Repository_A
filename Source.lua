@@ -781,7 +781,7 @@ if table.find(UserIds, Player.UserId) then
 			local i = nil
 			UserInput.InputBegan:Connect(function(Key, isTyping)
 				local Humanoid = Player.Character:WaitForChild("Humanoid")
-				if not isTyping and not Script_Disabled and Toggle_Sprint.Button.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
+				if not isTyping and not Script_Disabled and Toggle_Sprint.Button.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter and not Player.Character.Humanoid:FindFirstChild("Tackled") then
 					if Toggle then
 						Humanoid.WalkSpeed = 16
 					elseif not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or CarryBallActive then
@@ -791,7 +791,7 @@ if table.find(UserIds, Player.UserId) then
 						i.Parent = Humanoid
 						task.wait()
 						Humanoid.WalkSpeed = SprintSpeed
-						while Toggle and not Script_Disabled do
+						while Toggle do
 							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or M1
 							if Toggle then
 								Toggle = false
