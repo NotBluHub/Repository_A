@@ -882,14 +882,19 @@ if table.find(UserIds, Player.UserId) then
 			end)
 			---------------------------------------------------------------------------
 			local R = nil
+			local OriginalImage = nil
 			FormlessShooter.Button.MouseButton1Click:Connect(function()
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
 					FormlessShooter.Button.BackgroundTransparency = 1
 				else
 					FormlessShooter.Button.BackgroundTransparency = 0
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
+					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
+					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
+					
 					repeat wait() until Script_Disabled or FormlessShooter.Button.BackgroundTransparency == 1
 					R:Disconnect()
+					Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
 				end
 			end)
 			---------------------------------------------------------------------------
