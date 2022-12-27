@@ -843,10 +843,14 @@ if table.find(UserIds, Player.UserId) then
 			Center.Button.MouseButton1Click:Connect(function()
 				if Center.Button.BackgroundTransparency == 0 then
 					Center.Button.BackgroundTransparency = 1
-					R:Disconnect()
 				else
 					Center.Button.BackgroundTransparency = 0
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
+					
+					CarryBall.Button.BackgroundTransparency = 1
+					CarryBallActive = false
+					repeat wait() until Script_Disabled or Center.Button.BackgroundTransparency == 1
+					R:Disconnect()
 				end
 			end)
 			---------------------------------------------------------------------------
@@ -868,10 +872,12 @@ if table.find(UserIds, Player.UserId) then
 			CarryBall.Button.MouseButton1Click:Connect(function()
 				if CarryBall.Button.BackgroundTransparency == 0 then
 					CarryBall.Button.BackgroundTransparency = 1
-					CarryBallActive = false
 				else
 					CarryBall.Button.BackgroundTransparency = 0
 					CarryBallActive = true
+					Center.Button.BackgroundTransparency = 1
+					repeat wait() until Script_Disabled or Center.Button.BackgroundTransparency == 1
+					CarryBallActive = false
 				end
 			end)
 			---------------------------------------------------------------------------
@@ -879,10 +885,11 @@ if table.find(UserIds, Player.UserId) then
 			FormlessShooter.Button.MouseButton1Click:Connect(function()
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
 					FormlessShooter.Button.BackgroundTransparency = 1
-					R:Disconnect()
 				else
 					FormlessShooter.Button.BackgroundTransparency = 0
-					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "FormlessShooter") end)
+					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
+					repeat wait() until Script_Disabled or FormlessShooter.Button.BackgroundTransparency == 1
+					R:Disconnect()
 				end
 			end)
 			---------------------------------------------------------------------------
