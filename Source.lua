@@ -36,7 +36,7 @@ local response = syn.request(
 	}
 )
 
-if table.find(UserIds, Player.UserId) then
+function LoadHub()
 	local ScreenGui = Instance.new("ScreenGui")
 	local ImageButton = Instance.new("ImageButton")
 	local Pages = Instance.new("Folder")
@@ -64,6 +64,7 @@ if table.find(UserIds, Player.UserId) then
 	local Outline = Instance.new("Frame")
 
 	--Properties:
+	syn.protect_gui(ScreenGui)
 	ScreenGui.Parent = game:WaitForChild("CoreGui")
 
 	ImageButton.Parent = ScreenGui
@@ -840,7 +841,7 @@ if table.find(UserIds, Player.UserId) then
 				else
 					Center.Button.BackgroundTransparency = 0
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
-					
+
 					CarryBall.Button.BackgroundTransparency = 1
 					CarryBallActive = false
 					repeat wait() until Script_Disabled or Center.Button.BackgroundTransparency == 1
@@ -885,7 +886,7 @@ if table.find(UserIds, Player.UserId) then
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
 					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
-					
+
 					repeat wait() until Script_Disabled or FormlessShooter.Button.BackgroundTransparency == 1
 					R:Disconnect()
 					Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
@@ -1029,3 +1030,11 @@ if table.find(UserIds, Player.UserId) then
 		end
 	end
 end
+
+if whitelisted then
+	LoadHub()
+end
+syn.queue_on_teleport([[
+game.Loaded:Wait()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NotBluHub/Secured/main/Code.lua"))()
+]])
