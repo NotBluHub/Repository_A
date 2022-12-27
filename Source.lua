@@ -705,7 +705,7 @@ if table.find(UserIds, Player.UserId) then
 
 			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
-			local Acrobatic = ToggleButton(Badge_Tab, "Acrobatic")
+			local Center = ToggleButton(Badge_Tab, "Center")
 			local Ball_Awareness = ToggleButton(Badge_Tab, "Ball Awareness")
 			local CarryBall = ToggleButton(Badge_Tab, "Carry Ball")
 			local FormlessShooter = ToggleButton(Badge_Tab, "Formless Shooter")
@@ -836,16 +836,16 @@ if table.find(UserIds, Player.UserId) then
 				end
 			end)
 			---------------------------------------------------------------------------
-			Acrobatic.Button.MouseButton1Click:Connect(function()
-				if Acrobatic.Button.BackgroundTransparency == 0 then
-					Acrobatic.Button.BackgroundTransparency = 1
+			Center.Button.MouseButton1Click:Connect(function()
+				if Center.Button.BackgroundTransparency == 0 then
+					Center.Button.BackgroundTransparency = 1
 				else
-					Acrobatic.Button.BackgroundTransparency = 0
+					Center.Button.BackgroundTransparency = 0
 				end
 
-				while Acrobatic.Button.BackgroundTransparency == 0 and not Script_Disabled do
+				while Center.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait()
-					Player.ArcheType3.Value = "Acrobatic"
+					Player.ArcheType3.Value = "Center"
 				end
 			end)
 			---------------------------------------------------------------------------
