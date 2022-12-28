@@ -863,9 +863,15 @@ if whitelisted then
 			---------------------------------------------------------------------------
 			local Toggle = false
 			local i = nil
-			F.No_Stam_Sprint_Function = function()
+			F.No_Stam_Sprint_Function = function(MouseLock)
 				ToggleTransparency(No_Stam_Sprint)
-
+				local function CheckMouseLock()
+					if UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
+						return true
+					else
+						return false
+					end
+				end
 				local Humanoid = Player.Character:WaitForChild("Humanoid")
 				if not Script_Disabled and No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
 					if Toggle then
@@ -883,7 +889,7 @@ if whitelisted then
 							task.wait()
 							Humanoid.WalkSpeed = SprintSpeed
 							while Toggle do
-								repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive
+								repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
 								if Toggle then
 									No_Stam_Sprint.Button.BackgroundTransparency = 1
 									Toggle = false
@@ -953,17 +959,23 @@ if whitelisted then
 				end
 			end
 			---------------------------------------------------------------------------
-			local R = nil
+			local R = {}
 			local OriginalImage = nil
 			F.FormlessShooter_Function = function()
 				ToggleTransparency(FormlessShooter)
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
-					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
+					R[1] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
+					wait()
+					R[2] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
+					wait()
+					R[3] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
 					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
 
 					repeat wait() until Script_Disabled or FormlessShooter.Button.BackgroundTransparency == 1
-					R:Disconnect()
+					R[1]:Disconnect()
+					R[2]:Disconnect()
+					R[3]:Disconnect()
 					Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
 				end
 			end
@@ -1128,7 +1140,7 @@ if whitelisted then
 						if (keyCode == bindKey) or (userInputType == bindKey) then
 							if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
 								if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
-									F[funcName .. "_Function"]()
+									F[funcName .. "_Function"](true)
 								end
 							else
 								F[funcName .. "_Function"]()
