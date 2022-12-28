@@ -6,7 +6,7 @@ local UserIds = {
 	105115151, 2444381495,	--Blu
 	132541900, 2730836956,	--David
 	149522897,		--Booh
-	1425652856, 1121717767, 	-- Kaz
+	1425652856, 1121717767, -- Kaz
 	351990069, 		-- EK/Frost (Kaz Friend)
 	206007586, 		-- laqol (Kaz Friend)
 	1246274469,		-- (Kaz Friend)
@@ -867,8 +867,12 @@ if whitelisted then
 			F.No_Stam_Sprint_Function = function(MouseLock)
 				ToggleTransparency(No_Stam_Sprint)
 				local function CheckMouseLock()
-					if UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
-						return true
+					if MouseLock then
+						if UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
+							return true
+						else
+							return false
+						end
 					else
 						return false
 					end
@@ -1139,6 +1143,7 @@ if whitelisted then
 						local keyCode = tostring(key.KeyCode)
 						local userInputType = tostring(key.UserInputType)
 						if (keyCode == bindKey) or (userInputType == bindKey) then
+							print(bindKey)
 							if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
 								if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
 									F[funcName .. "_Function"](true)
