@@ -1,8 +1,12 @@
+if game:WaitForChild("CoreGui"):FindFirstChild("SDYASE123EN8FW") then
+	game.CoreGui.SDYASE123EN8FW:Destroy()
+end
+
 local UserIds = {
 	105115151, 2444381495,	--Blu
 	132541900, 2730836956,	--David
 	149522897,		--Booh
-	1425652856, 		-- Kaz(Still needs to pay)
+	1425652856, 		-- Kaz
 	351990069, 		-- EK/Frost
 	206007586, 		-- laqol
 }
@@ -39,11 +43,10 @@ local response = syn.request(
 	}
 )
 
-function LoadHub()
+if whitelisted then
 	local ScreenGui = Instance.new("ScreenGui")
 	local ImageButton = Instance.new("ImageButton")
 	local Pages = Instance.new("Folder")
-	local Frame_ = Instance.new("Frame")
 	local Game_ = Instance.new("Frame")
 	local Column1_Game_ = Instance.new("ScrollingFrame")
 	local UIListLayout = Instance.new("UIListLayout")
@@ -60,13 +63,24 @@ function LoadHub()
 	local UIListLayout_4 = Instance.new("UIListLayout")
 	local UIPadding_4 = Instance.new("UIPadding")
 	local ActiveBar_2 = Instance.new("Frame")
+	local Frame_ = Instance.new("Frame")
+	local Keybinds = Instance.new("Frame")
+	local Column2_Keybinds = Instance.new("ScrollingFrame")
+	local UIListLayout_5 = Instance.new("UIListLayout")
+	local UIPadding_5 = Instance.new("UIPadding")
+	local Column1_Keybinds = Instance.new("ScrollingFrame")
+	local UIListLayout_6 = Instance.new("UIListLayout")
+	local UIPadding_6 = Instance.new("UIPadding")
+	local ActiveBar_3 = Instance.new("Frame")
 	local HubName = Instance.new("TextLabel")
 	local Settings_2 = Instance.new("TextButton")
 	local Game_2 = Instance.new("TextButton")
 	local TopBar = Instance.new("Frame")
 	local Outline = Instance.new("Frame")
+	local Keybinds_2 = Instance.new("TextButton")
 
 	--Properties:
+	ScreenGui.Name = "SDYASE123EN8FW"
 	syn.protect_gui(ScreenGui)
 	ScreenGui.Parent = game:WaitForChild("CoreGui")
 
@@ -75,7 +89,7 @@ function LoadHub()
 	ImageButton.AnchorPoint = Vector2.new(0.5, 0.5)
 	ImageButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 	ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	ImageButton.Position = UDim2.new(0.5, 5, 0.25, 0)
+	ImageButton.Position = UDim2.new(0.5, 24, 0.25, 10)
 	ImageButton.Size = UDim2.new(0, 494, 0, 320)
 	ImageButton.AutoButtonColor = false
 	ImageButton.ImageColor3 = Color3.fromRGB(0, 0, 0)
@@ -85,17 +99,11 @@ function LoadHub()
 	Pages.Name = "Pages"
 	Pages.Parent = ImageButton
 
-	Frame_.Parent = Pages
-	Frame_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Frame_.BackgroundTransparency = 1.000
-	Frame_.Position = UDim2.new(0, 0, 0, 52)
-	Frame_.Size = UDim2.new(0, 494, 0, 268)
-
 	Game_.Name = "Game"
 	Game_.Parent = Pages
 	Game_.BackgroundTransparency = 1.000
 	Game_.Position = UDim2.new(0, 5, 0, 55)
-	Game_.Size = UDim2.new(1, -10, 1, -60)
+	Game_.Size = UDim2.new(0, 484, 0, 260)
 
 	Column1_Game_.Name = "Column1"
 	Column1_Game_.Parent = Game_
@@ -198,8 +206,70 @@ function LoadHub()
 	ActiveBar_2.Parent = Settings
 	ActiveBar_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
 	ActiveBar_2.BorderSizePixel = 0
-	ActiveBar_2.Position = UDim2.new(0, 84, 0, -3)
+	ActiveBar_2.Position = UDim2.new(0, 152, 0, -3)
 	ActiveBar_2.Size = UDim2.new(0, 77, 0, -1)
+
+	Frame_.Parent = Pages
+	Frame_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Frame_.BackgroundTransparency = 1.000
+	Frame_.Position = UDim2.new(0, 0, 0, 52)
+	Frame_.Size = UDim2.new(0, 494, 0, 268)
+
+	Keybinds.Name = "Keybinds"
+	Keybinds.Parent = Pages
+	Keybinds.BackgroundTransparency = 1.000
+	Keybinds.Position = UDim2.new(0, 5, 0, 55)
+	Keybinds.Size = UDim2.new(1, -10, 1, -60)
+	Keybinds.Visible = false
+
+	Column2_Keybinds.Name = "Column2"
+	Column2_Keybinds.Parent = Keybinds
+	Column2_Keybinds.BackgroundTransparency = 1.000
+	Column2_Keybinds.BorderSizePixel = 0
+	Column2_Keybinds.Position = UDim2.new(0, 245, 0, 2)
+	Column2_Keybinds.Size = UDim2.new(0, 233, 1, -4)
+	Column2_Keybinds.ZIndex = 2
+	Column2_Keybinds.CanvasSize = UDim2.new(0, 0, 0, 0)
+	Column2_Keybinds.ScrollBarThickness = 0
+	Column2_Keybinds.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+
+	UIListLayout_5.Parent = Column2_Keybinds
+	UIListLayout_5.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout_5.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout_5.Padding = UDim.new(0, 12)
+
+	UIPadding_5.Parent = Column2_Keybinds
+	UIPadding_5.PaddingLeft = UDim.new(0, 2)
+	UIPadding_5.PaddingRight = UDim.new(0, 2)
+	UIPadding_5.PaddingTop = UDim.new(0, 8)
+
+	Column1_Keybinds.Name = "Column1"
+	Column1_Keybinds.Parent = Keybinds
+	Column1_Keybinds.BackgroundTransparency = 1.000
+	Column1_Keybinds.BorderSizePixel = 0
+	Column1_Keybinds.Position = UDim2.new(0, 6, 0, 2)
+	Column1_Keybinds.Size = UDim2.new(0, 233, 1, -4)
+	Column1_Keybinds.ZIndex = 2
+	Column1_Keybinds.CanvasSize = UDim2.new(0, 0, 0, 0)
+	Column1_Keybinds.ScrollBarThickness = 0
+	Column1_Keybinds.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
+
+	UIListLayout_6.Parent = Column1_Keybinds
+	UIListLayout_6.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout_6.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout_6.Padding = UDim.new(0, 25)
+
+	UIPadding_6.Parent = Column1_Keybinds
+	UIPadding_6.PaddingLeft = UDim.new(0, 2)
+	UIPadding_6.PaddingRight = UDim.new(0, 2)
+	UIPadding_6.PaddingTop = UDim.new(0, 8)
+
+	ActiveBar_3.Name = "ActiveBar"
+	ActiveBar_3.Parent = Keybinds
+	ActiveBar_3.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	ActiveBar_3.BorderSizePixel = 0
+	ActiveBar_3.Position = UDim2.new(0, 65, 0, -3)
+	ActiveBar_3.Size = UDim2.new(0, 77, 0, -1)
 
 	HubName.Name = "Hub Name"
 	HubName.Parent = ImageButton
@@ -217,7 +287,7 @@ function LoadHub()
 	Settings_2.Parent = ImageButton
 	Settings_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
 	Settings_2.BackgroundTransparency = 1.000
-	Settings_2.Position = UDim2.new(0, 89, 0, 22)
+	Settings_2.Position = UDim2.new(0, 157, 0, 22)
 	Settings_2.Size = UDim2.new(0, 77, 0, 30)
 	Settings_2.ZIndex = 5
 	Settings_2.Font = Enum.Font.Code
@@ -252,16 +322,28 @@ function LoadHub()
 	Outline.Size = UDim2.new(1, 0, 0, 50)
 	Outline.ZIndex = 4
 
+	Keybinds_2.Name = "Keybinds"
+	Keybinds_2.Parent = ImageButton
+	Keybinds_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	Keybinds_2.BackgroundTransparency = 1.000
+	Keybinds_2.Position = UDim2.new(0, 70, 0, 22)
+	Keybinds_2.Size = UDim2.new(0, 77, 0, 30)
+	Keybinds_2.ZIndex = 5
+	Keybinds_2.Font = Enum.Font.Code
+	Keybinds_2.Text = "Keybinds"
+	Keybinds_2.TextColor3 = Color3.fromRGB(253, 21, 32)
+	Keybinds_2.TextSize = 15.000
+
 	--Main:
 
-	CreateTab = function(Parent, Name ,Size)
+	local CreateTab = function(Parent, Name ,Size)
 		local Frame = Instance.new("Frame")
 		local Color = Instance.new("Frame")
 		local TabName = Instance.new("TextLabel")
 		local Buttons = Instance.new("ScrollingFrame")
 		local UIListLayout = Instance.new("UIListLayout")
 		local UIPadding = Instance.new("UIPadding")
-
+		
 		Frame.Name = Name
 		Frame.Parent = Parent
 		Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -305,7 +387,67 @@ function LoadHub()
 
 		return Frame
 	end
-	ToggleButton = function(Parent, Name)
+	local Keybind = function(Parent, Name)
+		local Frame = Instance.new("Frame")
+		local TextLabel = Instance.new("TextLabel")
+		local Button = Instance.new("TextButton")
+		local ImageLabel = Instance.new("ImageLabel")
+		local ImageLabel_2 = Instance.new("ImageLabel")
+
+		Frame.Name = Name
+		Frame.Parent = Parent.Buttons
+		Frame.BackgroundTransparency = 1.000
+		Frame.Size = UDim2.new(1, 0, 0, 20)
+
+		TextLabel.Parent = Frame
+		TextLabel.AnchorPoint = Vector2.new(0, 0.5)
+		TextLabel.BackgroundTransparency = 1.000
+		TextLabel.Position = UDim2.new(0, 3, 0.5, 0)
+		TextLabel.Size = UDim2.new(0.942731261, 0, 0.571428657, 0)
+		TextLabel.Font = Enum.Font.Code
+		TextLabel.Text = Name
+		TextLabel.TextColor3 = Color3.fromRGB(160, 160, 160)
+		TextLabel.TextSize = 10
+		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+		Button.Name = "Button"
+		Button.Parent = Frame
+		Button.AnchorPoint = Vector2.new(1, 0.5)
+		Button.BackgroundColor3 = Color3.fromRGB(18, 127, 253)
+		Button.BackgroundTransparency = 1.000
+		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Button.Position = UDim2.new(1, 0, 0.5, 0)
+		Button.Size = UDim2.new(0, 125, 0, 20)
+		Button.ZIndex = 2
+		Button.Font = Enum.Font.Code
+		Button.Text = ""
+		Button.TextColor3 = Color3.fromRGB(160, 160, 160)
+		Button.TextScaled = true
+		Button.TextSize = 18.000
+		Button.TextWrapped = true
+
+		ImageLabel.Parent = Button
+		ImageLabel.BackgroundTransparency = 1.000
+		ImageLabel.Position = UDim2.new(0, 1, 0, 1)
+		ImageLabel.Size = UDim2.new(1, -2, 1, -2)
+		ImageLabel.ZIndex = 2
+		ImageLabel.Image = "rbxassetid://2592362371"
+		ImageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
+		ImageLabel.ScaleType = Enum.ScaleType.Slice
+		ImageLabel.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		ImageLabel_2.Parent = Button
+		ImageLabel_2.BackgroundTransparency = 1.000
+		ImageLabel_2.Size = UDim2.new(1, 0, 1.00000012, 0)
+		ImageLabel_2.ZIndex = 3
+		ImageLabel_2.Image = "rbxassetid://2592362371"
+		ImageLabel_2.ImageColor3 = Color3.fromRGB(60, 60, 60)
+		ImageLabel_2.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		return Frame
+	end
+	local ToggleButton = function(Parent, Name, BindP)
 		local Frame = Instance.new("Frame")
 		local Button = Instance.new("TextButton")
 		local ImageLabel = Instance.new("ImageLabel")
@@ -360,10 +502,10 @@ function LoadHub()
 		Text.TextColor3 = Color3.fromRGB(160, 160, 160)
 		Text.TextSize = 15.000
 		Text.TextXAlignment = Enum.TextXAlignment.Left
-
-		return Frame
+		local BindFrame = Keybind(BindP, Name)
+		return Frame, BindFrame
 	end
-	BigButton = function(Parent, Name)
+	local BigButton = function(Parent, Name)
 		local Frame = Instance.new("Frame")
 		local Button = Instance.new("TextButton")
 		local ImageLabel = Instance.new("ImageLabel")
@@ -408,66 +550,7 @@ function LoadHub()
 
 		return Frame
 	end
-	Keybind = function(Parent, Name)
-		local Frame = Instance.new("Frame")
-		local TextLabel = Instance.new("TextLabel")
-		local TextButton = Instance.new("TextButton")
-		local ImageLabel = Instance.new("ImageLabel")
-		local ImageLabel_2 = Instance.new("ImageLabel")
-
-		Frame.Name = Name
-		Frame.Parent = Parent.Buttons
-		Frame.BackgroundTransparency = 1.000
-		Frame.Size = UDim2.new(1, 0, 0, 42)
-
-		TextLabel.Parent = Frame
-		TextLabel.BackgroundTransparency = 1.000
-		TextLabel.Position = UDim2.new(0, 7, 0, 0)
-		TextLabel.Size = UDim2.new(0.942731261, 0, 0.571428657, 0)
-		TextLabel.Font = Enum.Font.Code
-		TextLabel.Text = Name
-		TextLabel.TextColor3 = Color3.fromRGB(160, 160, 160)
-		TextLabel.TextSize = 15.000
-		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-		TextButton.Parent = Frame
-		TextButton.Name = "Button"
-		TextButton.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
-		TextButton.BackgroundTransparency = 1.000
-		TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextButton.Position = UDim2.new(0.427312791, 0, 0, 0)
-		TextButton.Size = UDim2.new(0.54625535, 0, 0.476190478, 0)
-		TextButton.ZIndex = 2
-		TextButton.Font = Enum.Font.Code
-		TextButton.Text = ""
-		TextButton.TextColor3 = Color3.fromRGB(160, 160, 160)
-		TextButton.TextScaled = true
-		TextButton.TextSize = 18.000
-		TextButton.TextWrapped = true
-
-		ImageLabel.Parent = TextButton
-		ImageLabel.BackgroundTransparency = 1.000
-		ImageLabel.Position = UDim2.new(0, 1, 0, 1)
-		ImageLabel.Size = UDim2.new(1, -2, 1, -2)
-		ImageLabel.ZIndex = 2
-		ImageLabel.Image = "rbxassetid://2592362371"
-		ImageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
-		ImageLabel.ScaleType = Enum.ScaleType.Slice
-		ImageLabel.SliceCenter = Rect.new(2, 2, 62, 62)
-
-		ImageLabel_2.Parent = TextButton
-		ImageLabel_2.BackgroundTransparency = 1.000
-		ImageLabel_2.Size = UDim2.new(1, 0, 1.00000012, 0)
-		ImageLabel_2.ZIndex = 3
-		ImageLabel_2.Image = "rbxassetid://2592362371"
-		ImageLabel_2.ImageColor3 = Color3.fromRGB(60, 60, 60)
-		ImageLabel_2.ScaleType = Enum.ScaleType.Slice
-		ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
-
-		return Frame
-	end
-
-	ToggleTextBox = function(Parent, Name, PlaceHolder)
+	local ToggleTextBox = function(Parent, Name, PlaceHolder)
 		local Frame = Instance.new("Frame")
 		local Button = Instance.new("TextButton")
 		local ImageLabel = Instance.new("ImageLabel")
@@ -577,11 +660,14 @@ function LoadHub()
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
-
+	
 	local ToggleGui_Keybind = "RightShift"
 
 	local Script_Disabled = false
-
+	ScreenGui.Destroying:Connect(function()
+		Script_Disabled = true
+	end)
+	
 	local Image = nil
 
 	coroutine.resume(coroutine.create(function()
@@ -593,8 +679,8 @@ function LoadHub()
 			Image.Data = data
 			Image.Visible = true
 			Image.Position = Frame_.AbsolutePosition + Vector2.new(0, 35)
-
-			while not Script_Disabled do
+			
+			while not Script_Disabled and ScreenGui.Parent == game.CoreGui do
 				wait()
 				Image.Position = Frame_.AbsolutePosition + Vector2.new(0, 35)
 			end
@@ -602,7 +688,7 @@ function LoadHub()
 		end
 	end))
 
-	function TogglePages(Page)
+	local function TogglePages(Page)
 		for _, i in pairs(Pages:GetChildren()) do
 			if i.Name ~= Page then
 				i.Visible = false
@@ -613,13 +699,14 @@ function LoadHub()
 	end
 
 	Game_2.MouseButton1Click:Connect(function() TogglePages(Game_2.Name) end)
+	Keybinds_2.MouseButton1Click:Connect(function() TogglePages(Keybinds_2.Name) end)
 	Settings_2.MouseButton1Click:Connect(function() TogglePages(Settings_2.Name) end)
 
 	local Hub_Tab = CreateTab(Column2_Settings, "Hub", {UDim2.new(1, 0, 0, 80), UDim2.new(0, 31, 0, 2)})
 	local Unload = BigButton(Hub_Tab, "Unload")
 
-	local Keybinds_Tab = CreateTab(Column1_Settings, "Keybinds", {UDim2.new(1, 0, 0, 100), UDim2.new(0, 68, 0, 2)})
-	local Gui_Keybind = Keybind(Keybinds_Tab, "Toggle Gui")
+	local Settings_Tab = CreateTab(Column1_Settings, "Settings", {UDim2.new(1, 0, 0, 100), UDim2.new(0, 68, 0, 2)})
+	local Gui_Keybind = Keybind(Settings_Tab, "Toggle Gui")
 	Gui_Keybind.Button.Text = ToggleGui_Keybind
 
 	Gui_Keybind.Button.MouseButton1Click:Connect(function()
@@ -666,22 +753,31 @@ function LoadHub()
 		local SlideTackleRadius = 20
 
 		local CarryBallActive = false
+		local F = {}
 
+		local function ToggleTransparency(Frame)
+			if Frame.Button.BackgroundTransparency == 0 then
+
+				Frame.Button.BackgroundTransparency = 1
+			else
+				Frame.Button.BackgroundTransparency = 0
+			end
+		end
+		local function ChangeBadge(Arch, Text)
+			Player[Arch].Value = Text
+		end
+		
 		if game.PlaceId == 8397893574 then
 			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
 
 			local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
-
-			Code_Spammer.Button.MouseButton1Click:Connect(function()
-				if Code_Spammer.Button.BackgroundTransparency == 0 then
-					Code_Spammer.Button.BackgroundTransparency = 1
-				else
-					Code_Spammer.Button.BackgroundTransparency = 0
-				end
+			
+			local Code_Spammer_Function = function()
+				ToggleTransparency(Code_Spammer)
 				if Code_Spammer.Button.BackgroundTransparency == 0 then
 					local Event = Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
 					local Text = Code_Spammer.TextFrame.TextBox.Text
-					local Runners = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
+					local Runners = {['a'] = nil, ['b'] = nil, ['c'] = nil, ['d'] = nil, ['e'] = nil, ['f'] = nil, ['g'] = nil, ['h'] = nil, ['i'] = nil, ['j'] = nil, ['k'] = nil, ['l'] = nil, ['m'] = nil, ['n'] = nil, ['o'] = nil, ['p'] = nil, ['q'] = nil, ['r'] = nil, ['s'] = nil, ['t'] = nil, ['u'] = nil, ['v'] = nil, ['w'] = nil, ['x'] = nil, ['y'] = nil, ['z'] = nil}
 
 					for _, letter in pairs(Runners) do
 						letter = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
@@ -695,29 +791,31 @@ function LoadHub()
 
 					Code_Spammer.Button.BackgroundTransparency = 1
 				end
-			end)
+			end
+			
+			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
 
 		elseif game.PlaceId == 9822821238 then
 			local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-
-			local Quick_Queue = ToggleButton(Game_Tab, "Quick Queue")
-			local Toggle_Sprint = ToggleButton(Game_Tab, "Toggle Sprint")
-			local No_Sit = ToggleButton(Game_Tab, "No Sit")
-			local Unlock_Camera = ToggleButton(Game_Tab, "Unlock Camera Zoom")
-
+			local Game_Bind = CreateTab(Column1_Keybinds, "Goal!", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-
-			local Center = ToggleButton(Badge_Tab, "Center")
-			local Ball_Awareness = ToggleButton(Badge_Tab, "Ball Awareness")
-			local CarryBall = ToggleButton(Badge_Tab, "Carry Ball")
-			local FormlessShooter = ToggleButton(Badge_Tab, "Formless Shooter")
-
+			local Badge_Bind = CreateTab(Column1_Keybinds, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
 			local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
+			local AutoDribble_Bind = CreateTab(Column2_Keybinds, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
 
-			local Auto_Dribble = ToggleButton(AutoDribble_Tab, "Auto Dribble")
-			local Jump_Input = ToggleButton(AutoDribble_Tab, "Jump Input")
-			local Show_Step_Radius = ToggleButton(AutoDribble_Tab, "Show Step Radius")
+			local Quick_Queue, Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
+			local No_Stam_Sprint, No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
+			local No_Sit, No_Sit_Bind = ToggleButton(Game_Tab, "No Sit", Game_Bind)
+			local Unlock_Camera, Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera Zoom", Game_Bind)
 
+			local Center, Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
+			local Ball_Awareness, Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
+			local CarryBall, CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
+			local FormlessShooter, FormlessShooter_Bind = ToggleButton(Badge_Tab, "Formless Shooter", Badge_Bind)
+
+			local Auto_Dribble, Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
+			local Jump_Input, Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
+			local Show_Step_Radius, Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
 			---------------------------------------------------------------------------
 			local Actual_Spots = {}
 			for _, i in pairs(workspace:GetDescendants()) do
@@ -749,71 +847,59 @@ function LoadHub()
 
 				return closestPart
 			end
-			Quick_Queue.Button.MouseButton1Click:Connect(function()
-				if Quick_Queue.Button.BackgroundTransparency == 0 then
+			F.Quick_Queue_Function = function()
+				ToggleTransparency(Quick_Queue)
 
-					Quick_Queue.Button.BackgroundTransparency = 1
-				else
-					Quick_Queue.Button.BackgroundTransparency = 0
-				end
-				if Quick_Queue.Button.BackgroundTransparency == 0 then
-
-					local NearestSpot = FindSpot(Player.Character)
-
-					while Quick_Queue.Button.BackgroundTransparency == 0 and not Script_Disabled do
-						local Character = Player.Character
-						if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and Quick_Queue.Button.BackgroundTransparency ~= 1 and not Script_Disabled then
-							fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-							Quick_Queue.Button.BackgroundTransparency = 1
-						end
-						repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Quick_Queue.Button.BackgroundTransparency == 1 or Script_Disabled
+				local NearestSpot = FindSpot(Player.Character)
+				while Quick_Queue.Button.BackgroundTransparency == 0 and not Script_Disabled do
+					local Character = Player.Character
+					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and Quick_Queue.Button.BackgroundTransparency ~= 1 and not Script_Disabled then
+						fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+						Quick_Queue.Button.BackgroundTransparency = 1
 					end
+					repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Quick_Queue.Button.BackgroundTransparency == 1 or Script_Disabled
 				end
-			end)
+			end
 			---------------------------------------------------------------------------
-			Toggle_Sprint.Button.MouseButton1Click:Connect(function()
-				if Toggle_Sprint.Button.BackgroundTransparency == 0 then
-					Toggle_Sprint.Button.BackgroundTransparency = 1
-				else
-					Toggle_Sprint.Button.BackgroundTransparency = 0
-				end
-			end)
 			local Toggle = false
-			local M1 = false
 			local i = nil
-			UserInput.InputBegan:Connect(function(Key, isTyping)
+			F.No_Stam_Sprint_Function = function()
+				ToggleTransparency(No_Stam_Sprint)
+
 				local Humanoid = Player.Character:WaitForChild("Humanoid")
-				if not isTyping and not Script_Disabled and Toggle_Sprint.Button.BackgroundTransparency == 0 and Key.UserInputType == Enum.UserInputType.MouseButton2 and UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter and not Player.Character.Humanoid:FindFirstChild("Tackled") then
+				if not Script_Disabled and No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
 					if Toggle then
 						Humanoid.WalkSpeed = 16
-					elseif not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or CarryBallActive then
-						Toggle = true
-						i = Instance.new("StringValue")
-						i.Name = "ShiftLock"
-						i.Parent = Humanoid
-						task.wait()
-						Humanoid.WalkSpeed = SprintSpeed
-						while Toggle do
-							repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter or Toggle_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or M1 or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not CarryBallActive
-							if Toggle then
-								Toggle = false
-								M1 = false
-								i:Destroy()
-								if Humanoid.WalkSpeed == SprintSpeed then
-									Humanoid.WalkSpeed = 16
+					else
+						local Check = false
+						if UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") then
+							Check = true
+						end
+						if not Check or CarryBall then
+							Toggle = true
+							i = Instance.new("StringValue")
+							i.Name = "ShiftLock"
+							i.Parent = Humanoid
+							task.wait()
+							Humanoid.WalkSpeed = SprintSpeed
+							while Toggle do
+								repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive
+								if Toggle then
+									No_Stam_Sprint.Button.BackgroundTransparency = 1
+									Toggle = false
+									i:Destroy()
+									if Humanoid.WalkSpeed == SprintSpeed then
+										Humanoid.WalkSpeed = 16
+									end
 								end
 							end
 						end
 					end
 				end
-			end)
+			end
 			---------------------------------------------------------------------------
-			No_Sit.Button.MouseButton1Click:Connect(function()
-				if No_Sit.Button.BackgroundTransparency == 0 then
-					No_Sit.Button.BackgroundTransparency = 1
-				else
-					No_Sit.Button.BackgroundTransparency = 0
-				end
+			F.No_Sit_Function = function()
+				ToggleTransparency(No_Sit)
 
 				while No_Sit.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait(0.00001)
@@ -822,27 +908,23 @@ function LoadHub()
 						Player.Character.VFX.NoMove.Value = false
 					end
 				end
-			end)
-			---------------------------------------------------------------------------
-			Unlock_Camera.Button.MouseButton1Click:Connect(function()
-				if Unlock_Camera.Button.BackgroundTransparency == 0 then
-					Unlock_Camera.Button.BackgroundTransparency = 1
-					Player.CameraMaxZoomDistance = 23
-				else
-					Unlock_Camera.Button.BackgroundTransparency = 0
-					Player.CameraMaxZoomDistance = 100
-				end
-			end)
-			---------------------------------------------------------------------------
-			local function ChangeBadge(Arch, Text)
-				Player[Arch].Value = Text
 			end
+			---------------------------------------------------------------------------
+			F.Unlock_Camera_Function = function()
+				ToggleTransparency(Unlock_Camera)
+
+				if Unlock_Camera.Button.BackgroundTransparency == 0 then
+					Player.CameraMaxZoomDistance = 100
+					repeat wait() until Script_Disabled or Unlock_Camera.Button.BackgroundTransparency == 1
+					Player.CameraMaxZoomDistance = 23
+				end
+			end
+			---------------------------------------------------------------------------
 			local R = nil
-			Center.Button.MouseButton1Click:Connect(function()
+			F.Center_Function = function()
+				ToggleTransparency(Center)
+
 				if Center.Button.BackgroundTransparency == 0 then
-					Center.Button.BackgroundTransparency = 1
-				else
-					Center.Button.BackgroundTransparency = 0
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
 
 					CarryBall.Button.BackgroundTransparency = 1
@@ -850,15 +932,11 @@ function LoadHub()
 					repeat wait() until Script_Disabled or Center.Button.BackgroundTransparency == 1
 					R:Disconnect()
 				end
-			end)
+			end
 			---------------------------------------------------------------------------
-			Ball_Awareness.Button.MouseButton1Click:Connect(function()
-				if Ball_Awareness.Button.BackgroundTransparency == 0 then
-					Ball_Awareness.Button.BackgroundTransparency = 1
-				else
-					Ball_Awareness.Button.BackgroundTransparency = 0
-				end
-			end)
+			F.Ball_Awareness_Function = function()
+				ToggleTransparency(Ball_Awareness)
+			end
 			if workspace:FindFirstChild("Ignore") then
 				workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
 					if Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
@@ -867,25 +945,19 @@ function LoadHub()
 				end)
 			end
 			---------------------------------------------------------------------------
-			CarryBall.Button.MouseButton1Click:Connect(function()
+			F.CarryBall_Function = function()
+				ToggleTransparency(CarryBall)
 				if CarryBall.Button.BackgroundTransparency == 0 then
-					CarryBall.Button.BackgroundTransparency = 1
-				else
-					CarryBall.Button.BackgroundTransparency = 0
-					CarryBallActive = true
-					Center.Button.BackgroundTransparency = 1
-					repeat wait() until Script_Disabled or Center.Button.BackgroundTransparency == 1
+					repeat wait() until Script_Disabled or CarryBall.Button.BackgroundTransparency == 1
 					CarryBallActive = false
 				end
-			end)
+			end
 			---------------------------------------------------------------------------
 			local R = nil
 			local OriginalImage = nil
-			FormlessShooter.Button.MouseButton1Click:Connect(function()
+			F.FormlessShooter_Function = function()
+				ToggleTransparency(FormlessShooter)
 				if FormlessShooter.Button.BackgroundTransparency == 0 then
-					FormlessShooter.Button.BackgroundTransparency = 1
-				else
-					FormlessShooter.Button.BackgroundTransparency = 0
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
 					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
@@ -894,7 +966,7 @@ function LoadHub()
 					R:Disconnect()
 					Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
 				end
-			end)
+			end
 			---------------------------------------------------------------------------
 			local playerEnteredRadius = {}
 			local playersInRadius = {}
@@ -937,12 +1009,8 @@ function LoadHub()
 					end
 				end
 			end
-			Auto_Dribble.Button.MouseButton1Click:Connect(function()
-				if Auto_Dribble.Button.BackgroundTransparency == 0 then
-					Auto_Dribble.Button.BackgroundTransparency = 1
-				else
-					Auto_Dribble.Button.BackgroundTransparency = 0
-				end
+			F.Auto_Dribble_Function = function()
+				ToggleTransparency(Auto_Dribble)
 				if Auto_Dribble.Button.BackgroundTransparency == 0 then
 					local RenderStepped = runService.RenderStepped:Connect(checkRadius)
 
@@ -985,23 +1053,14 @@ function LoadHub()
 						end
 					end)
 				end
-			end)
+			end
 			---------------------------------------------------------------------------
-			Jump_Input.Button.MouseButton1Click:Connect(function()
-				if Jump_Input.Button.BackgroundTransparency == 0 then
-					Jump_Input.Button.BackgroundTransparency = 1
-				else
-					Jump_Input.Button.BackgroundTransparency = 0
-				end
-			end)
+			F.Jump_Input_Function = function()
+				ToggleTransparency(Jump_Input)
+			end
 			---------------------------------------------------------------------------
-			Show_Step_Radius.Button.MouseButton1Click:Connect(function()
-				if Show_Step_Radius.Button.BackgroundTransparency == 0 then
-
-					Show_Step_Radius.Button.BackgroundTransparency = 1
-				else
-					Show_Step_Radius.Button.BackgroundTransparency = 0
-				end
+			F.Show_Step_Radius_Function = function()
+				ToggleTransparency(Show_Step_Radius)
 				local Character = Player.Character
 				if Show_Step_Radius.Button.BackgroundTransparency == 0 then
 					local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
@@ -1029,15 +1088,87 @@ function LoadHub()
 					if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
 					if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
 				end
-			end)
+			end
+			---------------------------------------------------------------------------
+			function BindButtons(frame, funcName)
+				local bindKey
+				local d = true
+				frame.Button.MouseButton1Click:Connect(function()
+					if frame.Button.Text ~= "Press a Key" and d then
+						d = false
+						frame.Button.Text = "Press a Key"
+						bindKey = nil
+
+						local inputBeganConn = UserInput.InputBegan:Connect(function(key, isTyping)
+							if not Script_Disabled and frame.Button.Text == "Press a Key" then
+								local keyCode = tostring(key.KeyCode)
+								local userInputType = tostring(key.UserInputType)
+								if string.split(keyCode, ".")[3] == "Escape" or string.split(keyCode, ".")[3] == "Backspace" then
+									bindKey = "Enum.KeyCode."
+								elseif string.split(keyCode, ".")[3] ~= "Unknown" then
+									bindKey = keyCode
+								elseif string.split(userInputType, ".")[3] ~= "Unknown" then
+									bindKey = userInputType
+								end
+								frame.Button.Text = string.split(bindKey, ".")[3]
+							end
+						end)
+
+						repeat wait() until bindKey
+						inputBeganConn:Disconnect()
+						wait(0.05)
+						d = true
+					end
+				end)
+
+				UserInput.InputBegan:Connect(function(key, isTyping)
+					if not Script_Disabled and not isTyping and frame.Button.Text ~= "Press a Key" and d then
+						local keyCode = tostring(key.KeyCode)
+						local userInputType = tostring(key.UserInputType)
+						if (keyCode == bindKey) or (userInputType == bindKey) then
+							if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
+								if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
+									F[funcName .. "_Function"]()
+								end
+							else
+								F[funcName .. "_Function"]()
+							end
+						end
+					end
+				end)
+			end
+
+			BindButtons(Quick_Queue_Bind, "Quick_Queue")
+			BindButtons(No_Stam_Sprint_Bind, "No_Stam_Sprint")
+			BindButtons(No_Sit_Bind, "No_Sit")
+			BindButtons(Unlock_Camera_Bind, "Unlock_Camera")
+			BindButtons(Center_Bind, "Center")
+			BindButtons(Ball_Awareness_Bind, "Ball_Awareness")
+			BindButtons(CarryBall_Bind, "CarryBall")
+			BindButtons(FormlessShooter_Bind, "FormlessShooter")
+			BindButtons(Auto_Dribble_Bind, "Auto_Dribble")
+			BindButtons(Jump_Input_Bind, "Jump_Input")
+			BindButtons(Show_Step_Radius_Bind, "Show_Step_Radius")
+			---------------------------------------------------------------------------
+			Quick_Queue.Button.MouseButton1Click:Connect(F.Quick_Queue_Function)
+			No_Stam_Sprint.Button.MouseButton1Click:Connect(F.No_Stam_Sprint_Function)
+			No_Sit.Button.MouseButton1Click:Connect(F.No_Sit_Function)
+			Unlock_Camera.Button.MouseButton1Click:Connect(F.Unlock_Camera_Function)
+			Center.Button.MouseButton1Click:Connect(F.Center_Function)
+			Ball_Awareness.Button.MouseButton1Click:Connect(F.Ball_Awareness_Function)
+			CarryBall.Button.MouseButton1Click:Connect(F.CarryBall_Function)
+			FormlessShooter.Button.MouseButton1Click:Connect(F.FormlessShooter_Function)
+			Auto_Dribble.Button.MouseButton1Click:Connect(F.Auto_Dribble_Function)
+			Jump_Input.Button.MouseButton1Click:Connect(F.Jump_Input_Function)
+			Show_Step_Radius.Button.MouseButton1Click:Connect(F.Show_Step_Radius_Function)
 		end
 	end
 end
-
-if whitelisted then
-	LoadHub()
-end
-syn.queue_on_teleport([[
-game.Loaded:Wait()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NotBluHub/Secured/main/Code.lua"))()
-]])
+game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+	if State == Enum.TeleportState.Started then
+		syn.queue_on_teleport([[
+		game.Loaded:Wait()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/NotBluHub/Secured/main/Code.lua"))()
+		]])
+	end
+end)
