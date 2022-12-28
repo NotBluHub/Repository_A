@@ -7,8 +7,9 @@ local UserIds = {
 	132541900, 2730836956,	--David
 	149522897,		--Booh
 	1425652856, 		-- Kaz
-	351990069, 		-- EK/Frost
-	206007586, 		-- laqol
+	351990069, 		-- EK/Frost (Kaz Friend)
+	206007586, 		-- laqol (Kaz Friend)
+	1246274469,		-- (Kaz Friend)
 }
 local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
 
