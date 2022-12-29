@@ -1143,7 +1143,6 @@ if whitelisted then
 						local keyCode = tostring(key.KeyCode)
 						local userInputType = tostring(key.UserInputType)
 						if (keyCode == bindKey) or (userInputType == bindKey) then
-							print(bindKey)
 							if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
 								if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
 									F[funcName .. "_Function"](true)
