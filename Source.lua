@@ -7,7 +7,7 @@ local UserIds = {
 	132541900, 2730836956,	--David
 	149522897,		--Booh
 	1425652856, 1121717767, -- Kaz
-	351990069, 1522914997, 		-- EK/Frost (Kaz Friend)
+	351990069, 1522914997, 	-- EK/Frost (Kaz Friend)
 	206007586, 		-- laqol (Kaz Friend)
 	1246274469,		-- (Kaz Friend)
 }
@@ -344,7 +344,7 @@ if whitelisted then
 		local Buttons = Instance.new("ScrollingFrame")
 		local UIListLayout = Instance.new("UIListLayout")
 		local UIPadding = Instance.new("UIPadding")
-		
+
 		Frame.Name = Name
 		Frame.Parent = Parent
 		Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -661,14 +661,14 @@ if whitelisted then
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
-	
+
 	local ToggleGui_Keybind = "RightShift"
 
 	local Script_Disabled = false
 	ScreenGui.Destroying:Connect(function()
 		Script_Disabled = true
 	end)
-	
+
 	local Image = nil
 
 	coroutine.resume(coroutine.create(function()
@@ -680,7 +680,7 @@ if whitelisted then
 			Image.Data = data
 			Image.Visible = true
 			Image.Position = Frame_.AbsolutePosition + Vector2.new(0, 35)
-			
+
 			while not Script_Disabled and ScreenGui.Parent == game.CoreGui do
 				wait()
 				Image.Position = Frame_.AbsolutePosition + Vector2.new(0, 35)
@@ -767,23 +767,44 @@ if whitelisted then
 		local function ChangeBadge(Arch, Text)
 			Player[Arch].Value = Text
 		end
-		
+
 		if game.PlaceId == 8397893574 then
 			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
 
 			local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
-			
+
 			local Code_Spammer_Function = function()
 				ToggleTransparency(Code_Spammer)
 				if Code_Spammer.Button.BackgroundTransparency == 0 then
-					local Event = Player.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
+					local Event = game.Players.LocalPlayer.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
 					local Text = Code_Spammer.TextFrame.TextBox.Text
-					local Runners = {['a'] = nil, ['b'] = nil, ['c'] = nil, ['d'] = nil, ['e'] = nil, ['f'] = nil, ['g'] = nil, ['h'] = nil, ['i'] = nil, ['j'] = nil, ['k'] = nil, ['l'] = nil, ['m'] = nil, ['n'] = nil, ['o'] = nil, ['p'] = nil, ['q'] = nil, ['r'] = nil, ['s'] = nil, ['t'] = nil, ['u'] = nil, ['v'] = nil, ['w'] = nil, ['x'] = nil, ['y'] = nil, ['z'] = nil}
-
-					for _, letter in pairs(Runners) do
-						letter = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					end
-
+					local Runners = {
+						[1] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[2] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[3] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[4] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[5] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[6] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
+						[7] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
+						[8] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[9] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
+						[10] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[11] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[12] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[13] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[14] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[15] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[16] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[17] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[18] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[19] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[20] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[21] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[22] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[23] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[24] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[25] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[26] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end)}
 					wait(5)
 
 					for _, letter in pairs(Runners) do
@@ -793,7 +814,7 @@ if whitelisted then
 					Code_Spammer.Button.BackgroundTransparency = 1
 				end
 			end
-			
+
 			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
 
 		elseif game.PlaceId == 9822821238 then
