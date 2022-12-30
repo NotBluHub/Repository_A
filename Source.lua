@@ -7,7 +7,7 @@ local UserIds = {
 	132541900, 2730836956,	--David
 	149522897,		--Booh
 	1425652856, 1121717767, -- Kaz
-	351990069, 		-- EK/Frost (Kaz Friend)
+	351990069, 1522914997 		-- EK/Frost (Kaz Friend)
 	206007586, 		-- laqol (Kaz Friend)
 	1246274469,		-- (Kaz Friend)
 }
