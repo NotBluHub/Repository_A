@@ -787,12 +787,33 @@ if whitelisted then
 				if Code_Spammer.Button.BackgroundTransparency == 0 then
 					local Event = game.Players.LocalPlayer.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
 					local Text = Code_Spammer.TextFrame.TextBox.Text
-					local Runners = {['a'] = nil, ['b'] = nil, ['c'] = nil, ['d'] = nil, ['e'] = nil, ['f'] = nil, ['g'] = nil, ['h'] = nil, ['i'] = nil, ['j'] = nil, ['k'] = nil, ['l'] = nil, ['m'] = nil, ['n'] = nil, ['o'] = nil, ['p'] = nil, ['q'] = nil, ['r'] = nil, ['s'] = nil, ['t'] = nil, ['u'] = nil, ['v'] = nil, ['w'] = nil, ['x'] = nil, ['y'] = nil, ['z'] = nil}
-
-					for _, letter in pairs(Runners) do
-						letter = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
-					end
-
+					local Runners = {
+						[1] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[2] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[3] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[4] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[5] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[6] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
+						[7] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
+						[8] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[9] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
+						[10] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[11] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[12] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[13] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[14] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[15] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[16] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[17] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[18] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[19] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[20] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[21] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[22] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[23] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[24] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[25] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
+						[26] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end)}
 					wait(5)
 
 					for _, letter in pairs(Runners) do
@@ -952,7 +973,7 @@ if whitelisted then
 			local Remote = Events.M1B
 			F.Max_Power_Function = function()
 				ToggleTransparency(a.Max_Power)
-				
+
 				if a.Max_Power.Button.BackgroundTransparency == 0 then
 					Connection1 = Mouse.Button1Down:Connect(function()
 						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
