@@ -661,6 +661,9 @@ if whitelisted then
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
+	local Events = game:GetService("ReplicatedStorage").Events
+	local Animations = game:GetService("ReplicatedStorage").Animations
+	local Mouse = Player:GetMouse()
 
 	local ToggleGui_Keybind = "RightShift"
 
@@ -753,7 +756,7 @@ if whitelisted then
 		local StepTackleRadius = 12
 		local SlideTackleRadius = 20
 
-		local CarryBallActive = false
+		local CanDribble = false
 		local F = {}
 
 		local function ToggleTransparency(Frame)
@@ -767,6 +770,12 @@ if whitelisted then
 		local function ChangeBadge(Arch, Text)
 			Player[Arch].Value = Text
 		end
+		local function inAir(Character)
+			local airThreshold = 2
+			if Character.Humanoid.FloorMaterial == Enum.Material.Air and Character.HumanoidRootPart.Position.Y - Character.HumanoidRootPart.Size.Y/2 > airThreshold then
+				return true
+			end
+		end
 
 		if game.PlaceId == 8397893574 then
 			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
@@ -778,33 +787,12 @@ if whitelisted then
 				if Code_Spammer.Button.BackgroundTransparency == 0 then
 					local Event = game.Players.LocalPlayer.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
 					local Text = Code_Spammer.TextFrame.TextBox.Text
-					local Runners = {
-						[1] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[2] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[3] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[4] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[5] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[6] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
-						[7] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
-						[8] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[9] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
-						[10] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[11] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[12] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[13] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[14] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[15] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[16] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[17] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[18] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[19] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[20] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[21] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[22] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[23] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[24] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[25] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[26] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end)}
+					local Runners = {['a'] = nil, ['b'] = nil, ['c'] = nil, ['d'] = nil, ['e'] = nil, ['f'] = nil, ['g'] = nil, ['h'] = nil, ['i'] = nil, ['j'] = nil, ['k'] = nil, ['l'] = nil, ['m'] = nil, ['n'] = nil, ['o'] = nil, ['p'] = nil, ['q'] = nil, ['r'] = nil, ['s'] = nil, ['t'] = nil, ['u'] = nil, ['v'] = nil, ['w'] = nil, ['x'] = nil, ['y'] = nil, ['z'] = nil}
+
+					for _, letter in pairs(Runners) do
+						letter = runService.RenderStepped:Connect(function() Event:FireServer(Text) end)
+					end
+
 					wait(5)
 
 					for _, letter in pairs(Runners) do
@@ -818,26 +806,33 @@ if whitelisted then
 			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
 
 		elseif game.PlaceId == 9822821238 then
-			local Game_Tab = CreateTab(Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-			local Game_Bind = CreateTab(Column1_Keybinds, "Goal!", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-			local Badge_Tab = CreateTab(Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-			local Badge_Bind = CreateTab(Column1_Keybinds, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0))
-			local AutoDribble_Tab = CreateTab(Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
-			local AutoDribble_Bind = CreateTab(Column2_Keybinds, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0))
+			local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 149), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
+			local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+			local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
+			local Info = {Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+			local Badge_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+			local Badge_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
+			local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+			local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+			local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
 
-			local Quick_Queue, Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
-			local No_Stam_Sprint, No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
-			local No_Sit, No_Sit_Bind = ToggleButton(Game_Tab, "No Sit", Game_Bind)
-			local Unlock_Camera, Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera Zoom", Game_Bind)
+			local a = {}
+			local b = {}
+			a.Inf_Energy, b.Inf_Energy_Bind = ToggleButton(Game_Tab, "Inf Energy", Game_Bind)
+			a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
+			a.No_Sit, b.No_Sit_Bind = ToggleButton(Game_Tab, "No Sit", Game_Bind)
+			a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
+			a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
+			a.Max_Power, b.Max_Power_Bind = ToggleButton(Game_Tab, "Max Power", Game_Bind)
 
-			local Center, Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
-			local Ball_Awareness, Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
-			local CarryBall, CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
-			local FormlessShooter, FormlessShooter_Bind = ToggleButton(Badge_Tab, "Formless Shooter", Badge_Bind)
+			a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
+			a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
+			a.Center, b.Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
+			a.FormlessShooter, b.FormlessShooter_Bind = ToggleButton(Badge_Tab, "FormlessShooter", Badge_Bind)
 
-			local Auto_Dribble, Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
-			local Jump_Input, Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
-			local Show_Step_Radius, Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
+			a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
+			a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
+			a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
 			---------------------------------------------------------------------------
 			local Actual_Spots = {}
 			for _, i in pairs(workspace:GetDescendants()) do
@@ -870,23 +865,23 @@ if whitelisted then
 				return closestPart
 			end
 			F.Quick_Queue_Function = function()
-				ToggleTransparency(Quick_Queue)
+				ToggleTransparency(a.Quick_Queue)
 
 				local NearestSpot = FindSpot(Player.Character)
-				while Quick_Queue.Button.BackgroundTransparency == 0 and not Script_Disabled do
+				while a.Quick_Queue.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					local Character = Player.Character
-					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and Quick_Queue.Button.BackgroundTransparency ~= 1 and not Script_Disabled then
+					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and a.Quick_Queue.Button.BackgroundTransparency ~= 1 and not Script_Disabled then
 						fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-						Quick_Queue.Button.BackgroundTransparency = 1
+						a.Quick_Queue.Button.BackgroundTransparency = 1
 					end
-					repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or Quick_Queue.Button.BackgroundTransparency == 1 or Script_Disabled
+					repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or a.Quick_Queue.Button.BackgroundTransparency == 1 or Script_Disabled
 				end
 			end
 			---------------------------------------------------------------------------
 			local Toggle = false
 			local i = nil
 			F.No_Stam_Sprint_Function = function(MouseLock)
-				ToggleTransparency(No_Stam_Sprint)
+				ToggleTransparency(a.No_Stam_Sprint)
 				local function CheckMouseLock()
 					if MouseLock then
 						if UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
@@ -899,7 +894,7 @@ if whitelisted then
 					end
 				end
 				local Humanoid = Player.Character:WaitForChild("Humanoid")
-				if not Script_Disabled and No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
+				if not Script_Disabled and a.No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
 					if Toggle then
 						Humanoid.WalkSpeed = 16
 					else
@@ -907,7 +902,7 @@ if whitelisted then
 						if UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") then
 							Check = true
 						end
-						if not Check or CarryBall then
+						if not Check or a.CarryBall.Button.BackgroundTransparency == 0 then
 							Toggle = true
 							i = Instance.new("StringValue")
 							i.Name = "ShiftLock"
@@ -915,9 +910,9 @@ if whitelisted then
 							task.wait()
 							Humanoid.WalkSpeed = SprintSpeed
 							while Toggle do
-								repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
+								repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or a.No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
 								if Toggle then
-									No_Stam_Sprint.Button.BackgroundTransparency = 1
+									a.No_Stam_Sprint.Button.BackgroundTransparency = 1
 									Toggle = false
 									i:Destroy()
 									if Humanoid.WalkSpeed == SprintSpeed then
@@ -931,9 +926,9 @@ if whitelisted then
 			end
 			---------------------------------------------------------------------------
 			F.No_Sit_Function = function()
-				ToggleTransparency(No_Sit)
+				ToggleTransparency(a.No_Sit)
 
-				while No_Sit.Button.BackgroundTransparency == 0 and not Script_Disabled do
+				while a.No_Sit.Button.BackgroundTransparency == 0 and not Script_Disabled do
 					wait(0.00001)
 					if not Script_Disabled then
 						Player.Character.Humanoid.Sit = false
@@ -943,53 +938,104 @@ if whitelisted then
 			end
 			---------------------------------------------------------------------------
 			F.Unlock_Camera_Function = function()
-				ToggleTransparency(Unlock_Camera)
+				ToggleTransparency(a.Unlock_Camera)
 
-				if Unlock_Camera.Button.BackgroundTransparency == 0 then
+				if a.Unlock_Camera.Button.BackgroundTransparency == 0 then
 					Player.CameraMaxZoomDistance = 100
-					repeat wait() until Script_Disabled or Unlock_Camera.Button.BackgroundTransparency == 1
+					repeat wait() until Script_Disabled or a.Unlock_Camera.Button.BackgroundTransparency == 1
 					Player.CameraMaxZoomDistance = 23
 				end
 			end
 			---------------------------------------------------------------------------
+			local Connection1 = nil
+			local Connection2 = nil
+			local Remote = Events.M1B
+			F.Max_Power_Function = function()
+				ToggleTransparency(a.Max_Power)
+				
+				if a.Max_Power.Button.BackgroundTransparency == 0 then
+					Connection1 = Mouse.Button1Down:Connect(function()
+						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
+							local Character = Player.Character
+							if inAir(Player.Character) then
+								CanDribble = true
+								local BodyRotate = runService.RenderStepped:Connect(function()
+									local l__Position__189 = Character.HumanoidRootPart.Position
+									local l__Position__190 = Mouse.Hit.Position
+									Character.HumanoidRootPart.CFrame = CFrame.new(l__Position__189, Vector3.new(l__Position__190.X, l__Position__189.Y, l__Position__190.Z))
+								end)
+								local Anim = Player.Character.Humanoid.Animator:LoadAnimation(Animations.Kick)
+								Anim:Play()
+								spawn(function()
+									wait(0.05)
+									BodyRotate:Disconnect()
+									Remote:FireServer(115, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+									Remote.Name = "Invalid"
+								end)
+							end
+						elseif Script_Disabled then
+							Connection1:Disconnect()
+							Connection2:Disconnect()
+							Connection1 = nil
+							Connection2 = nil
+							Remote.Name = "M1B"
+						end
+					end)
+					Connection2 = Mouse.Button1Up:Connect(function()
+						wait(1.5)
+						Remote.Name = "M1B"
+						CanDribble = false
+					end)
+				else
+					if Connection1 ~= nil then
+						Connection1:Disconnect()
+						Connection2:Disconnect()
+						Connection1 = nil
+						Connection2 = nil
+					end
+				end
+			end
+			---------------------------------------------------------------------------
+			local R = nil
+			F.Inf_Energy_Function = function()
+				ToggleTransparency(a.Inf_Energy)
+				R = runService.RenderStepped:Connect(function() Player.PlayerGui.Check.LocalScript.RemoteEvent:FireServer(100) end)
+				repeat wait() until Script_Disabled or a.Inf_Energy.Button.BackgroundTransparency == 1
+				R:Disconnect()
+			end
+			---------------------------------------------------------------------------
 			local R = nil
 			F.Center_Function = function()
-				ToggleTransparency(Center)
+				ToggleTransparency(a.Center)
 
-				if Center.Button.BackgroundTransparency == 0 then
+				if a.Center.Button.BackgroundTransparency == 0 then
 					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
-
-					CarryBall.Button.BackgroundTransparency = 1
 					CarryBallActive = false
-					repeat wait() until Script_Disabled or Center.Button.BackgroundTransparency == 1
+					repeat wait() until Script_Disabled or a.Center.Button.BackgroundTransparency == 1
 					R:Disconnect()
 				end
 			end
 			---------------------------------------------------------------------------
 			F.Ball_Awareness_Function = function()
-				ToggleTransparency(Ball_Awareness)
+				ToggleTransparency(a.Ball_Awareness)
 			end
 			if workspace:FindFirstChild("Ignore") then
 				workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
-					if Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
+					if a.Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
 						p8.Transparency = 0.6
 					end
 				end)
 			end
 			---------------------------------------------------------------------------
 			F.CarryBall_Function = function()
-				ToggleTransparency(CarryBall)
-				if CarryBall.Button.BackgroundTransparency == 0 then
-					repeat wait() until Script_Disabled or CarryBall.Button.BackgroundTransparency == 1
-					CarryBallActive = false
-				end
+				ToggleTransparency(a.CarryBall)
 			end
 			---------------------------------------------------------------------------
 			local R = {}
 			local OriginalImage = nil
 			F.FormlessShooter_Function = function()
-				ToggleTransparency(FormlessShooter)
-				if FormlessShooter.Button.BackgroundTransparency == 0 then
+				ToggleTransparency(a.FormlessShooter)
+				if a.FormlessShooter.Button.BackgroundTransparency == 0 then
 					R[1] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
 					wait()
 					R[2] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
@@ -998,7 +1044,7 @@ if whitelisted then
 					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
 
-					repeat wait() until Script_Disabled or FormlessShooter.Button.BackgroundTransparency == 1
+					repeat wait() until Script_Disabled or a.FormlessShooter.Button.BackgroundTransparency == 1
 					R[1]:Disconnect()
 					R[2]:Disconnect()
 					R[3]:Disconnect()
@@ -1016,28 +1062,23 @@ if whitelisted then
 				table.remove(playersInRadius, table.find(playersInRadius, otherPlayer))
 			end
 			local function checkRadius()
-				if Player.Character:FindFirstChild("Bola") then
-					local playersInRadius = {}
-					for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
-						if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
-							local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
-							if distance <= SlideTackleRadius then
-								playersInRadius[otherPlayer] = true
-								if not playerEnteredRadius[otherPlayer] then
-									playerEnteredRadius[otherPlayer] = true
-									onPlayerEnterRadius(otherPlayer)
-								end
-							else
-								if playerEnteredRadius[otherPlayer] then
-									playerEnteredRadius[otherPlayer] = false
-									onPlayerLeaveRadius(otherPlayer)
-								end
+				local playersInRadius = {}
+				for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
+					if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
+						local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
+						if distance <= SlideTackleRadius then
+							playersInRadius[otherPlayer] = true
+							if not playerEnteredRadius[otherPlayer] then
+								playerEnteredRadius[otherPlayer] = true
+								onPlayerEnterRadius(otherPlayer)
+							end
+						else
+							if playerEnteredRadius[otherPlayer] then
+								playerEnteredRadius[otherPlayer] = false
+								onPlayerLeaveRadius(otherPlayer)
 							end
 						end
 					end
-				else
-					playerEnteredRadius = {}
-					playersInRadius = {}
 				end
 			end
 			local function FindTackleFootAnimation(Op, ID)
@@ -1048,26 +1089,21 @@ if whitelisted then
 				end
 			end
 			F.Auto_Dribble_Function = function()
-				ToggleTransparency(Auto_Dribble)
-				if Auto_Dribble.Button.BackgroundTransparency == 0 then
+				ToggleTransparency(a.Auto_Dribble)
+				if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
 					local RenderStepped = runService.RenderStepped:Connect(checkRadius)
 
 					local Dribble_Loop 
 					Dribble_Loop = runService.RenderStepped:Connect(function()
 						local Character = Player.Character
-						if Character:FindFirstChild("Bola") then
+						if Character:FindFirstChild("Bola") and not inAir(Character) and not Character:FindFirstChild("IsDribbling") and Character.Humanoid.AutoRotate == true then
 							local Ball = Player.Character.Bola
 							for _, Op in ipairs(playersInRadius) do
 								local op = Op.Character
-								if not Ball:FindFirstChild(op.Name) and not Character:FindFirstChild("`") and op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value then
+								if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
 									if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-										if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
-											keypress(0x46)
-											keyrelease(0x46)
-											keypress(0x56)
-											keyrelease(0x56)
-											keypress(0x20)
-											keyrelease(0x20)
+										if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and not CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
+											Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
 
 											local CD = 1.5
 											if op.Humanoid:FindFirstChild("Tackled") then
@@ -1077,30 +1113,29 @@ if whitelisted then
 											Tag.Name = op.Name
 											Tag.Parent = Ball
 											Debris:AddItem(Tag, CD)
-										elseif Jump_Input.Button.BackgroundTransparency == 0 and op.Humanoid:FindFirstChild("Tackled") then
-											keypress(0x20)
-											keyrelease(0x20)
 										end
 									end
 								end
 							end
 						end
-						if Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
+						if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
 							Dribble_Loop:Disconnect()
 							RenderStepped:Disconnect()
+							playerEnteredRadius = {}
+							playersInRadius = {}
 						end
 					end)
 				end
 			end
 			---------------------------------------------------------------------------
 			F.Jump_Input_Function = function()
-				ToggleTransparency(Jump_Input)
+				ToggleTransparency(a.Jump_Input)
 			end
 			---------------------------------------------------------------------------
 			F.Show_Step_Radius_Function = function()
-				ToggleTransparency(Show_Step_Radius)
+				ToggleTransparency(a.Show_Step_Radius)
 				local Character = Player.Character
-				if Show_Step_Radius.Button.BackgroundTransparency == 0 then
+				if a.Show_Step_Radius.Button.BackgroundTransparency == 0 then
 					local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
 					Cylinder.Name = "Radius"
 					Cylinder.Shape = Enum.PartType.Cylinder
@@ -1113,7 +1148,7 @@ if whitelisted then
 					Weld.Part0 = Weld.Parent
 					Weld.Part1 = Cylinder
 					Weld.C0 = CFrame.new(0, -3, 0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08, 0, 0, 0, 1)
-					while Show_Step_Radius.Button.BackgroundTransparency == 0 do
+					while a.Show_Step_Radius.Button.BackgroundTransparency == 0 do
 						local Character = Player.Character
 						Cylinder.Parent = Character
 						Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
@@ -1126,6 +1161,22 @@ if whitelisted then
 					if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
 					if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
 				end
+			end
+			---------------------------------------------------------------------------
+			function replaceSpacesWithUnderscores(input)
+				local result = ""
+
+				for i = 1, #input do
+					local char = input:sub(i, i)
+
+					if char == " " then
+						result = result .. "_"
+					else
+						result = result .. char
+					end
+				end
+
+				return result
 			end
 			---------------------------------------------------------------------------
 			function BindButtons(frame, funcName)
@@ -1175,38 +1226,21 @@ if whitelisted then
 					end
 				end)
 			end
-
-			BindButtons(Quick_Queue_Bind, "Quick_Queue")
-			BindButtons(No_Stam_Sprint_Bind, "No_Stam_Sprint")
-			BindButtons(No_Sit_Bind, "No_Sit")
-			BindButtons(Unlock_Camera_Bind, "Unlock_Camera")
-			BindButtons(Center_Bind, "Center")
-			BindButtons(Ball_Awareness_Bind, "Ball_Awareness")
-			BindButtons(CarryBall_Bind, "CarryBall")
-			BindButtons(FormlessShooter_Bind, "FormlessShooter")
-			BindButtons(Auto_Dribble_Bind, "Auto_Dribble")
-			BindButtons(Jump_Input_Bind, "Jump_Input")
-			BindButtons(Show_Step_Radius_Bind, "Show_Step_Radius")
+			for _, i in pairs(b) do
+				BindButtons(i, replaceSpacesWithUnderscores(i.Name))
+			end
 			---------------------------------------------------------------------------
-			Quick_Queue.Button.MouseButton1Click:Connect(F.Quick_Queue_Function)
-			No_Stam_Sprint.Button.MouseButton1Click:Connect(F.No_Stam_Sprint_Function)
-			No_Sit.Button.MouseButton1Click:Connect(F.No_Sit_Function)
-			Unlock_Camera.Button.MouseButton1Click:Connect(F.Unlock_Camera_Function)
-			Center.Button.MouseButton1Click:Connect(F.Center_Function)
-			Ball_Awareness.Button.MouseButton1Click:Connect(F.Ball_Awareness_Function)
-			CarryBall.Button.MouseButton1Click:Connect(F.CarryBall_Function)
-			FormlessShooter.Button.MouseButton1Click:Connect(F.FormlessShooter_Function)
-			Auto_Dribble.Button.MouseButton1Click:Connect(F.Auto_Dribble_Function)
-			Jump_Input.Button.MouseButton1Click:Connect(F.Jump_Input_Function)
-			Show_Step_Radius.Button.MouseButton1Click:Connect(F.Show_Step_Radius_Function)
+			for _, i in pairs(a) do
+				i.Button.MouseButton1Click:Connect(F[replaceSpacesWithUnderscores(i.Name).."_Function"])
+			end
 		end
 	end
+	game:GetService("Players").PlayerRemoving:Connect(function(Plr)
+		if Plr == Player and not Script_Disabled then
+			syn.queue_on_teleport([[
+      game.Loaded:Wait()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/NotBluHub/Secured/main/Code.lua"))()
+      ]])
+		end
+	end)
 end
-game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-	if State == Enum.TeleportState.Started then
-		syn.queue_on_teleport([[
-		game.Loaded:Wait()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/NotBluHub/Secured/main/Code.lua"))()
-		]])
-	end
-end)
