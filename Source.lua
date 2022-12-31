@@ -661,8 +661,6 @@ if whitelisted then
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
-	local Events = game:GetService("ReplicatedStorage").Events
-	local Animations = game:GetService("ReplicatedStorage").Animations
 	local Mouse = Player:GetMouse()
 
 	local ToggleGui_Keybind = "RightShift"
@@ -778,7 +776,7 @@ if whitelisted then
 		end
 
 		if game.PlaceId == 8397893574 then
-			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
+			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0, 100), UDim2.new(0, 8, 0, 2)})
 
 			local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
 
@@ -827,6 +825,10 @@ if whitelisted then
 			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
 
 		elseif game.PlaceId == 9822821238 then
+			local Events = game:GetService("ReplicatedStorage").Events
+			local Animations = game:GetService("ReplicatedStorage").Animations
+			
+			
 			local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 149), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
 			local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 			local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
