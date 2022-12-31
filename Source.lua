@@ -9,7 +9,7 @@ local UserIds = {
 	1425652856, 1121717767, -- Kaz
 	351990069, 1522914997, 	-- EK/Frost (Kaz Friend)
 	206007586, 3443274111,	-- laqol (Kaz Friend)
-	1246274469,		-- (Kaz Friend)
+	1246274469, 385469353,	-- Rifle/Funeral(Kaz Friend)
 }
 local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
 
@@ -957,7 +957,7 @@ if whitelisted then
 					Connection1 = Mouse.Button1Down:Connect(function()
 						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
 							local Character = Player.Character
-							if inAir(Player.Character) then
+							if inAir(Player.Character) and a.FormlessShooter.Button.BackgroundTransparency == 0 then
 								CanDribble = true
 								local BodyRotate = runService.RenderStepped:Connect(function()
 									local l__Position__189 = Character.HumanoidRootPart.Position
