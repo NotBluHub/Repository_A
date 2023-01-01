@@ -992,7 +992,7 @@ if whitelisted then
 								spawn(function()
 									wait(0.05)
 									BodyRotate:Disconnect()
-									Remote:FireServer(115, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+									Remote:FireServer(100, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
 									Remote.Name = "Invalid"
 								end)
 							end
