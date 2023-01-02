@@ -140,7 +140,6 @@ if whitelisted then
 	Column2_Game_.Position = UDim2.new(0, 245, 0, 2)
 	Column2_Game_.Size = UDim2.new(0, 233, 1, -4)
 	Column2_Game_.ZIndex = 2
-	Column2_Game_.CanvasSize = UDim2.new(0, 0, 0, 0)
 	Column2_Game_.ScrollBarThickness = 0
 	Column2_Game_.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
@@ -168,7 +167,6 @@ if whitelisted then
 	Column2_Settings.Position = UDim2.new(0, 245, 0, 2)
 	Column2_Settings.Size = UDim2.new(0, 233, 1, -4)
 	Column2_Settings.ZIndex = 2
-	Column2_Settings.CanvasSize = UDim2.new(0, 0, 0, 0)
 	Column2_Settings.ScrollBarThickness = 0
 	Column2_Settings.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
@@ -189,7 +187,6 @@ if whitelisted then
 	Column1_Settings.Position = UDim2.new(0, 6, 0, 2)
 	Column1_Settings.Size = UDim2.new(0, 233, 1, -4)
 	Column1_Settings.ZIndex = 2
-	Column1_Settings.CanvasSize = UDim2.new(0, 0, 0, 0)
 	Column1_Settings.ScrollBarThickness = 0
 	Column1_Settings.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
@@ -230,7 +227,6 @@ if whitelisted then
 	Column2_Keybinds.Position = UDim2.new(0, 245, 0, 2)
 	Column2_Keybinds.Size = UDim2.new(0, 233, 1, -4)
 	Column2_Keybinds.ZIndex = 2
-	Column2_Keybinds.CanvasSize = UDim2.new(0, 0, 0, 0)
 	Column2_Keybinds.ScrollBarThickness = 0
 	Column2_Keybinds.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
@@ -251,7 +247,6 @@ if whitelisted then
 	Column1_Keybinds.Position = UDim2.new(0, 6, 0, 2)
 	Column1_Keybinds.Size = UDim2.new(0, 233, 1, -4)
 	Column1_Keybinds.ZIndex = 2
-	Column1_Keybinds.CanvasSize = UDim2.new(0, 0, 0, 0)
 	Column1_Keybinds.ScrollBarThickness = 0
 	Column1_Keybinds.VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 
@@ -661,6 +656,8 @@ if whitelisted then
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
+	local Events = game:GetService("ReplicatedStorage").Events
+	local Animations = game:GetService("ReplicatedStorage").Animations
 	local Mouse = Player:GetMouse()
 
 	local ToggleGui_Keybind = "RightShift"
@@ -753,8 +750,10 @@ if whitelisted then
 		local SprintSpeed = 21
 		local StepTackleRadius = 12
 		local SlideTackleRadius = 20
+		local ShotPower = 100
 
-		local CanDribble = false
+		local CanDribble = true
+		local AutoAim = {}
 		local F = {}
 
 		local function ToggleTransparency(Frame)
@@ -772,11 +771,13 @@ if whitelisted then
 			local airThreshold = 2
 			if Character.Humanoid.FloorMaterial == Enum.Material.Air and Character.HumanoidRootPart.Position.Y - Character.HumanoidRootPart.Size.Y/2 > airThreshold then
 				return true
+			else
+				return false
 			end
 		end
 
 		if game.PlaceId == 8397893574 then
-			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0, 100), UDim2.new(0, 8, 0, 2)})
+			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
 
 			local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
 
@@ -825,19 +826,18 @@ if whitelisted then
 			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
 
 		elseif game.PlaceId == 9822821238 then
-			local Events = game:GetService("ReplicatedStorage").Events
-			local Animations = game:GetService("ReplicatedStorage").Animations
-			
-			
-			local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 149), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
+			local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 126), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
 			local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 			local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
 			local Info = {Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)}
 			local Badge_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 			local Badge_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
-			local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.949, 0, 0.01, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+			local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
 			local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 			local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
+			local Info = {Column2_Game_, "Shooting", {UDim2.new(0.95, 0, 0, 60), UDim2.new(0, 58, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+			local Shooting_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+			local Shooting_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
 
 			local a = {}
 			local b = {}
@@ -846,7 +846,6 @@ if whitelisted then
 			a.No_Sit, b.No_Sit_Bind = ToggleButton(Game_Tab, "No Sit", Game_Bind)
 			a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
 			a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
-			a.Max_Power, b.Max_Power_Bind = ToggleButton(Game_Tab, "Max Power", Game_Bind)
 
 			a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
 			a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
@@ -856,6 +855,9 @@ if whitelisted then
 			a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
 			a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
 			a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
+
+			a.Max_Power, b.Max_Power_Bind = ToggleButton(Shooting_Tab, "Max Power", Shooting_Bind)
+			a.Auto_Aim, b.Auto_Aim_Bind = ToggleButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
 			---------------------------------------------------------------------------
 			local Actual_Spots = {}
 			for _, i in pairs(workspace:GetDescendants()) do
@@ -970,55 +972,6 @@ if whitelisted then
 				end
 			end
 			---------------------------------------------------------------------------
-			local Connection1 = nil
-			local Connection2 = nil
-			local Remote = Events.M1B
-			F.Max_Power_Function = function()
-				ToggleTransparency(a.Max_Power)
-
-				if a.Max_Power.Button.BackgroundTransparency == 0 then
-					Connection1 = Mouse.Button1Down:Connect(function()
-						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
-							local Character = Player.Character
-							if inAir(Player.Character) and a.FormlessShooter.Button.BackgroundTransparency == 0 then
-								CanDribble = true
-								local BodyRotate = runService.RenderStepped:Connect(function()
-									local l__Position__189 = Character.HumanoidRootPart.Position
-									local l__Position__190 = Mouse.Hit.Position
-									Character.HumanoidRootPart.CFrame = CFrame.new(l__Position__189, Vector3.new(l__Position__190.X, l__Position__189.Y, l__Position__190.Z))
-								end)
-								local Anim = Player.Character.Humanoid.Animator:LoadAnimation(Animations.Kick)
-								Anim:Play()
-								spawn(function()
-									wait(0.05)
-									BodyRotate:Disconnect()
-									Remote:FireServer(100, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
-									Remote.Name = "Invalid"
-								end)
-							end
-						elseif Script_Disabled then
-							Connection1:Disconnect()
-							Connection2:Disconnect()
-							Connection1 = nil
-							Connection2 = nil
-							Remote.Name = "M1B"
-						end
-					end)
-					Connection2 = Mouse.Button1Up:Connect(function()
-						wait(1.5)
-						Remote.Name = "M1B"
-						CanDribble = false
-					end)
-				else
-					if Connection1 ~= nil then
-						Connection1:Disconnect()
-						Connection2:Disconnect()
-						Connection1 = nil
-						Connection2 = nil
-					end
-				end
-			end
-			---------------------------------------------------------------------------
 			local R = nil
 			F.Inf_Energy_Function = function()
 				ToggleTransparency(a.Inf_Energy)
@@ -1059,18 +1012,9 @@ if whitelisted then
 			F.FormlessShooter_Function = function()
 				ToggleTransparency(a.FormlessShooter)
 				if a.FormlessShooter.Button.BackgroundTransparency == 0 then
-					R[1] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
-					wait()
-					R[2] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
-					wait()
-					R[3] = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType2", "FormlessShooter") end)
 					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
-
 					repeat wait() until Script_Disabled or a.FormlessShooter.Button.BackgroundTransparency == 1
-					R[1]:Disconnect()
-					R[2]:Disconnect()
-					R[3]:Disconnect()
 					Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
 				end
 			end
@@ -1125,7 +1069,7 @@ if whitelisted then
 								local op = Op.Character
 								if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
 									if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-										if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and not CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
+										if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
 											Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
 
 											local CD = 1.5
@@ -1183,6 +1127,192 @@ if whitelisted then
 				else
 					if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
 					if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
+				end
+			end
+			---------------------------------------------------------------------------
+			local Connection1 = nil
+			local Connection2 = nil
+			local BallConnect = nil
+			local Remote = Events.M1B
+			local BallCD = false
+			local function StopAnimations(character, Names)
+				local animationController = character:WaitForChild("Humanoid")
+				local tracks = animationController:GetPlayingAnimationTracks()
+				for _, track in pairs(tracks) do
+					if table.find(Names, track.Name) then
+						track:Stop()
+					end
+				end
+			end
+
+			F.Max_Power_Function = function()
+				ToggleTransparency(a.Max_Power)
+				if a.Max_Power.Button.BackgroundTransparency == 0 then
+					BallConnect = Player.Character.ChildAdded:Connect(function(Child)
+						if Child.Name == "Bola" and not BallCD then
+							BallCD = true
+							task.delay(2, function()
+								BallCD = false
+							end)
+						end
+					end)
+					Connection1 = Mouse.Button1Down:Connect(function()
+						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
+							print(inAir(Player.Character))
+							print(Remote.Name)
+							local Character = Player.Character
+							local Hum = Character.Humanoid
+							if inAir(Player.Character) and a.FormlessShooter.Button.BackgroundTransparency == 0 and Remote.Name ~= "Invalid" then
+								CanDribble = false
+								local Anim = Hum.Animator:LoadAnimation(Animations.Kick)
+								Anim:Play()
+								Remote.Name = "Invalid"
+								Hum.AutoRotate = false
+								if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then -- Formless, No Auto Aim
+									local BodyRotate = runService.RenderStepped:Connect(function()
+										ChangeBadge("ArcheType2", "NoLook")
+										local CharPos = Character.HumanoidRootPart.Position
+										local MousePos = Mouse.Hit.Position
+										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
+									end)
+									spawn(function()
+										wait(0.7)
+										BodyRotate:Disconnect()
+									end)
+									spawn(function()
+										wait(0.05)
+										if inAir(Player.Character) then
+											Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+										end
+									end)
+								else -- Auto Aim
+									local BodyRotate = runService.RenderStepped:Connect(function()
+										ChangeBadge("ArcheType2", "NoLook")
+										local CharPos = Character.HumanoidRootPart.Position
+										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
+									end)
+									spawn(function()
+										wait(0.7)
+										BodyRotate:Disconnect()
+									end)
+									spawn(function()
+										wait(0.05)
+										if inAir(Player.Character) then
+											Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
+										end
+									end)
+								end
+							elseif not inAir(Player.Character) and Remote.Name ~= "Invalid" and not BallCD then
+								Remote.Name = "Invalid"
+								CanDribble = false
+								Hum.WalkSpeed = 0
+								Hum.AutoRotate = false
+								if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then
+									local BodyRotate = runService.RenderStepped:Connect(function()
+										ChangeBadge("ArcheType2", "NoLook")
+										local CharPos = Character.HumanoidRootPart.Position
+										local MousePos = Mouse.Hit.Position
+										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
+									end)
+									spawn(function()
+										wait(0.7)
+										Hum.WalkSpeed = 16
+										if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
+										BodyRotate:Disconnect()
+									end)
+									StopAnimations(Character, {"ChargeKick", "Kick"})
+									local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
+									Anim1:Play()
+									wait(0.5)
+									StopAnimations(Character, {"ChargeKick", "Kick"})
+									spawn(function()
+										wait(0.05)
+										if not inAir(Player.Character) then
+											local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
+											StopAnimations(Character, {"ChargeKick", "Kick"})
+											Anim2:Play()
+											Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+										end
+									end)
+								else -- Auto Aim
+									local BodyRotate = runService.RenderStepped:Connect(function()
+										ChangeBadge("ArcheType2", "NoLook")
+										local CharPos = Character.HumanoidRootPart.Position
+										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
+									end)
+									spawn(function()
+										wait(0.7)
+										Hum.WalkSpeed = 16
+										if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
+										BodyRotate:Disconnect()
+									end)
+									StopAnimations(Character, {"ChargeKick", "Kick"})
+									local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
+									Anim1:Play()
+									wait(0.5)
+									StopAnimations(Character, {"ChargeKick", "Kick"})
+									spawn(function()
+										wait(0.05)
+										if not inAir(Player.Character) then
+											local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
+											StopAnimations(Character, {"ChargeKick", "Kick"})
+											Anim2:Play()
+											Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
+										end
+									end)
+								end
+							end
+						elseif Script_Disabled then
+							Remote.Name = "M1B"
+							Connection1:Disconnect()
+							Connection2:Disconnect()
+							BallConnect:Disconnect()
+							Connection1 = nil
+							Connection2 = nil
+						end
+					end)
+					Connection2 = Mouse.Button1Up:Connect(function()
+						wait(1.5)
+						Remote.Name = "M1B"
+						CanDribble = true
+					end)
+				else
+					if Connection1 ~= nil then
+						Connection1:Disconnect()
+						Connection2:Disconnect()
+						BallConnect:Disconnect()
+						Connection1 = nil
+						Connection2 = nil
+					end
+				end
+			end
+			---------------------------------------------------------------------------
+			local Connection
+			local Part
+			F.Auto_Aim_Function = function()
+				ToggleTransparency(a.Auto_Aim)
+				if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled then
+					Connection = UserInput.InputBegan:Connect(function(Key, isT)
+						if not isT and Key.KeyCode == Enum.KeyCode.LeftAlt and a.Auto_Aim.Button.BackgroundTransparency == 0 then
+							AutoAim[1] = Mouse.Hit
+							AutoAim[2] = Mouse.Target
+							AutoAim[3] = Mouse.Hit.Position
+							if Part then
+								Part.Position = AutoAim[3]
+							else
+								Part = Instance.new("Part", workspace)
+								Part.Anchored = true
+								Part.Size = Vector3.new(2,2,2)
+								Part.Material = Enum.Material.Neon
+								Part.Position = AutoAim[3]
+								Part.Shape = Enum.PartType.Ball
+							end
+						end
+					end)
+				else
+					Part:Destroy()
+					Part = nil
+					Connection:Disconnect()
 				end
 			end
 			---------------------------------------------------------------------------
