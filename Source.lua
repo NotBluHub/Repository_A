@@ -656,8 +656,6 @@ if whitelisted then
 	local UserInput = game:GetService("UserInputService")
 	local runService = game:GetService("RunService")
 	local Debris = game:GetService("Debris")
-	local Events = game:GetService("ReplicatedStorage").Events
-	local Animations = game:GetService("ReplicatedStorage").Animations
 	local Mouse = Player:GetMouse()
 
 	local ToggleGui_Keybind = "RightShift"
@@ -826,6 +824,10 @@ if whitelisted then
 			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
 
 		elseif game.PlaceId == 9822821238 then
+			local Events = game:GetService("ReplicatedStorage").Events
+			local Animations = game:GetService("ReplicatedStorage").Animations
+			
+			
 			local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 126), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
 			local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 			local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
@@ -1135,11 +1137,11 @@ if whitelisted then
 			local BallConnect = nil
 			local Remote = Events.M1B
 			local BallCD = false
-			local function StopAnimations(character, Names)
+			local function StopAnimations(character, Names, og)
 				local animationController = character:WaitForChild("Humanoid")
 				local tracks = animationController:GetPlayingAnimationTracks()
 				for _, track in pairs(tracks) do
-					if table.find(Names, track.Name) then
+					if table.find(Names, track.Name) and track ~= og then
 						track:Stop()
 					end
 				end
@@ -1157,17 +1159,34 @@ if whitelisted then
 						end
 					end)
 					Connection1 = Mouse.Button1Down:Connect(function()
+						local Character = Player.Character
+						local Hum = Character.Humanoid
 						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
-							print(inAir(Player.Character))
-							print(Remote.Name)
-							local Character = Player.Character
-							local Hum = Character.Humanoid
 							if inAir(Player.Character) and a.FormlessShooter.Button.BackgroundTransparency == 0 and Remote.Name ~= "Invalid" then
 								CanDribble = false
 								local Anim = Hum.Animator:LoadAnimation(Animations.Kick)
 								Anim:Play()
 								Remote.Name = "Invalid"
 								Hum.AutoRotate = false
+								
+								local function Shoot(BodyRotate, Aim)
+									spawn(function()
+										wait(0.7)
+										BodyRotate:Disconnect()
+									end)
+									spawn(function()
+										wait(0.05)
+										if inAir(Player.Character) then
+											if Aim then
+												Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
+											else
+												Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+											end
+										end
+										wait(0.2)
+										Hum.AutoRotate = true
+									end)
+								end
 								if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then -- Formless, No Auto Aim
 									local BodyRotate = runService.RenderStepped:Connect(function()
 										ChangeBadge("ArcheType2", "NoLook")
@@ -1175,38 +1194,49 @@ if whitelisted then
 										local MousePos = Mouse.Hit.Position
 										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
 									end)
-									spawn(function()
-										wait(0.7)
-										BodyRotate:Disconnect()
-									end)
-									spawn(function()
-										wait(0.05)
-										if inAir(Player.Character) then
-											Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
-										end
-									end)
+									Shoot(BodyRotate, false)
 								else -- Auto Aim
 									local BodyRotate = runService.RenderStepped:Connect(function()
 										ChangeBadge("ArcheType2", "NoLook")
 										local CharPos = Character.HumanoidRootPart.Position
 										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
 									end)
-									spawn(function()
-										wait(0.7)
-										BodyRotate:Disconnect()
-									end)
-									spawn(function()
-										wait(0.05)
-										if inAir(Player.Character) then
-											Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
-										end
-									end)
+									Shoot(BodyRotate, true)
 								end
 							elseif not inAir(Player.Character) and Remote.Name ~= "Invalid" and not BallCD then
 								Remote.Name = "Invalid"
 								CanDribble = false
 								Hum.WalkSpeed = 0
 								Hum.AutoRotate = false
+								
+								local function Shoot(BodyRotate, Aim)
+									spawn(function()
+										wait(0.7)
+										Hum.WalkSpeed = 16
+										if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
+										BodyRotate:Disconnect()
+									end)
+									local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
+									Anim1:Play()
+									StopAnimations(Character, {"ChargeKick", "Kick"}, Anim1)
+									wait(0.5)
+									StopAnimations(Character, {"ChargeKick", "Kick"}, Anim1)
+									spawn(function()
+										wait(0.05)
+										if not inAir(Player.Character) then
+											local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
+											Anim2:Play()
+											StopAnimations(Character, {"ChargeKick", "Kick"}, Anim2)
+											if Aim then
+												Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
+											else
+												Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+											end
+										end
+										wait(0.2)
+										Hum.AutoRotate = true
+									end)
+								end
 								if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then
 									local BodyRotate = runService.RenderStepped:Connect(function()
 										ChangeBadge("ArcheType2", "NoLook")
@@ -1214,52 +1244,14 @@ if whitelisted then
 										local MousePos = Mouse.Hit.Position
 										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
 									end)
-									spawn(function()
-										wait(0.7)
-										Hum.WalkSpeed = 16
-										if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
-										BodyRotate:Disconnect()
-									end)
-									StopAnimations(Character, {"ChargeKick", "Kick"})
-									local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
-									Anim1:Play()
-									wait(0.5)
-									StopAnimations(Character, {"ChargeKick", "Kick"})
-									spawn(function()
-										wait(0.05)
-										if not inAir(Player.Character) then
-											local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
-											StopAnimations(Character, {"ChargeKick", "Kick"})
-											Anim2:Play()
-											Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
-										end
-									end)
+									Shoot(BodyRotate, false)
 								else -- Auto Aim
 									local BodyRotate = runService.RenderStepped:Connect(function()
 										ChangeBadge("ArcheType2", "NoLook")
 										local CharPos = Character.HumanoidRootPart.Position
 										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
 									end)
-									spawn(function()
-										wait(0.7)
-										Hum.WalkSpeed = 16
-										if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
-										BodyRotate:Disconnect()
-									end)
-									StopAnimations(Character, {"ChargeKick", "Kick"})
-									local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
-									Anim1:Play()
-									wait(0.5)
-									StopAnimations(Character, {"ChargeKick", "Kick"})
-									spawn(function()
-										wait(0.05)
-										if not inAir(Player.Character) then
-											local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
-											StopAnimations(Character, {"ChargeKick", "Kick"})
-											Anim2:Play()
-											Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
-										end
-									end)
+									Shoot(BodyRotate, true)
 								end
 							end
 						elseif Script_Disabled then
