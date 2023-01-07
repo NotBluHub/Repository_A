@@ -3,14 +3,19 @@ if game:WaitForChild("CoreGui"):FindFirstChild("SDYASE123EN8FW") then
 end
 
 local UserIds = {
-	105115151, 2444381495,	--Blu
-	132541900, 2730836956,	--David
-	149522897,		--Booh
-	1425652856, 1121717767, -- Kaz
-	351990069, 1522914997, 	-- EK/Frost (Kaz Friend)
-	206007586, 3443274111,	-- laqol (Kaz Friend)
-	1246274469, 385469353,	-- Rifle/Funeral(Kaz Friend)
-	301817096, 		-- Gabe
+	105115151, 2444381495, 
+	101361949,		-- Me!
+	132541900, 2730836956,	-- Dävid#5802
+	149522897,		--Booh #6532
+	1425652856, 1121717767, -- kaz#4091
+	351990069, 1522914997, 	-- EKGUETS#7150
+	206007586, 3443274111,	-- laqol#3077
+	1246274469, 385469353,	-- rifle#2951
+	301817096, 		-- gabes#3044
+}
+local AutoAimWhitelist = {
+	105115151, 2444381495,	-- Me!
+	149522897,		--Booh #6532
 }
 local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
 
@@ -129,7 +134,7 @@ if whitelisted then
 
 	ActiveBar.Name = "ActiveBar"
 	ActiveBar.Parent = Game_
-	ActiveBar.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	ActiveBar.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	ActiveBar.BorderSizePixel = 0
 	ActiveBar.Position = UDim2.new(0, 9, 0, -3)
 	ActiveBar.Size = UDim2.new(0, 50, 0, -1)
@@ -203,7 +208,7 @@ if whitelisted then
 
 	ActiveBar_2.Name = "ActiveBar"
 	ActiveBar_2.Parent = Settings
-	ActiveBar_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	ActiveBar_2.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	ActiveBar_2.BorderSizePixel = 0
 	ActiveBar_2.Position = UDim2.new(0, 152, 0, -3)
 	ActiveBar_2.Size = UDim2.new(0, 77, 0, -1)
@@ -263,7 +268,7 @@ if whitelisted then
 
 	ActiveBar_3.Name = "ActiveBar"
 	ActiveBar_3.Parent = Keybinds
-	ActiveBar_3.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	ActiveBar_3.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	ActiveBar_3.BorderSizePixel = 0
 	ActiveBar_3.Position = UDim2.new(0, 65, 0, -3)
 	ActiveBar_3.Size = UDim2.new(0, 77, 0, -1)
@@ -275,38 +280,38 @@ if whitelisted then
 	HubName.Size = UDim2.new(0, 0, 0, 20)
 	HubName.ZIndex = 5
 	HubName.Font = Enum.Font.Code
-	HubName.Text = "Blu Hub | BETA"
+	HubName.Text = "Pink Hub"
 	HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
 	HubName.TextSize = 18.000
 	HubName.TextXAlignment = Enum.TextXAlignment.Left
 
 	Settings_2.Name = "Settings"
 	Settings_2.Parent = ImageButton
-	Settings_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	Settings_2.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	Settings_2.BackgroundTransparency = 1.000
 	Settings_2.Position = UDim2.new(0, 157, 0, 22)
 	Settings_2.Size = UDim2.new(0, 77, 0, 30)
 	Settings_2.ZIndex = 5
 	Settings_2.Font = Enum.Font.Code
 	Settings_2.Text = "Settings"
-	Settings_2.TextColor3 = Color3.fromRGB(253, 21, 32)
+	Settings_2.TextColor3 = Color3.fromRGB(253, 47, 253)
 	Settings_2.TextSize = 15.000
 
 	Game_2.Name = "Game"
 	Game_2.Parent = ImageButton
-	Game_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	Game_2.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	Game_2.BackgroundTransparency = 1.000
 	Game_2.Position = UDim2.new(0, 0, 0, 22)
 	Game_2.Size = UDim2.new(0, 77, 0, 30)
 	Game_2.ZIndex = 5
 	Game_2.Font = Enum.Font.Code
 	Game_2.Text = "Game"
-	Game_2.TextColor3 = Color3.fromRGB(253, 21, 32)
+	Game_2.TextColor3 = Color3.fromRGB(253, 47, 253)
 	Game_2.TextSize = 15.000
 
 	TopBar.Name = "TopBar"
 	TopBar.Parent = ImageButton
-	TopBar.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	TopBar.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	TopBar.BorderSizePixel = 0
 	TopBar.Position = UDim2.new(0, 0, 0, 24)
 	TopBar.Size = UDim2.new(1, 0, 0, 1)
@@ -321,14 +326,14 @@ if whitelisted then
 
 	Keybinds_2.Name = "Keybinds"
 	Keybinds_2.Parent = ImageButton
-	Keybinds_2.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+	Keybinds_2.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 	Keybinds_2.BackgroundTransparency = 1.000
 	Keybinds_2.Position = UDim2.new(0, 70, 0, 22)
 	Keybinds_2.Size = UDim2.new(0, 77, 0, 30)
 	Keybinds_2.ZIndex = 5
 	Keybinds_2.Font = Enum.Font.Code
 	Keybinds_2.Text = "Keybinds"
-	Keybinds_2.TextColor3 = Color3.fromRGB(253, 21, 32)
+	Keybinds_2.TextColor3 = Color3.fromRGB(253, 47, 253)
 	Keybinds_2.TextSize = 15.000
 
 	--Main:
@@ -349,7 +354,7 @@ if whitelisted then
 
 		Color.Name = "Color"
 		Color.Parent = Frame
-		Color.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+		Color.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 		Color.BorderSizePixel = 0
 		Color.Size = UDim2.new(1, 0, 0, 1)
 
@@ -459,7 +464,7 @@ if whitelisted then
 
 		Button.Name = "Button"
 		Button.Parent = Frame
-		Button.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+		Button.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 		Button.BackgroundTransparency = 1.000
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.Position = UDim2.new(0, 6, 0, 4)
@@ -516,7 +521,7 @@ if whitelisted then
 
 		Button.Parent = Frame
 		Button.Name = "Button"
-		Button.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+		Button.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 		Button.BackgroundTransparency = 1.000
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.Position = UDim2.new(0, 31, 0, 22)
@@ -566,7 +571,7 @@ if whitelisted then
 
 		Button.Parent = Frame
 		Button.Name = "Button"
-		Button.BackgroundColor3 = Color3.fromRGB(253, 21, 32)
+		Button.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
 		Button.BackgroundTransparency = 1.000
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.Position = UDim2.new(0, 6, 0, 4)
@@ -844,9 +849,7 @@ if whitelisted then
 
 			local a = {}
 			local b = {}
-			a.Inf_Energy, b.Inf_Energy_Bind = ToggleButton(Game_Tab, "Inf Energy", Game_Bind)
 			a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
-			a.No_Sit, b.No_Sit_Bind = ToggleButton(Game_Tab, "No Sit", Game_Bind)
 			a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
 			a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
 
@@ -861,6 +864,11 @@ if whitelisted then
 
 			a.Max_Power, b.Max_Power_Bind = ToggleButton(Shooting_Tab, "Max Power", Shooting_Bind)
 			a.Auto_Aim, b.Auto_Aim_Bind = ToggleButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
+			---------------------------------------------------------------------------
+			if not  table.find(AutoAimWhitelist, Player.UserId) then
+				a.Auto_Aim.Visible = false
+				b.Auto_Aim_Bind.Visible = false
+			end
 			---------------------------------------------------------------------------
 			local Actual_Spots = {}
 			for _, i in pairs(workspace:GetDescendants()) do
@@ -935,10 +943,10 @@ if whitelisted then
 							i = Instance.new("StringValue")
 							i.Name = "ShiftLock"
 							i.Parent = Humanoid
-							task.wait()
+							wait()
 							Humanoid.WalkSpeed = SprintSpeed
 							while Toggle do
-								repeat task.wait() until Humanoid.WalkSpeed ~= SprintSpeed or a.No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
+								repeat wait() until Humanoid.WalkSpeed ~= SprintSpeed or a.No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
 								if Toggle then
 									a.No_Stam_Sprint.Button.BackgroundTransparency = 1
 									Toggle = false
@@ -953,18 +961,6 @@ if whitelisted then
 				end
 			end
 			---------------------------------------------------------------------------
-			F.No_Sit_Function = function()
-				ToggleTransparency(a.No_Sit)
-
-				while a.No_Sit.Button.BackgroundTransparency == 0 and not Script_Disabled do
-					wait(0.00001)
-					if not Script_Disabled then
-						Player.Character.Humanoid.Sit = false
-						Player.Character.VFX.NoMove.Value = false
-					end
-				end
-			end
-			---------------------------------------------------------------------------
 			F.Unlock_Camera_Function = function()
 				ToggleTransparency(a.Unlock_Camera)
 
@@ -973,14 +969,6 @@ if whitelisted then
 					repeat wait() until Script_Disabled or a.Unlock_Camera.Button.BackgroundTransparency == 1
 					Player.CameraMaxZoomDistance = 23
 				end
-			end
-			---------------------------------------------------------------------------
-			local R = nil
-			F.Inf_Energy_Function = function()
-				ToggleTransparency(a.Inf_Energy)
-				R = runService.RenderStepped:Connect(function() Player.PlayerGui.Check.LocalScript.RemoteEvent:FireServer(100) end)
-				repeat wait() until Script_Disabled or a.Inf_Energy.Button.BackgroundTransparency == 1
-				R:Disconnect()
 			end
 			---------------------------------------------------------------------------
 			local R = nil
@@ -1284,7 +1272,7 @@ if whitelisted then
 			local Part
 			F.Auto_Aim_Function = function()
 				ToggleTransparency(a.Auto_Aim)
-				if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled then
+				if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled and table.find(AutoAimWhitelist, Player.UserId) then
 					Connection = UserInput.InputBegan:Connect(function(Key, isT)
 						if not isT and Key.KeyCode == Enum.KeyCode.LeftAlt and a.Auto_Aim.Button.BackgroundTransparency == 0 then
 							AutoAim[1] = Mouse.Hit
