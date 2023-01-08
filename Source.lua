@@ -15,7 +15,7 @@ local AutoAimWhitelist = {
 }
 
 local TrialMode = false
-local LogExecution = false
+local LogExecution = true
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -1145,7 +1145,7 @@ if whitelisted or TrialMode then
 				a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
 				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
 
-				a.Max_Power, b.Max_Power_Bind = ToggleValueButton(Shooting_Tab, "Max Power", Shooting_Bind)
+				a.Instant_Power, b.Instant_Power_Bind = ToggleValueButton(Shooting_Tab, "Instant Power", Shooting_Bind)
 				a.Auto_Aim, b.Auto_Aim_Bind = ToggleBindButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
 				---------------------------------------------------------------------------
 				if not table.find(AutoAimWhitelist, Player.UserId) then
@@ -1293,13 +1293,13 @@ if whitelisted or TrialMode then
 						OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 						Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
 						local Step1 = runService.RenderStepped:Connect(function()
-							if a.Max_Power.Button.BackgroundTransparency == 1 then
+							if a.Instant_Power.Button.BackgroundTransparency == 1 then
 								ChangeBadge("ArcheType3", "FormlessShooter")
 							end
 						end)
 						wait()
 						local Step2 = runService.RenderStepped:Connect(function()
-							if a.Max_Power.Button.BackgroundTransparency == 1 then
+							if a.Instant_Power.Button.BackgroundTransparency == 1 then
 								ChangeBadge("ArcheType3", "FormlessShooter")
 							end
 						end)
@@ -1436,9 +1436,9 @@ if whitelisted or TrialMode then
 					end
 				end
 
-				F.Max_Power_Function = function()
-					ToggleTransparency(a.Max_Power)
-					if a.Max_Power.Button.BackgroundTransparency == 0 then
+				F.Instant_Power_Function = function()
+					ToggleTransparency(a.Instant_Power)
+					if a.Instant_Power.Button.BackgroundTransparency == 0 then
 						BallConnect = Player.Character.ChildAdded:Connect(function(Child)
 							if Child.Name == "Bola" and not BallCD then
 								BallCD = true
@@ -1448,7 +1448,7 @@ if whitelisted or TrialMode then
 							end
 						end)
 						Connection1 = Mouse.Button1Down:Connect(function()
-							local ShotPower = tonumber(a.Max_Power.Value.TextBox.Text)
+							local ShotPower = tonumber(a.Instant_Power.Value.TextBox.Text)
 							if ShotPower == nil then
 								ShotPower = 100
 							end
