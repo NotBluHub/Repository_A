@@ -15,7 +15,7 @@ local AutoAimWhitelist = {
 }
 
 local TrialMode = false
-local LogExecution = true
+local LogExecution = false
 
 
 local Player = game:GetService("Players").LocalPlayer
@@ -512,6 +512,114 @@ if whitelisted or TrialMode then
 		Text.TextColor3 = Color3.fromRGB(160, 160, 160)
 		Text.TextSize = 15.000
 		Text.TextXAlignment = Enum.TextXAlignment.Left
+		
+		local BindFrame = Keybind(BindP, Name)
+		return Frame, BindFrame
+	end
+	local ToggleBindButton = function(Parent, Name, BindP)
+		local Frame = Instance.new("Frame")
+		local Text = Instance.new("TextLabel")
+		local Button = Instance.new("TextButton")
+		local ImageLabel = Instance.new("ImageLabel")
+		local ImageLabel_2 = Instance.new("ImageLabel")
+		local Bind = Instance.new("Frame")
+		local Button_2 = Instance.new("TextButton")
+		local ImageLabel_3 = Instance.new("ImageLabel")
+		local ImageLabel_4 = Instance.new("ImageLabel")
+		local StringValue = Instance.new("StringValue")
+		
+		Frame.Name = Name
+		Frame.Parent = Parent.Buttons
+		Frame.BackgroundTransparency = 1.000
+		Frame.LayoutOrder = 5
+		Frame.Size = UDim2.new(1, 0, 0, 20)
+
+		Text.Name = "Text"
+		Text.Parent = Frame
+		Text.BackgroundTransparency = 1.000
+		Text.Position = UDim2.new(0, 24, 0, 0)
+		Text.Size = UDim2.new(1, 0, 1, 0)
+		Text.Font = Enum.Font.Code
+		Text.Text = Name
+		Text.TextColor3 = Color3.fromRGB(160, 160, 160)
+		Text.TextSize = 15.000
+		Text.TextXAlignment = Enum.TextXAlignment.Left
+
+		Button.Name = "Button"
+		Button.Parent = Frame
+		Button.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
+		Button.BackgroundTransparency = 1.000
+		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Button.Position = UDim2.new(0, 6, 0, 4)
+		Button.Size = UDim2.new(0, 12, 0, 12)
+		Button.ZIndex = 2
+		Button.Font = Enum.Font.SourceSans
+		Button.Text = ""
+		Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Button.TextSize = 14.000
+
+		ImageLabel.Parent = Button
+		ImageLabel.BackgroundTransparency = 1.000
+		ImageLabel.Position = UDim2.new(0, 1, 0, 1)
+		ImageLabel.Size = UDim2.new(1, -2, 1, -2)
+		ImageLabel.ZIndex = 2
+		ImageLabel.Image = "rbxassetid://2592362371"
+		ImageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
+		ImageLabel.ScaleType = Enum.ScaleType.Slice
+		ImageLabel.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		ImageLabel_2.Parent = Button
+		ImageLabel_2.BackgroundTransparency = 1.000
+		ImageLabel_2.Size = UDim2.new(1, 0, 1, 0)
+		ImageLabel_2.ZIndex = 3
+		ImageLabel_2.Image = "rbxassetid://2592362371"
+		ImageLabel_2.ImageColor3 = Color3.fromRGB(60, 60, 60)
+		ImageLabel_2.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		Bind.Name = "Bind"
+		Bind.Parent = Frame
+		Bind.BackgroundTransparency = 1.000
+		Bind.Size = UDim2.new(1, 0, 0, 20)
+
+		Button_2.Name = "Button"
+		Button_2.Parent = Bind
+		Button_2.AnchorPoint = Vector2.new(1, 0.5)
+		Button_2.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
+		Button_2.BackgroundTransparency = 1.000
+		Button_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Button_2.Position = UDim2.new(1, 0, 0.5, 0)
+		Button_2.Size = UDim2.new(0, 125, 0, 20)
+		Button_2.ZIndex = 2
+		Button_2.Font = Enum.Font.Code
+		Button_2.Text = ""
+		Button_2.TextColor3 = Color3.fromRGB(160, 160, 160)
+		Button_2.TextScaled = true
+		Button_2.TextSize = 18.000
+		Button_2.TextWrapped = true
+
+		ImageLabel_3.Parent = Button_2
+		ImageLabel_3.BackgroundTransparency = 1.000
+		ImageLabel_3.Size = UDim2.new(1, 0, 1.00000012, 0)
+		ImageLabel_3.ZIndex = 3
+		ImageLabel_3.Image = "rbxassetid://2592362371"
+		ImageLabel_3.ImageColor3 = Color3.fromRGB(60, 60, 60)
+		ImageLabel_3.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_3.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		ImageLabel_4.Parent = Button_2
+		ImageLabel_4.BackgroundTransparency = 1.000
+		ImageLabel_4.Position = UDim2.new(0, 1, 0, 1)
+		ImageLabel_4.Size = UDim2.new(1, -2, 1, -2)
+		ImageLabel_4.ZIndex = 2
+		ImageLabel_4.Image = "rbxassetid://2592362371"
+		ImageLabel_4.ImageColor3 = Color3.fromRGB(0, 0, 0)
+		ImageLabel_4.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_4.SliceCenter = Rect.new(2, 2, 62, 62)
+		
+		StringValue.Parent = Button_2
+		StringValue.Name = "String"
+		
 		local BindFrame = Keybind(BindP, Name)
 		return Frame, BindFrame
 	end
@@ -937,9 +1045,9 @@ if whitelisted or TrialMode then
 				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
 
 				a.Max_Power, b.Max_Power_Bind = ToggleButton(Shooting_Tab, "Max Power", Shooting_Bind)
-				a.Auto_Aim, b.Auto_Aim_Bind = ToggleButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
+				a.Auto_Aim, b.Auto_Aim_Bind = ToggleBindButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
 				---------------------------------------------------------------------------
-				if not  table.find(AutoAimWhitelist, Player.UserId) then
+				if not table.find(AutoAimWhitelist, Player.UserId) then
 					a.Auto_Aim.Visible = false
 					b.Auto_Aim_Bind.Visible = false
 				end
@@ -1348,7 +1456,9 @@ if whitelisted or TrialMode then
 					ToggleTransparency(a.Auto_Aim)
 					if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled and table.find(AutoAimWhitelist, Player.UserId) then
 						Connection = UserInput.InputBegan:Connect(function(Key, isT)
-							if not isT and Key.KeyCode == Enum.KeyCode.LeftAlt and a.Auto_Aim.Button.BackgroundTransparency == 0 then
+							local bindKey = a.Auto_Aim.Bind.Button.String.Value
+							print(bindKey)
+							if not isT and (tostring(Key.KeyCode) == bindKey) or (tostring(Key.UserInputType) == bindKey) and a.Auto_Aim.Button.BackgroundTransparency == 0 then
 								AutoAim[1] = Mouse.Hit
 								AutoAim[2] = Mouse.Target
 								AutoAim[3] = Mouse.Hit.Position
@@ -1409,6 +1519,10 @@ if whitelisted or TrialMode then
 								bindKey = userInputType
 							end
 							frame.Button.Text = string.split(bindKey, ".")[3]
+							if frame.Button:FindFirstChild("String") then
+								frame.Button.String.Value = tostring(bindKey)
+								print(bindKey)
+							end
 						end
 					end)
 
@@ -1418,27 +1532,29 @@ if whitelisted or TrialMode then
 					d = true
 				end
 			end)
-
-			UserInput.InputBegan:Connect(function(key, isTyping)
-				if not Script_Disabled and not isTyping and frame.Button.Text ~= "Press a Key" and d then
-					local keyCode = tostring(key.KeyCode)
-					local userInputType = tostring(key.UserInputType)
-					if (keyCode == bindKey) or (userInputType == bindKey) then
-						if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
-							if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
-								F[funcName .. "_Function"](true)
+			if funcName then
+				UserInput.InputBegan:Connect(function(key, isTyping)
+					if not Script_Disabled and not isTyping and frame.Button.Text ~= "Press a Key" and d then
+						local keyCode = tostring(key.KeyCode)
+						local userInputType = tostring(key.UserInputType)
+						if (keyCode == bindKey) or (userInputType == bindKey) then
+							if funcName == "No_Stam_Sprint" and bindKey == "Enum.UserInputType.MouseButton2" then
+								if UserInput.MouseBehavior == Enum.MouseBehavior.LockCenter then
+									F[funcName .. "_Function"](true)
+								end
+							else
+								F[funcName .. "_Function"]()
 							end
-						else
-							F[funcName .. "_Function"]()
 						end
 					end
-				end
-			end)
+				end)
+			end
 		end
 		
 		for _, i in pairs(b) do
 			BindButtons(i, replaceSpacesWithUnderscores(i.Name))
 		end
+		BindButtons(a.Auto_Aim.Bind)
 		---------------------------------------------------------------------------
 		for _, i in pairs(a) do
 			i.Button.MouseButton1Click:Connect(F[replaceSpacesWithUnderscores(i.Name).."_Function"])
