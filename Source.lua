@@ -512,7 +512,7 @@ if whitelisted or TrialMode then
 		Text.TextColor3 = Color3.fromRGB(160, 160, 160)
 		Text.TextSize = 15.000
 		Text.TextXAlignment = Enum.TextXAlignment.Left
-		
+
 		local BindFrame = Keybind(BindP, Name)
 		return Frame, BindFrame
 	end
@@ -527,7 +527,7 @@ if whitelisted or TrialMode then
 		local ImageLabel_3 = Instance.new("ImageLabel")
 		local ImageLabel_4 = Instance.new("ImageLabel")
 		local StringValue = Instance.new("StringValue")
-		
+
 		Frame.Name = Name
 		Frame.Parent = Parent.Buttons
 		Frame.BackgroundTransparency = 1.000
@@ -616,9 +616,112 @@ if whitelisted or TrialMode then
 		ImageLabel_4.ImageColor3 = Color3.fromRGB(0, 0, 0)
 		ImageLabel_4.ScaleType = Enum.ScaleType.Slice
 		ImageLabel_4.SliceCenter = Rect.new(2, 2, 62, 62)
-		
+
 		StringValue.Parent = Button_2
 		StringValue.Name = "String"
+
+		local BindFrame = Keybind(BindP, Name)
+		return Frame, BindFrame
+	end
+	local ToggleValueButton = function(Parent, Name, BindP)
+		local Frame = Instance.new("Frame")
+		local Text = Instance.new("TextLabel")
+		local Button = Instance.new("TextButton")
+		local ImageLabel = Instance.new("ImageLabel")
+		local ImageLabel_2 = Instance.new("ImageLabel")
+		local Value = Instance.new("Frame")
+		local TextBox = Instance.new("TextBox")
+		local ImageLabel_3 = Instance.new("ImageLabel")
+		local ImageLabel_4 = Instance.new("ImageLabel")
+
+		Frame.Name = Name
+		Frame.Parent = Parent.Buttons
+		Frame.BackgroundTransparency = 1.000
+		Frame.LayoutOrder = 5
+		Frame.Size = UDim2.new(1, 0, 0, 20)
+
+		Text.Name = "Text"
+		Text.Parent = Frame
+		Text.BackgroundTransparency = 1.000
+		Text.Position = UDim2.new(0, 24, 0, 0)
+		Text.Size = UDim2.new(1, 0, 1, 0)
+		Text.Font = Enum.Font.Code
+		Text.Text = Name
+		Text.TextColor3 = Color3.fromRGB(160, 160, 160)
+		Text.TextSize = 15.000
+		Text.TextXAlignment = Enum.TextXAlignment.Left
+
+		Button.Name = "Button"
+		Button.Parent = Frame
+		Button.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
+		Button.BackgroundTransparency = 1.000
+		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Button.Position = UDim2.new(0, 6, 0, 4)
+		Button.Size = UDim2.new(0, 12, 0, 12)
+		Button.ZIndex = 2
+		Button.Font = Enum.Font.SourceSans
+		Button.Text = ""
+		Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Button.TextSize = 14.000
+
+		ImageLabel.Parent = Button
+		ImageLabel.BackgroundTransparency = 1.000
+		ImageLabel.Position = UDim2.new(0, 1, 0, 1)
+		ImageLabel.Size = UDim2.new(1, -2, 1, -2)
+		ImageLabel.ZIndex = 2
+		ImageLabel.Image = "rbxassetid://2592362371"
+		ImageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
+		ImageLabel.ScaleType = Enum.ScaleType.Slice
+		ImageLabel.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		ImageLabel_2.Parent = Button
+		ImageLabel_2.BackgroundTransparency = 1.000
+		ImageLabel_2.Size = UDim2.new(1, 0, 1, 0)
+		ImageLabel_2.ZIndex = 3
+		ImageLabel_2.Image = "rbxassetid://2592362371"
+		ImageLabel_2.ImageColor3 = Color3.fromRGB(60, 60, 60)
+		ImageLabel_2.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_2.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		Value.Name = "Value"
+		Value.Parent = Frame
+		Value.BackgroundTransparency = 1.000
+		Value.Size = UDim2.new(1, 0, 0, 20)
+		
+		TextBox.Name = "TextBox"
+		TextBox.Parent = Value
+		TextBox.AnchorPoint = Vector2.new(1, 0.5)
+		TextBox.BackgroundColor3 = Color3.fromRGB(253, 47, 253)
+		TextBox.BackgroundTransparency = 1.000
+		TextBox.Position = UDim2.new(0.972391248, 0, 0.5, 0)
+		TextBox.Size = UDim2.new(0, 31, 0, 20)
+		TextBox.Font = Enum.Font.SourceSans
+		TextBox.PlaceholderColor3 = Color3.fromRGB(160, 160, 160)
+		TextBox.PlaceholderText = "#"
+		TextBox.Text = ""
+		TextBox.TextColor3 = Color3.fromRGB(160, 160, 160)
+		TextBox.TextScaled = true
+		TextBox.TextSize = 18.000
+		TextBox.TextWrapped = true
+
+		ImageLabel_3.Parent = TextBox
+		ImageLabel_3.BackgroundTransparency = 1.000
+		ImageLabel_3.Position = UDim2.new(0, 1, 0, 1)
+		ImageLabel_3.Size = UDim2.new(1, -2, 1, -2)
+		ImageLabel_3.ZIndex = 2
+		ImageLabel_3.Image = "rbxassetid://2592362371"
+		ImageLabel_3.ImageColor3 = Color3.fromRGB(0, 0, 0)
+		ImageLabel_3.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_3.SliceCenter = Rect.new(2, 2, 62, 62)
+
+		ImageLabel_4.Parent = TextBox
+		ImageLabel_4.BackgroundTransparency = 1.000
+		ImageLabel_4.Size = UDim2.new(1, 0, 1.00000012, 0)
+		ImageLabel_4.ZIndex = 3
+		ImageLabel_4.Image = "rbxassetid://2592362371"
+		ImageLabel_4.ImageColor3 = Color3.fromRGB(60, 60, 60)
+		ImageLabel_4.ScaleType = Enum.ScaleType.Slice
+		ImageLabel_4.SliceCenter = Rect.new(2, 2, 62, 62)
 		
 		local BindFrame = Keybind(BindP, Name)
 		return Frame, BindFrame
@@ -865,7 +968,7 @@ if whitelisted or TrialMode then
 		if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
 		if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
 	end)
-	
+
 	local function ToggleTransparency(Frame)
 		if Frame.Button.BackgroundTransparency == 0 then
 
@@ -879,10 +982,8 @@ if whitelisted or TrialMode then
 	local a = {}
 	local b = {}
 	if game.GameId == 3213718766 then -- Goal!
-		local SprintSpeed = 21
 		local StepTackleRadius = 12
 		local SlideTackleRadius = 20
-		local ShotPower = 100
 
 		local CanDribble = true
 		local AutoAim = {}
@@ -902,15 +1003,15 @@ if whitelisted or TrialMode then
 		if game.PlaceId == 9822821238 then
 			local Events = game:GetService("ReplicatedStorage").Events
 			local Animations = game:GetService("ReplicatedStorage").Animations
-			
+
 			if TrialMode and not whitelisted then
 				local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
 				local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 				local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
-				
+
 				a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
 				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
-				
+
 				local playerEnteredRadius = {}
 				local playersInRadius = {}
 
@@ -1032,7 +1133,7 @@ if whitelisted or TrialMode then
 				local Shooting_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
 
 				a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
-				a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleButton(Game_Tab, "No Stam Sprint", Game_Bind)
+				a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleValueButton(Game_Tab, "No Stam Sprint", Game_Bind)
 				a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
 
 				a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
@@ -1044,7 +1145,7 @@ if whitelisted or TrialMode then
 				a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
 				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
 
-				a.Max_Power, b.Max_Power_Bind = ToggleButton(Shooting_Tab, "Max Power", Shooting_Bind)
+				a.Max_Power, b.Max_Power_Bind = ToggleValueButton(Shooting_Tab, "Max Power", Shooting_Bind)
 				a.Auto_Aim, b.Auto_Aim_Bind = ToggleBindButton(Shooting_Tab, "Auto Aim", Shooting_Bind)
 				---------------------------------------------------------------------------
 				if not table.find(AutoAimWhitelist, Player.UserId) then
@@ -1113,6 +1214,10 @@ if whitelisted or TrialMode then
 					end
 					local Humanoid = Player.Character:WaitForChild("Humanoid")
 					if not Script_Disabled and a.No_Stam_Sprint.Button.BackgroundTransparency == 0 and not Player.Character.Humanoid:FindFirstChild("Tackled") then
+						local SprintSpeed = tonumber(a.No_Stam_Sprint.Value.TextBox.Text)
+						if SprintSpeed == nil then
+							SprintSpeed = 19
+						end
 						if Toggle then
 							Humanoid.WalkSpeed = 16
 						else
@@ -1187,8 +1292,21 @@ if whitelisted or TrialMode then
 					if a.FormlessShooter.Button.BackgroundTransparency == 0 then
 						OriginalImage = Player.PlayerGui.Layout.Badges.Slot1.Image
 						Player.PlayerGui.Layout.Badges.Slot1.Image = "rbxassetid://10323892082"
+						local Step1 = runService.RenderStepped:Connect(function()
+							if a.Max_Power.Button.BackgroundTransparency == 1 then
+								ChangeBadge("ArcheType3", "FormlessShooter")
+							end
+						end)
+						wait()
+						local Step2 = runService.RenderStepped:Connect(function()
+							if a.Max_Power.Button.BackgroundTransparency == 1 then
+								ChangeBadge("ArcheType3", "FormlessShooter")
+							end
+						end)
 						repeat wait() until Script_Disabled or a.FormlessShooter.Button.BackgroundTransparency == 1
 						Player.PlayerGui.Layout.Badges.Slot1.Image = OriginalImage
+						Step1:Disconnect()
+						Step2:Disconnect()
 					end
 				end
 				---------------------------------------------------------------------------
@@ -1330,6 +1448,10 @@ if whitelisted or TrialMode then
 							end
 						end)
 						Connection1 = Mouse.Button1Down:Connect(function()
+							local ShotPower = tonumber(a.Max_Power.Value.TextBox.Text)
+							if ShotPower == nil then
+								ShotPower = 100
+							end
 							local Character = Player.Character
 							local Hum = Character.Humanoid
 							if Player.Character:FindFirstChild("Bola") and not Script_Disabled then
@@ -1457,7 +1579,6 @@ if whitelisted or TrialMode then
 					if a.Auto_Aim.Button.BackgroundTransparency == 0 and not Script_Disabled and table.find(AutoAimWhitelist, Player.UserId) then
 						Connection = UserInput.InputBegan:Connect(function(Key, isT)
 							local bindKey = a.Auto_Aim.Bind.Button.String.Value
-							print(bindKey)
 							if not isT and (tostring(Key.KeyCode) == bindKey) or (tostring(Key.UserInputType) == bindKey) and a.Auto_Aim.Button.BackgroundTransparency == 0 then
 								AutoAim[1] = Mouse.Hit
 								AutoAim[2] = Mouse.Target
@@ -1550,7 +1671,7 @@ if whitelisted or TrialMode then
 				end)
 			end
 		end
-		
+
 		for _, i in pairs(b) do
 			BindButtons(i, replaceSpacesWithUnderscores(i.Name))
 		end
