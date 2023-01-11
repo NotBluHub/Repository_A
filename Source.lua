@@ -14,7 +14,7 @@ local AutoAimWhitelist = {
 	149522897,		--Booh #6532
 }
 
-local TrialMode = false
+local TrialMode = true
 local LogExecution = true
 
 
