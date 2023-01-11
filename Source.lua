@@ -8,10 +8,12 @@ local UserIds = {
 	206007586, 3443274111,	-- laqol#3077
 	1246274469, 385469353,	-- rifle#2951
 	301817096, 		-- gabes#3044
+	653580785		-- The Lemon God#0001
 }
 local AutoAimWhitelist = {
 	105115151, 2444381495,	-- Me!
-	149522897,		--Booh #6532
+	149522897,		-- Booh #6532
+	653580785		-- The Lemon God#0001
 }
 
 local TrialMode = true
