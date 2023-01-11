@@ -16,7 +16,7 @@ local AutoAimWhitelist = {
 	653580785		-- The Lemon God#0001
 }
 
-local TrialMode = true
+local TrialMode = false
 local LogExecution = true
 
 
@@ -689,7 +689,7 @@ if whitelisted or TrialMode then
 		Value.Parent = Frame
 		Value.BackgroundTransparency = 1.000
 		Value.Size = UDim2.new(1, 0, 0, 20)
-		
+
 		TextBox.Name = "TextBox"
 		TextBox.Parent = Value
 		TextBox.AnchorPoint = Vector2.new(1, 0.5)
@@ -724,7 +724,7 @@ if whitelisted or TrialMode then
 		ImageLabel_4.ImageColor3 = Color3.fromRGB(60, 60, 60)
 		ImageLabel_4.ScaleType = Enum.ScaleType.Slice
 		ImageLabel_4.SliceCenter = Rect.new(2, 2, 62, 62)
-		
+
 		local BindFrame = Keybind(BindP, Name)
 		return Frame, BindFrame
 	end
@@ -1137,6 +1137,7 @@ if whitelisted or TrialMode then
 				a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
 				a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleValueButton(Game_Tab, "No Stam Sprint", Game_Bind)
 				a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
+				a.Block_Extender, b.Block_Extender_Bind = ToggleValueButton(Game_Tab, "Block Extender", Shooting_Bind)
 
 				a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
 				a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
@@ -1257,6 +1258,24 @@ if whitelisted or TrialMode then
 						Player.CameraMaxZoomDistance = 100
 						repeat wait() until Script_Disabled or a.Unlock_Camera.Button.BackgroundTransparency == 1
 						Player.CameraMaxZoomDistance = 23
+					end
+				end
+				---------------------------------------------------------------------------
+				F.Block_Extender_Function = function()
+					ToggleTransparency(a.Block_Extender)
+					local BlockPart = Player.Character:FindFirstChild("BlockRange")
+					local Original = BlockPart.Size
+					if a.Block_Extender.Button.BackgroundTransparency == 0 then
+						while a.Block_Extender.Button.BackgroundTransparency == 0 do
+							local Str = string.split(string.gsub(a.Block_Extender.Value.TextBox.Text, " ", ""), ",")
+							
+							BlockPart.Size = Vector3.new(tonumber(Str[1]), tonumber(Str[2]), tonumber(Str[3]))
+							
+							Player.CharacterAppearanceLoaded:Wait()
+						end
+						
+						repeat wait() until Script_Disabled or a.Block_Extender.Button.BackgroundTransparency == 1
+						BlockPart.Size = Original
 					end
 				end
 				---------------------------------------------------------------------------
