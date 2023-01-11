@@ -1266,6 +1266,7 @@ if whitelisted or TrialMode then
 					local BlockPart = Character:WaitForChild("BlockRange")
 					if Original == nil then
 						Original = BlockPart.Size
+						a.Block_Extender.Value.TextBox.PlaceholderText = tostring(Original)
 					end
 					BlockPart.Massless = true
 				end)
@@ -1273,8 +1274,14 @@ if whitelisted or TrialMode then
 					ToggleTransparency(a.Block_Extender)
 					if a.Block_Extender.Button.BackgroundTransparency == 0 and Original ~= nil then
 						while a.Block_Extender.Button.BackgroundTransparency == 0 do
-							local Str = string.split(string.gsub(a.Block_Extender.Value.TextBox.Text, " ", ""), ",")
-							Player.Character:WaitForChild("BlockRange").Size = Vector3.new(tonumber(Str[1]), tonumber(Str[2]), tonumber(Str[3]))
+							local Text = a.Block_Extender.Value.TextBox.Text
+							if Text == "" then
+								Text = Original
+							else
+								Text = string.split(string.gsub(Text, " ", ""), ",")
+								Text = Vector3.new(tonumber(Text[1]), tonumber(Text[2]), tonumber(Text[3]))
+							end
+							Player.Character:WaitForChild("BlockRange").Size = Text
 							Player.CharacterAppearanceLoaded:Wait()
 						end
 						
