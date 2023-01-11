@@ -1139,8 +1139,8 @@ if whitelisted or TrialMode then
 				a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
 				a.Block_Extender, b.Block_Extender_Bind = ToggleValueButton(Game_Tab, "Block Extender", Shooting_Bind)
 
-				a.Ball_Awareness, b.Ball_Awareness_Bind = ToggleButton(Badge_Tab, "Ball Awareness", Badge_Bind)
-				a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "Carry Ball", Badge_Bind)
+				a.BallAwareness, b.BallAwareness_Bind = ToggleButton(Badge_Tab, "BallAwareness", Badge_Bind)
+				a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "CarryBall", Badge_Bind)
 				a.Center, b.Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
 				a.FormlessShooter, b.FormlessShooter_Bind = ToggleButton(Badge_Tab, "FormlessShooter", Badge_Bind)
 
@@ -1261,23 +1261,28 @@ if whitelisted or TrialMode then
 					end
 				end
 				---------------------------------------------------------------------------
+				local Original = nil
+				Player.CharacterAppearanceLoaded:Connect(function(Character)
+					local BlockPart = Character:WaitForChild("BlockRange")
+					if Original == nil then
+						Original = BlockPart.Size
+					end
+					BlockPart.Massless = true
+				end)
 				F.Block_Extender_Function = function()
 					ToggleTransparency(a.Block_Extender)
-					local BlockPart = Player.Character:FindFirstChild("BlockRange")
-					local Original = BlockPart.Size
-					if a.Block_Extender.Button.BackgroundTransparency == 0 then
+					if a.Block_Extender.Button.BackgroundTransparency == 0 and Original ~= nil then
 						while a.Block_Extender.Button.BackgroundTransparency == 0 do
 							local Str = string.split(string.gsub(a.Block_Extender.Value.TextBox.Text, " ", ""), ",")
-							
-							BlockPart.Size = Vector3.new(tonumber(Str[1]), tonumber(Str[2]), tonumber(Str[3]))
-							
+							Player.Character:WaitForChild("BlockRange").Size = Vector3.new(tonumber(Str[1]), tonumber(Str[2]), tonumber(Str[3]))
 							Player.CharacterAppearanceLoaded:Wait()
 						end
 						
 						repeat wait() until Script_Disabled or a.Block_Extender.Button.BackgroundTransparency == 1
-						BlockPart.Size = Original
+						Player.Character:WaitForChild("BlockRange").Size = Original
 					end
 				end
+
 				---------------------------------------------------------------------------
 				local R = nil
 				F.Center_Function = function()
