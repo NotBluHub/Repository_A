@@ -1137,7 +1137,7 @@ if whitelisted or TrialMode then
 				a.Quick_Queue, b.Quick_Queue_Bind = ToggleButton(Game_Tab, "Quick Queue", Game_Bind)
 				a.No_Stam_Sprint, b.No_Stam_Sprint_Bind = ToggleValueButton(Game_Tab, "No Stam Sprint", Game_Bind)
 				a.Unlock_Camera, b.Unlock_Camera_Bind = ToggleButton(Game_Tab, "Unlock Camera", Game_Bind)
-				a.Block_Extender, b.Block_Extender_Bind = ToggleValueButton(Game_Tab, "Block Extender", Shooting_Bind)
+				a.Block_Extender, b.Block_Extender_Bind = ToggleValueButton(Game_Tab, "Block Extender", Game_Bind)
 
 				a.BallAwareness, b.BallAwareness_Bind = ToggleButton(Badge_Tab, "BallAwareness", Badge_Bind)
 				a.CarryBall, b.CarryBall_Bind = ToggleButton(Badge_Tab, "CarryBall", Badge_Bind)
@@ -1271,6 +1271,7 @@ if whitelisted or TrialMode then
 						local BlockPart = Player.Character:WaitForChild("BlockRange")
 						Original = BlockPart.Size
 						a.Block_Extender.Value.TextBox.PlaceholderText = tostring(Original)
+						print(Original)
 					end
 					ToggleTransparency(a.Block_Extender)
 					if a.Block_Extender.Button.BackgroundTransparency == 0 and Original ~= nil then
