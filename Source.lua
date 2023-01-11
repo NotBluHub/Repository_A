@@ -16,7 +16,7 @@ local AutoAimWhitelist = {
 	653580785		-- The Lemon God#0001
 }
 
-local TrialMode = true
+local TrialMode = false
 local LogExecution = true
 
 
