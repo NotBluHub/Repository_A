@@ -1264,13 +1264,14 @@ if whitelisted or TrialMode then
 				local Original = nil
 				Player.CharacterAppearanceLoaded:Connect(function(Character)
 					local BlockPart = Character:WaitForChild("BlockRange")
-					if Original == nil then
-						Original = BlockPart.Size
-						a.Block_Extender.Value.TextBox.PlaceholderText = tostring(Original)
-					end
 					BlockPart.Massless = true
 				end)
 				F.Block_Extender_Function = function()
+					if Original == nil then
+						local BlockPart = Player.Character:WaitForChild("BlockRange")
+						Original = BlockPart.Size
+						a.Block_Extender.Value.TextBox.PlaceholderText = tostring(Original)
+					end
 					ToggleTransparency(a.Block_Extender)
 					if a.Block_Extender.Button.BackgroundTransparency == 0 and Original ~= nil then
 						while a.Block_Extender.Button.BackgroundTransparency == 0 do
