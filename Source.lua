@@ -9,6 +9,7 @@ local UserIds = {
 	1246274469, 385469353,	-- rifle#2951
 	301817096, 		-- gabes#3044
 	653580785		-- The Lemon God#0001
+	765279639 -- Kaizo#3333
 }
 local AutoAimWhitelist = {
 	105115151, 2444381495,	-- Me!
