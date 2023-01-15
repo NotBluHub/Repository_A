@@ -1284,7 +1284,7 @@ if whitelisted or TrialMode then
 							else
 								Multiplier = tonumber(Text)
 							end
-							Player.Character:WaitForChild("BlockRange").Size = Original*Text
+							Player.Character:WaitForChild("BlockRange").Size = Original*Multiplier
 							Player.CharacterAppearanceLoaded:Wait()
 						end
 						
