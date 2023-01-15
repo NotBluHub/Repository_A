@@ -9,7 +9,8 @@ local UserIds = {
 	1246274469, 385469353,	-- rifle#2951
 	301817096, 		-- gabes#3044
 	653580785,		-- The Lemon God#0001
-	765279639 -- Kaizo#3333
+	765279639, 		-- Kaizo#3333
+	487354196, 		-- pxlse#0001
 }
 local AutoAimWhitelist = {
 	105115151, 2444381495,	-- Me!
@@ -17,7 +18,7 @@ local AutoAimWhitelist = {
 	653580785		-- The Lemon God#0001
 }
 
-local TrialMode = true
+local TrialMode = false
 local LogExecution = true
 
 
@@ -1271,8 +1272,7 @@ if whitelisted or TrialMode then
 					if Original == nil then
 						local BlockPart = Player.Character:WaitForChild("BlockRange")
 						Original = BlockPart.Size
-						a.Block_Extender.Value.TextBox.PlaceholderText = tostring(Original)
-						print(Original)
+						a.Block_Extender.Value.TextBox.PlaceholderText = tostring(1)
 					end
 					ToggleTransparency(a.Block_Extender)
 					if a.Block_Extender.Button.BackgroundTransparency == 0 and Original ~= nil then
@@ -1280,11 +1280,8 @@ if whitelisted or TrialMode then
 							local Text = a.Block_Extender.Value.TextBox.Text
 							if Text == "" then
 								Text = Original
-							else
-								Text = string.split(string.gsub(Text, " ", ""), ",")
-								Text = Vector3.new(tonumber(Text[1]), tonumber(Text[2]), tonumber(Text[3]))
 							end
-							Player.Character:WaitForChild("BlockRange").Size = Text
+							Player.Character:WaitForChild("BlockRange").Size = Original*Text
 							Player.CharacterAppearanceLoaded:Wait()
 						end
 						
@@ -1346,58 +1343,44 @@ if whitelisted or TrialMode then
 					end
 				end
 				---------------------------------------------------------------------------
-				local playerEnteredRadius = {}
 				local playersInRadius = {}
 
-				local function onPlayerEnterRadius(otherPlayer)
-					table.insert(playersInRadius, otherPlayer)
-				end
-				local function onPlayerLeaveRadius(otherPlayer)
-					table.remove(playersInRadius, table.find(playersInRadius, otherPlayer))
-				end
 				local function checkRadius()
-					local playersInRadius = {}
+					playersInRadius = {}
+					local player = game:GetService("Players").LocalPlayer
 					for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
-						if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
-							local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
+						if otherPlayer ~= player and otherPlayer.Name ~= "Blu_Mo0n" then
+							local distance = (otherPlayer.Character.PrimaryPart.Position - player.Character.PrimaryPart.Position).Magnitude
 							if distance <= SlideTackleRadius then
-								playersInRadius[otherPlayer] = true
-								if not playerEnteredRadius[otherPlayer] then
-									playerEnteredRadius[otherPlayer] = true
-									onPlayerEnterRadius(otherPlayer)
-								end
-							else
-								if playerEnteredRadius[otherPlayer] then
-									playerEnteredRadius[otherPlayer] = false
-									onPlayerLeaveRadius(otherPlayer)
-								end
+								table.insert(playersInRadius, otherPlayer)
 							end
 						end
 					end
 				end
-				local function FindTackleFootAnimation(Op, ID)
-					for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
-						if Track.Animation.AnimationId == ID then
+
+				local function FindTackleFootAnimation(character)
+					for i, Track in pairs(character.Humanoid.Animator:GetPlayingAnimationTracks()) do
+						if Track.Animation.AnimationId == "rbxassetid://9015340307" then
 							return true
 						end
 					end
 				end
+
 				F.Auto_Dribble_Function = function()
 					ToggleTransparency(a.Auto_Dribble)
 					if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
 						local RenderStepped = runService.RenderStepped:Connect(checkRadius)
-
-						local Dribble_Loop 
+						local Dribble_Loop
 						Dribble_Loop = runService.RenderStepped:Connect(function()
-							local Character = Player.Character
-							if Character:FindFirstChild("Bola") and not inAir(Character) and not Character:FindFirstChild("IsDribbling") and Character.Humanoid.AutoRotate == true then
-								local Ball = Player.Character.Bola
-								for _, Op in ipairs(playersInRadius) do
-									local op = Op.Character
-									if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
-										if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-											if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
-												Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
+							local character = Player.Character
+							if character:FindFirstChild("Bola") and not inAir(character) and not character:FindFirstChild("IsDribbling") and character.Humanoid.AutoRotate == true then
+								local ball = character.Bola
+								for _, otherPlayer in ipairs(playersInRadius) do
+									local op = otherPlayer.Character
+									if op.Humanoid.Teammate.Value ~= character.Humanoid.Teammate.Value and not ball:FindFirstChild(op.Name) then
+										if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op) and (op.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
+											if character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(character) and CanDribble and not character:FindFirstChild("IsDribbling") and not character.Humanoid:FindFirstChild("Tackled") and character.Humanoid.AutoRotate == true then
+												Events.RealisticMovement:FireServer(Player, "V", true)
 
 												local CD = 1.5
 												if op.Humanoid:FindFirstChild("Tackled") then
@@ -1405,20 +1388,19 @@ if whitelisted or TrialMode then
 												end
 												local Tag = Instance.new("NumberValue")
 												Tag.Name = op.Name
-												Tag.Parent = Ball
+												Tag.Parent = ball
 												Debris:AddItem(Tag, CD)
 											end
 										end
 									end
 								end
 							end
-							if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
-								Dribble_Loop:Disconnect()
-								RenderStepped:Disconnect()
-								playerEnteredRadius = {}
-								playersInRadius = {}
-							end
 						end)
+						if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
+							Dribble_Loop:Disconnect()
+							RenderStepped:Disconnect()
+							playersInRadius = {}
+						end
 					end
 				end
 				---------------------------------------------------------------------------
@@ -1678,7 +1660,6 @@ if whitelisted or TrialMode then
 							frame.Button.Text = string.split(bindKey, ".")[3]
 							if frame.Button:FindFirstChild("String") then
 								frame.Button.String.Value = tostring(bindKey)
-								print(bindKey)
 							end
 						end
 					end)
