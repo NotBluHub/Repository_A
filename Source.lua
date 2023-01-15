@@ -1290,7 +1290,9 @@ if whitelisted or TrialMode then
 										if op.Humanoid:FindFirstChild("Tackled") or FindAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
 											if character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(character) and CanDribble and not character:FindFirstChild("IsDribbling") and not character.Humanoid:FindFirstChild("Tackled") and character.Humanoid.AutoRotate == true then
 												Events.RealisticMovement:FireServer(Player, DribbleType, true)
-
+												local Tag = Instance.new("NumberValue", character)
+												Tag.Name = "IsDribbling"
+												Debris:AddItem(Tag, 0.3)
 												local CD = 1.5
 												if op.Humanoid:FindFirstChild("Tackled") then
 													CD = 3
@@ -1304,12 +1306,12 @@ if whitelisted or TrialMode then
 									end
 								end
 							end
+							if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
+								Dribble_Loop:Disconnect()
+								RenderStepped:Disconnect()
+								playersInRadius = {}
+							end
 						end)
-						if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
-							Dribble_Loop:Disconnect()
-							RenderStepped:Disconnect()
-							playersInRadius = {}
-						end
 					end
 				end
 				---------------------------------------------------------------------------
