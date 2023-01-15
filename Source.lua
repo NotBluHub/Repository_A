@@ -1264,6 +1264,7 @@ if whitelisted or TrialMode then
 				end
 				---------------------------------------------------------------------------
 				local Original = nil
+				local Multiplier = 2
 				Player.CharacterAppearanceLoaded:Connect(function(Character)
 					local BlockPart = Character:WaitForChild("BlockRange")
 					BlockPart.Massless = true
@@ -1279,13 +1280,17 @@ if whitelisted or TrialMode then
 						while a.Block_Extender.Button.BackgroundTransparency == 0 do
 							local Text = a.Block_Extender.Value.TextBox.Text
 							if Text == "" then
-								Text = Original
+								Multiplier = 2
+							else
+								Multiplier = tonumber(Text)
 							end
 							Player.Character:WaitForChild("BlockRange").Size = Original*Text
 							Player.CharacterAppearanceLoaded:Wait()
 						end
 						
 						repeat wait() until Script_Disabled or a.Block_Extender.Button.BackgroundTransparency == 1
+						Player.Character:WaitForChild("BlockRange").Size = Original
+					else
 						Player.Character:WaitForChild("BlockRange").Size = Original
 					end
 				end
