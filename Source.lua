@@ -1009,121 +1009,7 @@ if whitelisted or TrialMode then
 			local Events = game:GetService("ReplicatedStorage").Events
 			local Animations = game:GetService("ReplicatedStorage").Animations
 
-			if TrialMode and not whitelisted then
-				local Info = {Column2_Game_, "Auto Dribble", {UDim2.new(0.95, 0, 0, 80), UDim2.new(0, 101, 0, 2)}, UDim2.new(0, 8, 0, 0)}
-				local AutoDribble_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
-				local AutoDribble_Bind = CreateTab(Column2_Keybinds, Info[2], Info[3], Info[4])
-
-				a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
-				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
-
-				local playerEnteredRadius = {}
-				local playersInRadius = {}
-
-				local function onPlayerEnterRadius(otherPlayer)
-					table.insert(playersInRadius, otherPlayer)
-				end
-				local function onPlayerLeaveRadius(otherPlayer)
-					table.remove(playersInRadius, table.find(playersInRadius, otherPlayer))
-				end
-				local function checkRadius()
-					local playersInRadius = {}
-					for _, otherPlayer in pairs(game:GetService("Players"):GetPlayers()) do
-						if otherPlayer ~= Player and otherPlayer.Name ~= "Blu_Mo0n" then
-							local distance = (otherPlayer.Character.PrimaryPart.Position - Player.Character.PrimaryPart.Position).Magnitude
-							if distance <= SlideTackleRadius then
-								playersInRadius[otherPlayer] = true
-								if not playerEnteredRadius[otherPlayer] then
-									playerEnteredRadius[otherPlayer] = true
-									onPlayerEnterRadius(otherPlayer)
-								end
-							else
-								if playerEnteredRadius[otherPlayer] then
-									playerEnteredRadius[otherPlayer] = false
-									onPlayerLeaveRadius(otherPlayer)
-								end
-							end
-						end
-					end
-				end
-				local function FindTackleFootAnimation(Op, ID)
-					for i, Track in pairs (Op.Humanoid.Animator:GetPlayingAnimationTracks()) do
-						if Track.Animation.AnimationId == ID then
-							return true
-						end
-					end
-				end
-				F.Auto_Dribble_Function = function()
-					ToggleTransparency(a.Auto_Dribble)
-					if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
-						local RenderStepped = runService.RenderStepped:Connect(checkRadius)
-
-						local Dribble_Loop 
-						Dribble_Loop = runService.RenderStepped:Connect(function()
-							local Character = Player.Character
-							if Character:FindFirstChild("Bola") and not inAir(Character) and not Character:FindFirstChild("IsDribbling") and Character.Humanoid.AutoRotate == true then
-								local Ball = Player.Character.Bola
-								for _, Op in ipairs(playersInRadius) do
-									local op = Op.Character
-									if op.Humanoid.Teammate.Value ~= Character.Humanoid.Teammate.Value and not Ball:FindFirstChild(op.Name) then
-										if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
-											if Character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(Character) and CanDribble and not Character:FindFirstChild("IsDribbling") and not Character.Humanoid:FindFirstChild("Tackled") and Character.Humanoid.AutoRotate == true then
-												Events.RealisticMovement:FireServer(game:GetService("Players").LocalPlayer, "V", true)
-
-												local CD = 1.5
-												if op.Humanoid:FindFirstChild("Tackled") then
-													CD = 3
-												end
-												local Tag = Instance.new("NumberValue")
-												Tag.Name = op.Name
-												Tag.Parent = Ball
-												Debris:AddItem(Tag, CD)
-											end
-										end
-									end
-								end
-							end
-							if a.Auto_Dribble.Button.BackgroundTransparency == 1 or Script_Disabled then
-								Dribble_Loop:Disconnect()
-								RenderStepped:Disconnect()
-								playerEnteredRadius = {}
-								playersInRadius = {}
-							end
-						end)
-					end
-				end
-				---------------------------------------------------------------------------
-				F.Show_Step_Radius_Function = function()
-					ToggleTransparency(a.Show_Step_Radius)
-					local Character = Player.Character
-					if a.Show_Step_Radius.Button.BackgroundTransparency == 0 then
-						local Cylinder, Weld = Instance.new('Part', Character), Instance.new('Weld', Character.HumanoidRootPart)
-						Cylinder.Name = "Radius"
-						Cylinder.Shape = Enum.PartType.Cylinder
-						Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
-						Cylinder.Anchored = false
-						Cylinder.CanCollide = false
-						Cylinder.Massless = true
-						Cylinder.Transparency = 0.7
-						Weld.Name = "Radius"
-						Weld.Part0 = Weld.Parent
-						Weld.Part1 = Cylinder
-						Weld.C0 = CFrame.new(0, -3, 0, -4.37113883e-08, -1, 0, 1, -4.37113883e-08, 0, 0, 0, 1)
-						while a.Show_Step_Radius.Button.BackgroundTransparency == 0 do
-							local Character = Player.Character
-							Cylinder.Parent = Character
-							Cylinder.Size = Vector3.new(0.1, StepTackleRadius, StepTackleRadius)
-							Weld.Parent = Character.HumanoidRootPart
-							Weld.Part0 = Weld.Parent
-
-							Player.CharacterAppearanceLoaded:Wait()
-						end
-					else
-						if Character:FindFirstChild("Radius") then Character.Radius:Destroy() end
-						if Character.HumanoidRootPart:FindFirstChild("Radius") then Character.HumanoidRootPart.Radius:Destroy() end
-					end
-				end
-			elseif whitelisted then
+			if whitelisted then
 				local Info = {Column1_Game_, "Goal!", {UDim2.new(0.95, 0, 0, 126), UDim2.new(0, 39, 0, 2)}, UDim2.new(0, 8, 0, 0)} --+23
 				local Game_Tab = CreateTab(Info[1], Info[2], Info[3], Info[4])
 				local Game_Bind = CreateTab(Column1_Keybinds, Info[2], Info[3], Info[4])
@@ -1147,7 +1033,7 @@ if whitelisted or TrialMode then
 				a.Center, b.Center_Bind = ToggleButton(Badge_Tab, "Center", Badge_Bind)
 				a.FormlessShooter, b.FormlessShooter_Bind = ToggleButton(Badge_Tab, "FormlessShooter", Badge_Bind)
 
-				a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
+				a.Auto_Dribble, b.Auto_Dribble_Bind = ToggleValueButton(AutoDribble_Tab, "Auto Dribble", AutoDribble_Bind)
 				a.Jump_Input, b.Jump_Input_Bind = ToggleButton(AutoDribble_Tab, "Jump Input", AutoDribble_Bind)
 				a.Show_Step_Radius, b.Show_Step_Radius_Bind = ToggleButton(AutoDribble_Tab, "Show Step Radius", AutoDribble_Bind)
 
@@ -1309,12 +1195,12 @@ if whitelisted or TrialMode then
 					end
 				end
 				---------------------------------------------------------------------------
-				F.Ball_Awareness_Function = function()
-					ToggleTransparency(a.Ball_Awareness)
+				F.BallAwareness_Function = function()
+					ToggleTransparency(a.BallAwareness)
 				end
 				if workspace:FindFirstChild("Ignore") then
 					workspace.Ignore.Predict.ChildAdded:Connect(function(p8)
-						if a.Ball_Awareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
+						if a.BallAwareness.Button.BackgroundTransparency == 0 and not Script_Disabled then
 							p8.Transparency = 0.6
 						end
 					end)
@@ -1364,9 +1250,12 @@ if whitelisted or TrialMode then
 					end
 				end
 
-				local function FindTackleFootAnimation(character)
+				local function FindAnimation(character, t)
 					for i, Track in pairs(character.Humanoid.Animator:GetPlayingAnimationTracks()) do
-						if Track.Animation.AnimationId == "rbxassetid://9015340307" then
+						local ID = Track.Animation.AnimationId
+						if ID == t then
+							return true
+						elseif typeof(t) == "table" and table.find(t, ID) then
 							return true
 						end
 					end
@@ -1375,18 +1264,32 @@ if whitelisted or TrialMode then
 				F.Auto_Dribble_Function = function()
 					ToggleTransparency(a.Auto_Dribble)
 					if a.Auto_Dribble.Button.BackgroundTransparency == 0 then
+						local BallConnect = nil
+						local BallCD = false
+						BallConnect = Player.Character.ChildAdded:Connect(function(Child)
+							if Child.Name == "Bola" and not BallCD then
+								BallCD = true
+								task.delay(0.25, function()
+									BallCD = false
+								end)
+							end
+						end)
 						local RenderStepped = runService.RenderStepped:Connect(checkRadius)
 						local Dribble_Loop
 						Dribble_Loop = runService.RenderStepped:Connect(function()
 							local character = Player.Character
-							if character:FindFirstChild("Bola") and not inAir(character) and not character:FindFirstChild("IsDribbling") and character.Humanoid.AutoRotate == true then
+							if character:FindFirstChild("Bola") and not inAir(character) and not BallCD and not character:FindFirstChild("IsDribbling") and character.Humanoid.AutoRotate == true then
 								local ball = character.Bola
+								local DribbleType = string.gsub(string.upper(a.Auto_Dribble.Value.TextBox.Text), " ", "")
+								if DribbleType == "" then
+									DribbleType = "V"
+								end
 								for _, otherPlayer in ipairs(playersInRadius) do
 									local op = otherPlayer.Character
 									if op.Humanoid.Teammate.Value ~= character.Humanoid.Teammate.Value and not ball:FindFirstChild(op.Name) then
-										if op.Humanoid:FindFirstChild("Tackled") or FindTackleFootAnimation(op) and (op.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
+										if op.Humanoid:FindFirstChild("Tackled") or FindAnimation(op, "rbxassetid://9015340307") and (op.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude < StepTackleRadius then
 											if character.Backpack.DribbleCounter.Value >= 1 and not UserInput:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not inAir(character) and CanDribble and not character:FindFirstChild("IsDribbling") and not character.Humanoid:FindFirstChild("Tackled") and character.Humanoid.AutoRotate == true then
-												Events.RealisticMovement:FireServer(Player, "V", true)
+												Events.RealisticMovement:FireServer(Player, DribbleType, true)
 
 												local CD = 1.5
 												if op.Humanoid:FindFirstChild("Tackled") then
