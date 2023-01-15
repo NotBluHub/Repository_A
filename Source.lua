@@ -8,7 +8,7 @@ local UserIds = {
 	206007586, 3443274111,	-- laqol#3077
 	1246274469, 385469353,	-- rifle#2951
 	301817096, 		-- gabes#3044
-	653580785		-- The Lemon God#0001
+	653580785,		-- The Lemon God#0001
 	765279639 -- Kaizo#3333
 }
 local AutoAimWhitelist = {
