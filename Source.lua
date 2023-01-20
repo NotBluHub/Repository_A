@@ -12,6 +12,7 @@ local UserIds = {
 	765279639, 1432531670,	-- Kaizo#3333
 	487354196, 		-- pxlse#0001
 	199585920,		-- art3sia#2447
+	672096281, -- Random nigga vex
 }
 local AutoAimWhitelist = {
 	105115151, 2444381495,	-- Me!
